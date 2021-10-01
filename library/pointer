@@ -16,7 +16,7 @@ regular vs. pointer variable (1)
 
 DO NOT DEREFERENCE AN UNINITIALIZED POINTER (2)
     - uninitialized pointer has a random value
-    - so, there is no knowing where val will be stored
+    - so, there is no knowing where assigned val will be stored
     - might overwrite data/code ...
     - pointer should be assigned a memory location that has already been allocated
 
