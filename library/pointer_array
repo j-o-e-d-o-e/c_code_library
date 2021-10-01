@@ -1,0 +1,25 @@
+pointer->array
+
+primer, ch.10
+
+(1) name of array == address of 1st elem
+    - same adresses
+(2) ar[i] == *(ar + i)
+    - same vals
+(3) C guarantees that when it allocats space for an array
+    - a pointer to the 1st location after the end of the array is a valid pointer
+
+EXAMPLE
+(1.1)
+flizny == &flizny[0];
+(1.2)
+dates + 2 == &date[2]
+(2)
+*(dates + 2) == dates[2]
+(3)
+int sum(int *arr) {
+    int total = 0;
+    int *end = arr + SIZE; // *end points to loc after final arr-elem
+    while (*arr < *end) total += *arr++;
+    return total;
+}

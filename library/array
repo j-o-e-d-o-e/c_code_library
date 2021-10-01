@@ -1,0 +1,15 @@
+array
+
+primer, ch.10
+
+(1) initialization
+    - less data than array size: compiler initializes remaining elems to 0
+    - more data than array size: error
+    - designated initializer: allows to choose specific elems (1.1)
+
+EXAMPLE
+(1)
+#define SIZE 8
+int powers[SIZE] = {1,2,4,6,8,16,32,64};
+(1.1)
+int arr[6] = {[5] = 212}; // arr[5] to 212, uninitialized elems set to 0
