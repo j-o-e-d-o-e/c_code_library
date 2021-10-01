@@ -1,0 +1,61 @@
+pointer->operations
+
+primer, ch.10
+
+(1) assignment
+    - assign an address to a pointer
+    - assigned val: array name, &var, or another pointer
+(2) value finding (dereferencing)
+    - *operator gives val stored in the pointed-to location
+(3) taking a pointer address
+    - &operator tells where the pointer itself is stored
+    - like all vars, a pointer has an address and a val
+(4) adding an integer to a pointer
+    - +operator adds an integer to a pointer
+    - int is multiplied by the number of bytes in the pointed-to type
+    - esp. for array iteration
+(5) incrementing a pointer
+    - ++operator moves pointer to the next elem of the array
+    - increases numerical val of pointer by number of bytes in the pointed-to type
+    - still, the address of the pointer itself remains the same
+    - in-/de-crementing beyond limits of array is undefined (see pointer->array)
+(6) subtracting an integer from a pointer
+    - -operator subtracts an integer from a pointer
+    - int is multiplied by the num of bytes in the pointed-to type
+(7) decrementing a pointer
+    - --operator moves pointer to the previous elem of the array
+    - opposite of (5)
+(8) differencing
+    - `ptr2 - ptr1` tells how far apart its pointed-to elems are
+    - returns val in pointed-to type, e.g. 2 ints apart
+    - normally, for pointers to elems within the same array
+(9) comparisons
+    - relational-operators to compare vals of two pointers
+    - provided pointers are of the same type
+
+EXAMPLE
+(1)
+int num = 5;
+int *ptr = &num;
+(2)
+printf("ptr = %d\n", *ptr);
+(3)
+printf("address = %p\n", &ptr);
+(4)
+int nums[5] = {100, 200, 300, 400, 500};
+int *ptr1 = nums;
+printf("address = %p\n", ptr1 + 4); // *(ptr1 + 4) returns its val
+(5)
+ptr1++;
+// val of pointer (address of pointed-to), val of pointed-to (200), adress of pointer (unchanged)
+printf("ptr1 = %p, *ptr1 =%d, &ptr1 = %p\n", ptr1, *ptr1, &ptr1);
+(6)
+printf("address = %p, val=%d\n", ptr1 - 1, *(ptr1 - 1)); // *(ptr1 - 1) == 100
+(7)
+ptr1--;
+printf("ptr1 = %p, *ptr1 =%d, &ptr1 = %p\n", ptr1, *ptr1, &ptr1); // *ptr1 == 100
+(8)
+int *ptr2 = nums[3]
+printf("diff = %d\n", ptr2 - ptr1); // diff == 3 (if *ptr1 == 100 && *ptr2 == 400)
+(9)
+while (*arr < *end) total += *arr++; // see pointer->array

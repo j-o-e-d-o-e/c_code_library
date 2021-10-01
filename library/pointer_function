@@ -1,0 +1,31 @@
+pointer->function
+
+primer, ch.9/10
+
+(1) if var in calling func needs to be altered, use pointer to var as arg of called func
+    - if called func only needs its val of var for further calculation, transmit var
+(2) `const` for immutable arrays
+
+EXAMPLE
+(1)
+int main(void) {
+    int x = 5, y = 10;
+    printf("Originally x = %d and y = %d.\n", x , y); // x == 5, y == 10
+    interchange(&x, &y);
+    printf("Now x = %d and y = %d.\n", x, y); // x == 10, y == 5
+    return 0;
+}
+void interchange(int *u, int *v) {
+    int temp;
+    temp = *u;
+    *u = *v;
+    *v = temp;
+}
+(2)
+int sum(const int ar[], int n); // prototype
+
+int sum(const int ar[], int n) { // definition
+    int total = 0;
+    for (int i = 0; i < n; i++) total += ar[i];
+    return total;
+}
