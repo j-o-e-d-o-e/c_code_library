@@ -1,0 +1,13 @@
+function
+
+primer, ch.9/10
+
+(1) param names in prototype and definition do not be the same
+    - though, good for readability
+
+EXAMPLE
+(1)
+int index_of_max(double *arr, int arr_size); // prototype
+int index_of_max(double *a, int size) { // definition
+    ...
+}
