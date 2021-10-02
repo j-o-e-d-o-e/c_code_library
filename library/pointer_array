@@ -20,6 +20,9 @@ dates + 2 == &date[2]
 int sum(int *arr) {
     int total = 0;
     int *end = arr + SIZE; // *end points to loc after final arr-elem
-    while (*arr < *end) total += *arr++;
+    while (arr < end) {
+        total += *arr;
+        arr++;
+    }
     return total;
 }

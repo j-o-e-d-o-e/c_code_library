@@ -6,6 +6,7 @@ primer, ch.10
     - less data than array size: compiler initializes remaining elems to 0
     - more data than array size: error
     - designated initializer: allows to choose specific elems (1.1)
+(2) `const` for immutable arrays
 
 EXAMPLE
 (1)
@@ -13,3 +14,11 @@ EXAMPLE
 int powers[SIZE] = {1,2,4,6,8,16,32,64};
 (1.1)
 int arr[6] = {[5] = 212}; // arr[5] to 212, uninitialized elems set to 0
+(2)
+int sum(const int ar[], int n); // prototype
+
+int sum(const int ar[], int n) { // definition
+    int total = 0;
+    for (int i = 0; i < n; i++) total += ar[i];
+    return total;
+}

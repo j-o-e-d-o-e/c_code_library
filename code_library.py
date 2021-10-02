@@ -23,7 +23,7 @@ def print_toc(toc):  # prompts table of content
         temp = []
         temp.append(str((toc.index(i) + 1)) + " - " + i["title"])
         if i["tags"]:
-            # temp.append("\t")
+            temp.append("\t")
             temp.append("-> (" + str((toc.index(i) + 1)) + ") " + i["tags"])
         table.append(temp)
     col_width = max(len(word) for row in table for word in row) - 6

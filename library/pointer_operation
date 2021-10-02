@@ -58,4 +58,4 @@ printf("ptr1 = %p, *ptr1 =%d, &ptr1 = %p\n", ptr1, *ptr1, &ptr1); // *ptr1 == 10
 int *ptr2 = nums[3]
 printf("diff = %d\n", ptr2 - ptr1); // diff == 3 (if *ptr1 == 100 && *ptr2 == 400)
 (9)
-while (*arr < *end) total += *arr++; // see pointer->array
+while (arr < end) total += *arr++; // see pointer->array
