@@ -1,0 +1,24 @@
+command-line args
+
+primer, ch.11
+
+int main(int argc, char **argv)
+    - char **argv == char *argv[]
+
+C compilers allow main() to have no args or else to have 2 args
+    - 1st arg (argc): num of strings in the command-line (argument count)
+        - system uses space to tell when on string ends and the next begins
+    - 2nd arg (argv): array of pointers to adresses of each string (argument values)
+        - argv[0]: name of the program itself
+
+EXAMPLE
+int main(int argc, char *argv[]) {
+    printf("The command line has %d arguments:\n", argc - 1);
+    for (int count = 1; count < argc; count++)
+        printf("%d: %s\n", count, argv[count]);
+    printf("\n");
+    return 0;
+}
+// The command line has 2 arguments:
+// 1: joe
+// 2: doe

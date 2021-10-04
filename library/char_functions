@@ -1,0 +1,23 @@
+char->functions
+
+primer, ch.11
+
+defined in <ctype.h>
+can't be applied to a string as a whole, but to the individual chars in a string
+
+(1) toupper() capitalizes a char given as arg
+
+EXAMPLE
+(1)
+include <ctype.h>
+
+char s[] = "joe doe";
+toupper_s(s);
+printf("%s", s); // JOE DOE
+
+void toupper_s(char *s) {
+    while (*s) { // \0 == 0 (false)
+        *s = toupper(*s); // from <ctype.h>
+        s++;
+    }
+}

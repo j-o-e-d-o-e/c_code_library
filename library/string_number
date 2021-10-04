@@ -1,0 +1,24 @@
+string<->number
+
+primer, ch.11
+
+(1) num-to-string conversion
+    - printf() (see string->output)
+    - sprintf() (see->string->functions)
+(2) string-to-num conversion
+    - scanf() (see string->input)
+    - atoi() (alphanumeric to integer) [stdlib.h]
+        - arg: string
+        - returns the corresponding integer val
+        - e.g. see command-line args
+    - strtol() converts string to a long [stdlib.h]
+    - strtod() converts string to double [stdlib.h]
+
+EXAMPLE
+(1)
+printf("num: %d", 3);
+(2)
+#include <stdlib.h>
+char argv[] = "3";
+int i = atoi(argv);
+printf("int: %d", i); // int: 3

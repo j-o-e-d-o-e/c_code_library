@@ -47,7 +47,7 @@ int *ptr1 = nums;
 printf("address = %p\n", ptr1 + 4); // *(ptr1 + 4) returns its val
 (5)
 ptr1++;
-// val of pointer (address of pointed-to), val of pointed-to (200), adress of pointer (unchanged)
+// val of pointer (address of pointed-to), val of pointed-to (200), address of pointer (unchanged)
 printf("ptr1 = %p, *ptr1 =%d, &ptr1 = %p\n", ptr1, *ptr1, &ptr1);
 (6)
 printf("address = %p, val=%d\n", ptr1 - 1, *(ptr1 - 1)); // *(ptr1 - 1) == 100

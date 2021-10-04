@@ -2,7 +2,7 @@ function
 
 primer, ch.9/10
 
-(1) param names in prototype and definition do not be the same
+(1) param-names in prototype and definition do not need to be the same
     - though, good for readability
 
 EXAMPLE

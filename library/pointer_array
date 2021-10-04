@@ -3,14 +3,14 @@ pointer->array
 primer, ch.10
 
 (1) name of array == address of 1st elem
-    - same adresses
+    - same adress
 (2) ar[i] == *(ar + i)
-    - same vals
+    - same val
 (3) C guarantees that when it allocats space for an array
     - a pointer to the 1st location after the end of the array is a valid pointer
 (4) declaring array params
-    - C interprets `int ar[] to mean the same as `int *ar`
-    - that is, `ar` is type pointer-to-int
+    - C interprets `int ar[]` to mean the same as `int *ar`
+    - that is, `ar` is of type pointer-to-int
 
 EXAMPLE
 (1.1)

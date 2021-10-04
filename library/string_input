@@ -1,0 +1,39 @@
+string->input
+
+primer, ch.11
+
+first, declare input var with enough space to store the string
+second, use input-func to fetch string
+
+(1) scanf()
+    - designed for single words from stdin
+    - scan starts at the first non-whitespace char
+    - scan ends
+        - %s: at next whitespace (blank, \t or \n)
+        - %10s: at specified field width (if no whitespace before)
+    - returns num of read items (int) or EOF
+(2) fgets() [stdio.h]
+    - designed for file input
+    - 2nd arg: max num of chars to be read (like gets_s())
+        - reads up to n-1 chars or through the newline-char (\n), whichever comes first
+        - stores \n in the string, if it reads it
+    - 3rd arg: which file to read
+        - e.g. stdin (standard input) [stdio.h]
+    - returns a pointer
+        - if success, same address that was passed as 1st arg
+        - if EOF, null-pointer (NULL)
+    - often paired with fputs() (due to stored \n)
+
+EXAMPLE
+(1)
+char name[3];
+int num = scanf("%s", name);
+printf("%d, %s\n", num, name); // 1, joe
+scanf("%2s", name);
+printf("%s\n", name); // jo
+(2)
+#define SIZE 10
+char name[SIZE];
+puts("Enter strings (empty line to quit):");
+while (fgets(name, SIZE, stdin) != NULL && name[0] != '\n')
+    fputs(name, stdout);

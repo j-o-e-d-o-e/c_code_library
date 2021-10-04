@@ -1,0 +1,43 @@
+string
+
+primer, ch.11
+
+series of chars (array) terminated by the null-character (\0)
+    - \0 has the numeric value 0, i.e. false (for branching)
+
+defining a string
+    (1) string constant
+        - enclosed in double quotation marks
+        - enclosed chars plus terminating \0 (provided by compiler) are stored in memory
+        - quoted phrase acts as a pointer to where the string is stored (like array-names)
+        - if used to initialize char-array
+            - array-size should be at least one greater than the string-length
+            - to accomodate the terminating \0
+    (2) char array
+        - size: num of chars plus 1 (for \0)
+            - if omitted, compiler determines array-size (by looking for \0)
+        - unused elems are automatically initialized to \0
+        - name of array == address of 1st char (see pointer->array)
+            - ar == &ar[0] // same address
+            - *(ar+1) == ar[1] // same val
+        - increment-operator not supported (since name of arr is a constant)
+    (3) char pointer
+        - unlike char-array, pointer can be incremented
+        - since pointer is var on its own with string-address as its mutuable val
+        - recommended: use `const` to initialize pointer to string literal
+            - don't use pointer to a string literal if you plan to alter the string
+
+EXAMPLE
+(1)
+// Joe, 0x556c801ed004 (address of first char), D
+printf("%s, %p, %c\n", "Joe", "Avery", *"Doe");
+(2)
+char me[] = "Joe Doe";
+// 0x7ffdf082ce40, 0x7ffdf082ce40, J, o, o
+printf("%p, %p, %c, %c, %c", me, &me[0], *me, *(me + 1), me[1]);
+(3)
+const char *me = "Joe Doe";
+while (*me != '\0') {
+    printf("%p, %c\n", me, *me);
+    me++;
+}
