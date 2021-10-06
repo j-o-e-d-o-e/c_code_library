@@ -1,0 +1,57 @@
+storage classes
+
+primer, ch.12
+
+see primer, table 12.1, p.517
+
+(1) automatic vars
+    - declared in a block
+    - are not initialized unless you do so explicitly
+        - if uninitialized, var has garbage value (undetermined)
+(2) register vars
+    - stored in CPU-registers (fastest memory available), if available
+    - can't use the &-operator with register vars
+    - if uninitialized, val is undetermined
+(3) static vars with block scope
+    - static duration: var stays put in memory during runtime (not necessarily in value)
+    - initialized just once (at compile-time)
+    - if not initialized explicitly, set to 0
+(4) static vars with external linkage
+    - external linkage: var can be used in other files
+    - declaration outside of any func (file scope)
+    - if var is defined in 1st file, declare var in 2nd file with `extern`
+    - persists during runtime (like (3))
+        - initialized just once (at compile-time)
+        - if not initialized explicitly, set to 0
+(5) static vars with internal linkage
+    - internal linkage: var can be used only in the file containing the definition
+    - declaration outside of any func (file scope) (like (4))
+
+EXAMPLE
+(1)
+int main(void){
+    int x; // whatever val happened to previously occpuy the assigned space
+}
+(2)
+int main(void){
+    register int x;
+}
+(3)
+void incr(void);
+
+int main(void) {
+    incr(); // 1, 1
+    incr(); // 1, 2
+    return 0;
+}
+void incr(void) {
+    int x = 1; // declaration executed each time:
+    static int y = 1; // not executed during runtime
+    printf("x = %d and y = %d\n", x++, y++);
+}
+(4)
+extern char c; // mandatory declaration if c defined in another file
+int main(void) { ... }
+(5)
+static int x = 1;
+int main(void) { ... }

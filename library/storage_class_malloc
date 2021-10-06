@@ -1,0 +1,34 @@
+storage class->mem-alloc
+
+primer, ch.12
+
+funcs to manage pool of memory
+
+(1) malloc() allocates memory [malloc.h]
+    - arg: num of bytes of memory you want
+    - if success, returns the address of the first byte of that block
+        -  otherwise, returns null-pointer (fails to find the required space)
+    - allows to create array while program runs (like VLA)
+        - e.g. during runtime create arrays with different sizes (100 vs. 10.000)
+(2) free() frees memory [malloc.h]
+    - each use of malloc()/calloc() should be balanced with a use of free()
+    - arg: address returned earlier by malloc()
+(3) calloc() allocates memory [malloc.h]
+    - 1st arg: num of memory-cells you want
+    - 2nd arg: size of each cell in bytes
+    - returns pointer to 1st mem-location (like malloc())
+    - sets all bits in the mem-block to 0
+
+EXAMPLE
+#include <malloc.h>
+#define SIZE 3
+int main(void) {
+    int *ptr = (int *) malloc(SIZE * sizeof(int)); // (1): type-cast optional
+    for (int i = SIZE; i > 0; i--) ptr[SIZE - i] = i;
+    for (int i = 0; i < SIZE; i++) printf("%d...\n", ptr[i]);
+    free(ptr); // (2)
+    puts("Kaboom.");
+    return 0;
+}
+(3)
+int *ptr = (int *) calloc(SIZE, sizeof(int));

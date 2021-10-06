@@ -8,6 +8,7 @@ primer, ch.11
         - %p: addresses
         - %s: strings
         - %d: ints
+        - %f: float/double
         - %c: chars
 (2) puts() [stdio.h]
     - arg: address of a string
@@ -17,7 +18,9 @@ primer, ch.11
 (3) fputs() [stdio.h]
     - designed for file output
     - does not append a newline on output (unlike puts())
-    - 2nd arg: file to write to
+    - 1st arg: address of a string
+        - buffer
+    - 2nd arg: file to write to (file-pointer)
         - e.g. stdout (for standard output) [stdio.h]
 
 EXAMPLE

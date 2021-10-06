@@ -1,6 +1,6 @@
 string->input
 
-primer, ch.11
+primer, ch.11/13
 
 first, declare input var with enough space to store the string
 second, use input-func to fetch string
@@ -14,10 +14,12 @@ second, use input-func to fetch string
     - returns num of read items (int) or EOF
 (2) fgets() [stdio.h]
     - designed for file input
+    - 1st arg: address (type char *) where input should be stored
     - 2nd arg: max num of chars to be read
         - reads up to n-1 chars or through the newline-char (\n), whichever comes first
-        - stores \n in the string, if it reads it
-    - 3rd arg: which file to read
+        - stores \n in the string, only if it is read
+        - adds a terminating null-character (\0) to form a string (-> SIZE + 1)
+    - 3rd arg: which file to read (file-pointer)
         - e.g. stdin (standard input) [stdio.h]
     - returns a pointer
         - if success, same address that was passed as 1st arg
@@ -37,3 +39,12 @@ char name[SIZE];
 puts("Enter strings (empty line to quit):");
 while (fgets(name, SIZE, stdin) != NULL && name[0] != '\n')
     fputs(name, stdout);
+(2.2)
+char name[SIZE];
+// input: "joedoe"
+printf("Enter strings with %d chars (empty line to quit): ", SIZE);
+int loop = 1;
+// loop: 1, name: joe
+// loop: 2, name: doe
+while (fgets(name, SIZE + 1, stdin) != NULL && name[0] != '\n')
+    printf("loop: %d, name: %s\n", loop++, name);

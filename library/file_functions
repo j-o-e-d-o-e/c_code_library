@@ -1,0 +1,57 @@
+file I/O->functions
+
+primer, ch.13
+
+use FILE-pointer, like stdout or return-val of fopen() (see file I/O)
+other standard I/O funcs: see primer, ch.13, p.584ff.
+
+(1) fprintf() (like printf()) [stdio.h]
+    - 1st arg: file-pointer to file to be written to, e.g. stderr
+    - unlike putc() (see file I/O), takes file-pointer as 1st arg
+(2) fscanf() (like scanf()) [stdio.h]
+    - copies chunk of data from file to buffer (like getc() or fgets())
+(3) rewind() takes program to beginning of file [stdio.h]
+(4) fseek() moves to any particular byte in a file [stdio.h]
+    - 1st arg: FILE-pointer to the file being searched (provided by fopen())
+    - 2nd arg: offset how far to move from starting point (type long)
+        - positive: move forward
+        - negative: move backward
+        - zero: stay put
+    - 3rd arg: mode identifying the starting point
+        - SEEK_SET: beginning of file (0L)
+        - SEEK_CUR: current position (1L)
+        - SEEK_END: end of file (2L)
+    - returns int value
+        - if success: 0
+        - if error: -1
+(5) ftell() tells the current file-location [stdio.h]
+    - in conjunction with fseek()
+    - arg: file-pointer
+    - returns the num of bytes from the beginning of the file (long)
+        - in binary mode, 1st byte of file == 0 (not necessarily in text mode)
+(6) fgets(): see string->input
+
+EXAMPLE
+(1)
+FILE *fp;
+if ((fp = fopen(f, "r")) == NULL) { // (1)
+    fprintf(stderr, "Couldn't open file \"%s\"\n", f);
+    exit(EXIT_FAILURE);
+}
+(2)
+while (fscanf(fp,"%s",words) == 1) puts(words);
+(3)
+rewind(fp);
+(4)
+fseek(fp, 10L, SEEK_SET); // go 10 bytes into the file
+(4+5)
+// outputs file content in reverse
+FILE *fp = fopen("input.txt", "rb");
+fseek(fp, 0L, SEEK_END); // (4): sets pos to end of the file
+long last = ftell(fp); // (5): assigns num of bytes from beginning to end
+for (long count = 1L; count <= last; count++) {
+    fseek(fp, -count, SEEK_END); // (4): go backward
+    putchar(getc(fp));
+}
+putchar('\n');
+fclose(fp);

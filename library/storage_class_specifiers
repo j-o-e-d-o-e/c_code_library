@@ -1,0 +1,28 @@
+storage class->specifiers
+
+primer, ch.12
+
+see also: storage classes
+
+(1) auto (default)
+    - automatic storage duration
+    - only be used in declarations of vars with block-scope
+        - which already have automatic storage duration
+        - therefore, its main use is only documenting intent
+(2) register
+    - only be used with vars of block scope
+    - puts var into the register storage class
+        - which amounts to request to minimize acess time
+        - &-operator not allowed
+(3) static
+    - static duration for entire program runtime
+    - if file-scope: var limited to that one file
+    - if block-scope: var can be accessed only within that block
+(4) extern
+    - indicates that you are declaring a var that has been defined elsewhere
+    - if file-scope: referred-to var referred to must have external linkage
+    - if block-scope: referred-to var has external or internal linkage
+
+func can be either external (the default) or static
+    - external: can be accessed by funcs in other files
+    - static: can be used only within the defining file
