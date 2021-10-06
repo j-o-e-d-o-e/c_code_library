@@ -10,9 +10,6 @@ defining a string
         - enclosed in double quotation marks
         - enclosed chars plus terminating \0 (provided by compiler) are stored in memory
         - quoted phrase acts as a pointer to where the string is stored (like array-names)
-        - if used to initialize char-array
-            - array-size should be at least one greater than the string-length
-            - to accomodate the terminating \0
     (2) char array
         - size: num of chars plus 1 (for \0)
             - if omitted, compiler determines array-size (by looking for \0)
@@ -23,7 +20,7 @@ defining a string
         - increment-operator not supported (since name of arr is a constant)
     (3) char pointer
         - unlike char-array, pointer can be incremented
-        - since pointer is var on its own with string-address as its mutuable val
+        - since pointer is var on its own, its value (string-address) is mutuable
         - recommended: use `const` to initialize pointer to string literal
             - don't use pointer to a string literal if you plan to alter the string
 

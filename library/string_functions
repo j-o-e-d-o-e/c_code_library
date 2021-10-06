@@ -42,7 +42,7 @@ see also: primer, ch.11, p.489ff.
     - strncopy() (4.2)
         - checks whether source (2nd arg) fits into target (1st arg)
         - 3rd arg: max num of chars to copy
-        - copies up to max chars or upt through \0 (whichever comes first)
+        - copies up to max chars or up through \0 (whichever comes first)
             - if source is less than max, then the entire string is copied incl. \0
             - if source is more than max, no \0 is added
 (5) combination

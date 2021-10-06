@@ -16,7 +16,7 @@ toupper_s(s);
 printf("%s", s); // JOE DOE
 
 void toupper_s(char *s) {
-    while (*s) { // \0 == 0 (false)
+    while (*s) { // exit: \0 == 0 (false)
         *s = toupper(*s); // from <ctype.h>
         s++;
     }

@@ -6,7 +6,7 @@ primer, ch.10
     - same adress
 (2) ar[i] == *(ar + i)
     - same val
-(3) C guarantees that when it allocats space for an array
+(3) C guarantees that when it allocates space for an array
     - a pointer to the 1st location after the end of the array is a valid pointer
 (4) declaring array params
     - C interprets `int ar[]` to mean the same as `int *ar`

@@ -14,7 +14,7 @@ second, use input-func to fetch string
     - returns num of read items (int) or EOF
 (2) fgets() [stdio.h]
     - designed for file input
-    - 2nd arg: max num of chars to be read (like gets_s())
+    - 2nd arg: max num of chars to be read
         - reads up to n-1 chars or through the newline-char (\n), whichever comes first
         - stores \n in the string, if it reads it
     - 3rd arg: which file to read
