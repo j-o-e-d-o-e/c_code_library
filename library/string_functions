@@ -51,6 +51,17 @@ see also: primer, ch.11, p.489ff.
         - 1st arg: address of target string
         - 2nd arg: conversion specification
         - remaining args: list of items to be written
+(6) search
+    - strchr()
+        - char *strchr(const char * s, int c);
+        - returns pointer to the 1st loc in string s that holds the char c
+        - if not found, returns null-pointer
+    - strpbrk()
+        - char *strpbrk(const char * s1, const char * s2);
+        - returns pointer to the 1st loc in string s1 that holds any char found in s2
+    - strstr()
+        - char *strstr(const char * s1, const char * s2);
+        - returns pointer to the 1st occurence of string s2 in string s1
 
 EXAMPLE
 (1)
