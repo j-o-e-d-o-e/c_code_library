@@ -8,6 +8,10 @@
 #define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
 #define DELIMITER_TOC "====================================="
 #define DELIMITER_ENTRY "-------------------------------------"
+#define TOC 0
+#define EXIT 667
+
+void flags(char **argv);
 
 int read_dir(void);
 
@@ -25,18 +29,22 @@ struct file_struct {
 };
 struct file_struct library[LLEN];
 
-int main(void) {
+int main(int argc, char **argv) {
+    if (argc > 1) {
+        flags(argv);
+        return 0;
+    }
     int library_len = read_dir();
     print_toc(library_len);
     while (1) {
         printf("\nWhat would you like to read? ");
         int ch;
         scanf("%d", &ch);
-        if (ch == 0) {
+        if (ch == TOC) {
             printf("\n");
             print_toc(library_len);
             continue;
-        } else if (ch == 667) {
+        } else if (ch == EXIT) {
             printf("Devil's neighbour wishes you a good day.\n");
             break;
         } else if (ch > library_len || ch < 0) {
@@ -46,6 +54,13 @@ int main(void) {
         print_entry(ch);
     }
     return 0;
+}
+
+void flags(char **argv) {
+    if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
+        printf("%s%s%s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
+        printf("%d: Table of Content\n%d: Exit\n", TOC, EXIT);
+    }
 }
 
 int read_dir(void) {
