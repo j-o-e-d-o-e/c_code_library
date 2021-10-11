@@ -5,6 +5,7 @@
 #include <ctype.h>
 
 #define LLEN 70
+#define LIT_LEN 2
 #define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
 #define DELIMITER_TOC "====================================="
 #define DELIMITER_ENTRY "-------------------------------------"
@@ -20,6 +21,11 @@ void print_toc(int library_len);
 void print_entry(int i);
 
 void fget(char *string, int n, FILE *file);
+
+const char *literature[LIT_LEN] = {
+        "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley.",
+        "..."
+};
 
 struct file_struct {
     int index;
@@ -59,7 +65,10 @@ int main(int argc, char **argv) {
 void flags(char **argv) {
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
         printf("%s%s%s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
-        printf("%d: Table of Content\n%d: Exit\n", TOC, EXIT);
+        puts("Commands:");
+        printf("\t- %d: Table of Content\n\t- %d: Exit\n", TOC, EXIT);
+        puts("\nLiterature:");
+        for (int i = 0; i < LIT_LEN; i++) printf("\t- %s\n", literature[i]);
     }
 }
 
