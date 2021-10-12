@@ -1,0 +1,38 @@
+struct->pointer
+
+primer, ch.14
+
+to access members of struct-pointers, use arrow-operator (->)
+    - if p = &list[0], then:
+        - list[0].favfood == p->favfood == (*p).favfood
+        - parenthesis required due to precedence
+
+EXAMPLE
+#define LEN 20
+struct name {
+    char first[LEN];
+    char last[LEN];
+};
+struct person {
+    struct name name;
+    char favfood[LEN];
+};
+struct person list[2] = {
+        {
+            {"Mary", "Jane"},
+            "grilled salmon",
+        },
+        {
+            {"Joe",  "Doe"},
+            "burger",
+        }
+};
+struct person *p;
+// address #1: 0x557109dc3020 #2: 0x557109dc305c
+printf("address #1: %p #2: %p\n", &list[0], &list[1]);
+p = &list[0]; /* tell the pointer where to point */
+// Mary Jane's favorite food is grilled salmon
+printf("%s %s's favorite food is %s.\n", p->name.first, p->name.last, (*p).favfood);
+p++;
+// Joe Doe's favorite food is burger
+printf("%s %s's favorite food is %s.\n", p->name.first, (*p).name.last, p->favfood);

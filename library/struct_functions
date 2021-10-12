@@ -1,0 +1,43 @@
+struct->functions
+
+primer, ch.14
+
+telling funcs about structures
+    (1) passing struct-members
+    (2) using struct-address
+        - must use &-operator to get address
+        - unlike array-name, struct-name is not a synonym for its address
+    (3) passing struct as arg
+        - copy is created in called func
+        - therefore, return-val might be needed
+
+typically, programmers use struct-pointers (2) instead of structs (3) as args for funcs
+    - using `const` when needed to protect data from unintended changes
+    - passing struct as arg (by value) most often done only for small data
+
+EXAMPLE
+struct account {
+    char name[LEN];
+    double balance;
+} joe = {
+        .name = "Joe Doe",
+        .balance = 10000
+};
+(1)
+void doubleB(double *b) {
+    *b *= 2;
+}
+doubleB(&joe.balance); // transmit address of member
+printf("%s's balance: %.2f\n", joe.name, joe.balance); // 20000.00
+(2)
+void halveB(struct account *account){
+    account->balance /= 2;
+}
+halveB(&joe);
+printf("%s's balance: %.2f\n", joe.name, joe.balance); // 10000.00
+(3)
+double reduceB(const struct account account, double minus) {
+    return account.balance - minus;
+}
+joe.balance = reduceB(joe, 5000);
+printf("%s's balance: %.2f\n", joe.name, joe.balance); // 5000.00

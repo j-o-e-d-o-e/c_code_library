@@ -1,0 +1,53 @@
+struct
+
+primer, ch.14
+
+to represent complex data
+struct-member can be any C data type, including other structures (nested)
+
+(1) declaring a struct and defining a struct-var can be combined into one step
+    - to initialize var, use comma-separated list of initializers enclosed in braces
+    - designated intializers to identify specific members
+(2) one struct-var can be assigned to another one (if boths structs are of the same type)
+    - each member of assigned struct is assigned val of corresponding member (copy)
+    - not possible with arrays
+(3) compound literals
+    - for temporary stuct-var (like for arrays)
+(4) saving/reading structures to/from file
+    - using fwrite()/fread() for binary mode
+    - see: primer, ch.14, p.639ff.
+
+EXAMPLE
+struct file_struct {
+    int index;
+    char path[20];
+    char title[20];
+    char src[20];
+} ex = { // (1)
+        .path = "/path",
+        .title = "ex",
+        .src = "primer, ch.14"
+};
+printf("title: %s\n", ex.title); // title: ex
+
+struct file_struct library[3] = {[1] = { // see entry: array
+        1,
+        "/path",
+        "one",
+        "primer, ch.14"
+}};
+printf("title: %s\n", library[1].title); // title: one
+(2)
+ex = library[1];
+strcpy(library[1].title, "new title");
+printf("title: %s\n", ex.title); // title: one
+printf("title: %s\n", library[1].title); // title: new title
+(3)
+struct rect {
+    double x;
+    double y;
+};
+double rect_area(struct rect r) { return r.x * r.y; }
+
+double area = rect_area((struct rect) {3., 4.0});
+printf("area: %.2f", area); // area: 12.00
