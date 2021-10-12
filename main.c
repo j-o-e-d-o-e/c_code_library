@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <string.h>
-#include <ctype.h>
 
 #define LLEN 70
 #define LIT_LEN 2
@@ -107,21 +106,19 @@ void print_toc(int library_len) {
 }
 
 void print_entry(int i) {
-    char filename[LLEN];
-    strcpy(filename, library[i - 1].path);
     FILE *f;
-    if ((f = fopen(filename, "r")) == NULL) {
-        printf("Opening File %s failed.\n", filename);
+    if ((f = fopen(library[i - 1].path, "r")) == NULL) {
+        printf("Opening File %s failed.\n", library[i - 1].title);
         return;
     }
     printf("\n%s\n", DELIMITER_ENTRY);
-    char h1[LLEN];
-    fget(h1, LLEN, f);
-    printf("%s\n\n", h1);
-    char s1[LLEN];
-    fget(s1, LLEN, f); // empty line
-    fget(s1, LLEN, f); // src
-    fget(s1, LLEN, f); // empty line
+    char title[LLEN];
+    fget(title, LLEN, f);
+    printf("%s\n\n", title);
+    char buffer[LLEN];
+    fget(buffer, LLEN, f); // empty line
+    fget(buffer, LLEN, f); // src
+    fget(buffer, LLEN, f); // empty line
     char content[LLEN];
     while (1) {
         content[0] = '\0';
@@ -133,12 +130,9 @@ void print_entry(int i) {
     printf("%s\n", DELIMITER_ENTRY);
 }
 
+/* wrapper for fgets - replaces first newline with null character */
 void fget(char *string, int n, FILE *f) {
-    // wrapper for fgets - replaces
-    // first newline with null character
-
     fgets(string, n, f);
-
     while (*string != '\0') {
         if (*string == '\n') {
             *string = '\0';
