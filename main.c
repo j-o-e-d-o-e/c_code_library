@@ -3,7 +3,7 @@
 #include <dirent.h>
 #include <string.h>
 
-#define LLEN 70
+#define LLEN 80
 #define LIT_LEN 2
 #define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
 #define DELIMITER_TOC "====================================="
@@ -100,7 +100,7 @@ int read_dir(void) {
 void print_toc(int library_len) {
     printf("%s%s%s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
     for (int i = 0; i < library_len; i++) {
-        int n = i < 9 ? 19 : 20;
+        int n = i < 9 ? 29 : 30;
         printf("%d - %-*s-> (%d) %s\n", library[i].index, LLEN - n, library[i].title, library[i].index, library[i].src);
     }
 }
