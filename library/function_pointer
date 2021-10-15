@@ -1,0 +1,50 @@
+function->pointer
+
+primer, ch.14
+
+typically, a pointer to a func is used as an arg to a 2nd func (1)
+    - telling the 2nd func which func to use
+    - e.g. qsort() [stdlib.h] takes a pointer-to-func to compare elems of arrays (of any type)
+    - allows also to create array of func-pointers (since arr of funcs is not allowed)
+
+to declare a pointer to a particular type of function
+    - first, declare a func of the desired type, e.g. void toUpper(char *)
+    - then, replace the func-name with an expression of the form (*pf)
+        - e.g. void (*pf)(char *)
+        - pf then becomes a pointer to a func of that type
+        - pointer holds address marking the start of the code of the func
+
+to assign the address of a (valid) func to a pointer (2)
+    - pointer can point to any func with same signature (args and return type)
+
+two ways to access a func via a pointer (2)
+    - since (*pf) == func: use *-operator in parenthesis, e.g. (*pf)(str);
+    - since func-name is a pointer (func == pf): use pointer-name, e.g. pf(str);
+
+EXAMPLE
+(1)
+void apply(void (*fp)(char *), char *str);
+void toupper_s(char *str);
+
+int main(void) {
+    char str[] = "joe doe";
+    apply(toupper_s, str);
+    puts(str); // JOE DOE
+    return 0;
+}
+
+void apply(void (*fp)(char *), char *str) {
+    (*fp)(str); // apply chosen func to str
+}
+
+void toupper_s(char *s) {
+    while (*s) {
+        *s = toupper(*s); // #include <ctype.h>
+        s++;
+    }
+}
+(2)
+void (*pf)(char *);
+pf = toupper_s;
+pf(str);
+(*pf)(str);

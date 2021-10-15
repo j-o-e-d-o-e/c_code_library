@@ -1,0 +1,11 @@
+typedef
+
+primer, ch.14
+
+to create own name for a type
+    - unlike #define, names not for vals, but for types only
+
+EXAMPLE
+typedef unsigned char BYTE;
+BYTE x = 1,  *y = &x, z[3] = {1,2,3};
+printf("%d, %d, %d",x, *(++y), z[2] );

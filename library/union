@@ -1,0 +1,43 @@
+union
+
+primer, ch.14
+
+allows to use different data types, i.e. only one val is stored at a time
+    - useful in conjunction with structs
+    - struct-member keeps track, which data type is used in union (also member)
+C compiler allocates enough space so that it can hold the largest of the described possibilites
+    - e.g. in an array of unions, each elem is then equal-sized
+
+initialize
+    (1) 1st elem: union numOrChar u = {1.5};
+    (2) designated initializer: union numOrChar u =  {.d = 1.5};
+    (3) to another union of the same type
+
+struct vs. union
+    - a struct has all declared members
+    - an union has only one of the declared members
+to access member of pointer to an union (2)
+    - use indirect membership-operator (->) (like pointers to structs)
+
+EXAMPLE
+(1)
+union numOrStr {
+    double d;
+    char c[8];
+};
+struct what {
+    int isNum;
+    union numOrStr u;
+};
+struct what whats[2] = {
+        {1, {1.5}}, // true
+        {0, {.c="Joe"}} // false
+};
+for (int i = 0; i < 2; i++) {
+    if (whats[i].isNum) printf("%.2f\n", whats[i].u.d);
+    else printf("%s\n", whats[i].u.c);
+}
+(2)
+union numOrChar u =  {1.5};;
+union numOrChar *pu = &u;
+printf("%f\n", pu->d);

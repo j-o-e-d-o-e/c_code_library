@@ -2,7 +2,7 @@ struct->pointer
 
 primer, ch.14
 
-to access members of struct-pointers, use arrow-operator (->)
+to access members of struct-pointers, use indirect-membership-operator (->)
     - if p = &list[0], then:
         - list[0].favfood == p->favfood == (*p).favfood
         - parenthesis required due to precedence
