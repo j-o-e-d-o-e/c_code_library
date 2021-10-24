@@ -2,7 +2,7 @@ file I/O->functions
 
 primer, ch.13
 
-use FILE-pointer, like stdout or return-val of fopen() (see file I/O)
+use FILE-pointer, like stdout or val returned by fopen() (see file I/O)
 other standard I/O funcs: see primer, ch.13, p.584ff.
 
 (1) fprintf() (like printf()) [stdio.h]

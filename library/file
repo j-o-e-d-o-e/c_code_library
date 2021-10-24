@@ -10,7 +10,7 @@ steps 1-3:
         - "w": writing
             - first, truncates an existing file to zero length
             - or creates the file if it does not exist
-        - "a": writing
+        - "a": appending (writing)
             - appends to the end of an existing file
             - or creates the file if it does not exist
         - "r+": updating (reading and writing)
@@ -20,7 +20,7 @@ steps 1-3:
         - "a+": updating (reading and writing)
             - whole file can be read
             - but, writing can only be appended
-        - "rb", "wb", "wb+", etc: binary mode
+        - "rb", "wb", "wb+", etc: binary modes
     - returns pointer
         - if success, file-pointer of type pointer-to-FILE [stdio.h]
         - if error, null-pointer

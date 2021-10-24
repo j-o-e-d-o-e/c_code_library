@@ -12,7 +12,7 @@ see also: storage classes
 (2) register
     - only be used with vars of block scope
     - puts var into the register storage class
-        - which amounts to request to minimize acess time
+        - which amounts to request to minimize access time
         - &-operator not allowed
 (3) static
     - static duration for entire program runtime
@@ -20,7 +20,7 @@ see also: storage classes
     - if block-scope: var can be accessed only within that block
 (4) extern
     - indicates that you are declaring a var that has been defined elsewhere
-    - if file-scope: referred-to var referred to must have external linkage
+    - if file-scope: referred-to var must have external linkage
     - if block-scope: referred-to var has external or internal linkage
 
 func can be either external (the default) or static
