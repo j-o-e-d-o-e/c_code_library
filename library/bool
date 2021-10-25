@@ -1,0 +1,13 @@
+boolean
+
+primer, ch.3
+
+since C99
+defined in [stdbool.h]
+no specific printf-specifier for bools (use e.g. %d instead)
+
+EXAMPLE
+#include <stdbool.h>
+
+bool x = true;
+printf(!x ? "true" : "false"); // false

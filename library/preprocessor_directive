@@ -1,0 +1,68 @@
+preprocessor->directives
+
+primer, ch.16
+
+indicated by # at the beginning of the line
+limited to one line in length, i.e. ends with 1st newline (after #)
+    - \ + newline allows to spread directive over multiple lines
+- can appear anywhere in the source file
+- definition holds from its place to the end of the file
+    - or, until it is the subject of an #undef (whichever comes first)
+
+(1) #define (constants)
+    - #define <macro> <body>
+        - macro: var- or func-name
+        - body: val or func-like
+    - func-like macros
+        - typically, used for simple functions, e.g. (1.1)
+        - can have args in parentheses
+            - stringizing: to include arg in string-body, use #
+        - use as many parentheses as necessary for args
+            - to ensure that operations are done in the right order
+            - generally, don't use in-/decrement-operator with macros
+(2) #include (file inclusion)
+    (2.1) angle-brackets
+        - tells UNIX-sys to look in std-system-dirs
+    (2.2) double quotation marks
+        - tells sys to first look in current/specified local-dir
+(3) directives for portability
+    (3.1) #undef cancels an earlier #define
+    (3.2) #ifdef <MACRO> (conditional compilation)
+            - if <MACRO> has been defined, use following directives
+            - in combination with #elif, #else (optional) and #endif (must be present)
+    (3.3) #ifndef <MACRO> asks whether the <MACRO> is not defined (contrary to #ifdef)
+        - typically, used to prevent multiple definitions of the same macro
+        - since first definition is active, subsequent definitions (in other header-files) are ignored
+(4) predefined macros
+    - __DATE__: date of preprocessing
+    - __TIME__: time of translation
+    - __FILE__: name of the current source-code-file
+    - __LINE__: line number in the current source-code-file (int)
+(5) #pragma allows to place compiler-instructions in the source-code
+    - generally, each compiler has its own set of pragmas
+
+EXAMPLE
+(1)
+#define TWO 2
+#define FOUR TWO*TWO
+#define SQUARE(X) (X)*(X)
+#define PR(X, Y) printf("Square of \'" #X " = %d\': %d.\n", X, Y)
+int x = FOUR;
+PR(x + 1, SQUARE(x + 1)); // Square of 'x + 1 = 5': 25.
+(1.1)
+#define MAX(X,Y) ((X) > (Y) ? (X) : (Y))
+(2.1)
+#include <stdio.h>
+(2.2)
+#include "mystuff.h"
+(3.1)
+#define LIMIT 400
+#undef LIMIT
+(3.2)
+#ifdef _WIN32
+    puts("Windows 32");
+#else
+    puts("Unix-like OS");
+#endif
+(4)
+printf("%s, %s", __DATE__, __TIME__); // Oct 25 2021, 20:32:13

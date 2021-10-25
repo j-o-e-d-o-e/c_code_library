@@ -6,6 +6,23 @@ to create own name for a type
     - unlike #define, names not for vals, but for types only
 
 EXAMPLE
+(1)
 typedef unsigned char BYTE;
 BYTE x = 1,  *y = &x, z[3] = {1,2,3};
 printf("%d, %d, %d",x, *(++y), z[2] );
+(2)
+struct name_st {
+    char first[8];
+    char last[8];
+};
+typedef struct name_st name;
+
+void get_name(name *n) {
+    printf("%s %s", n->first, n->last);
+}
+
+int main(void) {
+    name me = {"joe", "doe"};
+    get_name(&me);
+    return 0;
+}

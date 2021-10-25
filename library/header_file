@@ -1,0 +1,18 @@
+header files
+
+primer, ch.16
+
+suffix: .h
+commonly found in header-files
+    - directives (see entry: preprocessor->directives)
+    - struct-declarations (see entry: struct)
+    - function-prototypes (see entry: function)
+    - constants
+normally, do not include executable code (goes into source-code-file with .c-suffix)
+
+use header-files to declare external vars to be shared by several files (1)
+
+EXAMPLE
+(1)
+int status = 0 // source-code-file
+extern int status; // associated header-file
