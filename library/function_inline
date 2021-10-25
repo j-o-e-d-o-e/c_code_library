@@ -1,0 +1,12 @@
+function->inline
+
+primer, ch.16
+
+func defined with specifier 'inline'
+    - causes compiler to replace func call with inline-code
+    - and/or, perform some optimizations
+    - or have no effect
+C99/C11 says:
+    - making a func inline suggests thatcalls to the func be as fast as possible
+    - the extent to which such suggestions are effective is implementation-defined
+inline-func should be short ...

@@ -18,7 +18,7 @@ for vars
 (3) restrict
     - since C99 (for compiler optimization)
     - applied only to pointers
-    - indicates that pinter is the sole initial means of accessing a data obj
+    - indicates that pointer is the sole initial means of accessing a data obj
 (4) _Atomic [stdatomic.h]
     - since C11 (for concurrent programming)
     -

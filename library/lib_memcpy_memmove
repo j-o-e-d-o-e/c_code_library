@@ -1,0 +1,34 @@
+library->memcpy()/memmove()
+
+primer, ch.16
+
+for copying other kinds of arrays than strings (see entry: string->functions strcpy())
+
+(1) memcpy() [string.h]
+    - 1st arg (s1): target location (pointer-to-void)
+        - C allows to assign any pointer-type to pointers of the void *-type
+    - 2nd arg (s2): source location (pointer-to-void)
+    - 3rd arg  (n): number of bytes to be copied (size_t), e.g. 10*sizeof(double)
+    - returns the value of s1
+    - assumes no overlap between the two memory ranges (s1 and s2)
+(2) memmove() [string.h]
+    - unlike memcpy(), does not make assumption of non-overlapping
+
+EXAMPLE
+(1)
+#define SIZE 10
+int source[SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int target[SIZE];
+puts("Source: ");
+show_array(source, SIZE); // 1 2 3 4 5 6 7 8 9 10
+memcpy(target, source, SIZE * sizeof(int));
+puts("\nTarget (copy of source):");
+show_array(target, SIZE); // 1 2 3 4 5 6 7 8 9 10
+
+void show_array(const int ar[], int n) {
+    for (int i = 0; i < n; i++) printf("%d ", ar[i]);
+}
+(2)
+memmove(source + 2, source, 5 * sizeof(int));
+puts("\nElems at pos 0-5 (source) copied to pos 2-7 (target):");
+show_array(source, SIZE); // 1 2 1 2 3 4 5 8 9 10
