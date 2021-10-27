@@ -23,7 +23,7 @@ void fget(char *string, int n, FILE *file);
 
 const char *literature[LIT_LEN] = {
         "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley.",
-        "..."
+        "Jens Gustedt (2019): Modern C, 2nd Edition, Manning."
 };
 
 struct file_struct {

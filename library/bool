@@ -1,10 +1,14 @@
 boolean
 
-primer, ch.3
+primer, ch.3/modern, ch.3
 
 since C99
 defined in [stdbool.h]
 no specific printf-specifier for bools (use e.g. %d instead)
+
+false == 0, true == 1
+    - 0 represents logical false
+    - any value different from 0 represents logical true
 
 EXAMPLE
 #include <stdbool.h>
