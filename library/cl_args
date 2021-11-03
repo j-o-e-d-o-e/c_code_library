@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 C compilers allow main() to have no args or else to have 2 args
     - 1st arg (argc): num of strings in the command-line (argument count)
         - system uses space to tell when one string ends and the next begins
-    - 2nd arg (argv): array of pointers to addresses of each string (argument values)
+    - 2nd arg (argv): array (vector) of pointers to addresses of each string (argument values)
         - argv[0]: name of the program itself
 
 EXAMPLE

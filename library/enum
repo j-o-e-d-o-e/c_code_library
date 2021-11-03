@@ -5,7 +5,7 @@ primer, ch.14
 symbolic names to represent integer constants
 int constants useable e.g.
     - as size in array declaration
-    - as lables in switch-statement
+    - as lables in switch-statement (multiple selection based on int-vals)
 
 by default, constants are assigned the integer vals: 0, 1, 2, ...
 to assign other vals: enum e {const = val, ... }

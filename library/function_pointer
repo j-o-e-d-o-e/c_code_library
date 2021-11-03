@@ -36,6 +36,10 @@ int main(void) {
 void apply(void (*fp)(char *), char *str) {
     (*fp)(str); // apply chosen func to str
 }
+//alternatively
+void apply(void fp(char *), char *str) {
+    fp(str); // since (*fp) == func
+}
 
 void toupper_s(char *s) {
     while (*s) {

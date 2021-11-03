@@ -1,9 +1,11 @@
 function
 
-primer, ch.9/10
+primer, ch.9,10/modern, lvl.1.7
 
-(1) param-names in prototype and definition do not need to be the same
+param-names in prototype and definition do not need to be the same (1)
     - though, good for readability
+possible to declare funcs without prototype, but should be avoided
+    - to be retired in future versions of C
 
 EXAMPLE
 (1)

@@ -1,0 +1,18 @@
+size_t
+
+modern, lvl.1.4/1.5
+
+unsigned integer type defined in [stddefh.] (not a keyword of the language)
+represents values in the range [0, SIZE_MAX] (1)
+    - SIZE_MAX defined in [stdint.h]
+    - for sizes, cardinalities, etc.
+type-operator sizeof returns int of type size_t (2)
+
+printf()-specifier: %zu, %zx
+
+EXAMPLE
+(1)
+printf("%zu", SIZE_MAX); // 18446744073709551615 == 2^64 - 1
+(2)
+char a[3];
+printf("%zu\n", sizeof a); // 3

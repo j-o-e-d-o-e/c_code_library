@@ -1,15 +1,18 @@
 array
 
-primer, ch.10
+primer, ch.10/modern, lvl.1.6
 
 (1) initialization
     - less data than array size: compiler initializes remaining elems to 0
     - more data than array size: error
     - designated initializer: allows to choose specific elems (1.1)
+    - in braces (default intializer): T a = {0}
 (2) `const` for immutable arrays
 (3) compound literals
     - means for providing values that are needed only temporarily
     - typically, to pass data to func without having to create an array first
+(4) size of array
+    - sizeof-operator: total size / size of any elem
 
 EXAMPLE
 (1)
@@ -38,3 +41,7 @@ int sum(const int ar[], int n) {
 }
 int total = sum((int[]) {4, 4, 4, 5, 5, 5}, 6);
 printf("%d", total); // 27
+(4)
+char *c[3];
+int s = (sizeof c) / (sizeof c[0]);
+printf("Size of array: %d", s);

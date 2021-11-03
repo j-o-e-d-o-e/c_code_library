@@ -19,6 +19,10 @@ DO NOT DEREFERENCE AN UNINITIALIZED POINTER (2)
     - so, there is no knowing where assigned val will be stored
     - might overwrite data/code ...
     - pointer should be assigned a memory location that has already been allocated
+    => ALWAYS INITIALIZE POINTERS
+
+assignment with 0 makes a pointer null (a null-pointer) (3)
+    - evaluate to false
 
 EXAMPLE
 (1)
@@ -32,3 +36,6 @@ printf("a: %p, b: %p, c: %p\n", &a, ptr, &c); // addr, (a == b) != c
 (2)
 int * pt; // an uninitialized pointer
 *pt = 5; // a terrible error: stores 5 in location to which pt points
+(3)
+char *p = 0;
+if (!p) puts("null"); // null

@@ -1,10 +1,12 @@
-library->memcpy()/memmove()
+char array->functions
 
-primer, ch.16
+primer, ch.16/modern, lvl.1.6
 
-for copying other kinds of arrays than strings (see entry: string->functions strcpy())
+unlike funcs prefixed with `str`, operate on char-arrays (not strings)
+    - see also entry: string->functions
 
 (1) memcpy() [string.h]
+    - copies one array to another
     - 1st arg (s1): target location (pointer-to-void)
         - C allows to assign any pointer-type to pointers of the void *-type
     - 2nd arg (s2): source location (pointer-to-void)
@@ -13,6 +15,14 @@ for copying other kinds of arrays than strings (see entry: string->functions str
     - assumes no overlap between the two memory ranges (s1 and s2)
 (2) memmove() [string.h]
     - unlike memcpy(), does not make assumption of non-overlapping
+(3) memcmp() [string.h]
+    - compares two arrays in lexicographic order
+    - memcmp (s0, s1, len)
+    - returns the difference between 1st chars that are distinct
+    - if no difference, returns 0
+(4) memchr() [string.h]
+    - searches array s for the appearance of char c
+    - memchr(s, c, len)
 
 EXAMPLE
 (1)

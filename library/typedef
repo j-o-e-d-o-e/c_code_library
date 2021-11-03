@@ -4,6 +4,8 @@ primer, ch.14
 
 to create own name for a type
     - unlike #define, names not for vals, but for types only
+C standard uses typedef internally a lot, e.g. size_t (see entry: size_t)
+    - often suffixed with _t (therefore, reserved)
 
 EXAMPLE
 (1)
