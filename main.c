@@ -15,6 +15,10 @@ void flags(char **argv);
 
 int read_dir(void);
 
+void sort_lib(int library_len);
+
+int comp(const void *p1, const void *p2);
+
 void print_toc(int library_len);
 
 void print_entry(int i);
@@ -40,6 +44,7 @@ int main(int argc, char **argv) {
         return 0;
     }
     int library_len = read_dir();
+    sort_lib(library_len);
     print_toc(library_len);
     while (1) {
         printf("\nWhat would you like to read? ");
@@ -95,6 +100,17 @@ int read_dir(void) {
     }
     closedir(d);
     return count;
+}
+
+void sort_lib(int library_len){
+    qsort(library, library_len, sizeof(struct file_struct), comp);
+    for (int i = 0; i < library_len; i++) library[i].index = i + 1;
+}
+
+int comp(const void *p1, const void *p2) {
+    const struct file_struct *ps1 = (const struct file_struct *) p1;
+    const struct file_struct *ps2 = (const struct file_struct *) p2;
+    return strcmp(ps1->title, ps2->title); // sort by title
 }
 
 void print_toc(int library_len) {
