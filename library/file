@@ -1,6 +1,6 @@
 file I/O
 
-primer, ch.13
+primer, ch.13/modern, lvl.1.8.3
 
 steps 1-3:
 (1) fopen() opens file [stdio.h]
@@ -24,6 +24,8 @@ steps 1-3:
     - returns pointer
         - if success, file-pointer of type pointer-to-FILE [stdio.h]
         - if error, null-pointer
+(1.1) freopen() associates a given stream to a different file and eventually changes the mode
+    - FILE * freopen (char const path [static 1], char const mode [static 1], FILE * stream)
 (2.1) getc() gets a char from specified file (like getchar())
     - arg: file to be read
     - getc(stdin) == getchar()

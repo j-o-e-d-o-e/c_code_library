@@ -1,6 +1,6 @@
 string->functions
 
-primer, ch.11
+primer, ch.11/modern, lvl.1.8.4
 
 defined in <string.h>
 see also: primer, ch.11, p.489ff.
@@ -62,6 +62,11 @@ see also: primer, ch.11, p.489ff.
     - strstr()
         - char *strstr(const char * s1, const char * s2);
         - returns pointer to the 1st occurence of string s2 in string s1
+(7) conversion
+    - strtol() converts initial part of string to a long-int
+        - long int strtol(const char *str, char **endptr, int base)
+    - strtod() converts strings to a float
+        - double strtod(const char *str, char **endptr)
 
 EXAMPLE
 (1)
@@ -95,3 +100,9 @@ strncpy(target + 3, "yyyyyyyy", strlen(target) - 3); // Joeyyyy
 char target[SIZE];
 sprintf(target, "%s, %-10s: $%.2f\n", "Doe", "Joe", 6.666);
 puts(target); // Doe, Joe       : $6.67
+(7)
+char str[30] = "3 is three";
+char *ptr;
+long ret = strtol(str, &ptr, 10);
+printf("Num: %ld\n", ret); // Num: 3
+printf("String part: |%s|", ptr); // String part: | is three|

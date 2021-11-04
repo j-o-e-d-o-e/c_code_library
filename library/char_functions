@@ -1,10 +1,11 @@
 char->functions
 
-primer, ch.8/11
+primer, ch.8/11/modern, lvl.1.8.4
 
 can't be applied to a string as a whole, but to the individual chars in a string
 
 (1) toupper() capitalizes a char given as arg [ctype.h]
+    - tolower() converts given char to lowercase
 (2) getchar() reads char from stdin [stdio.h]
     - performs input one char at a time (like putchar() for output)
         - including every char: spaces, tabs, newlines
@@ -12,12 +13,21 @@ can't be applied to a string as a whole, but to the individual chars in a string
     - returns EOF, when end of file reached
         - typically defined as `#define EOF (-1)` [stdio.h]
         - on Unix/Linux, Ctrl+D at beginning of a line causes EOF-signal to be transmitted
-(3) isalpha() checks for an alphabetic character [ctype.h]
+(3) putchar() outputs a single char [stdio.h]
+    - int putchar ( int c )
+    - if error, returns EOF
+(4) isalpha() checks e.g. for an alphabetic character [ctype.h]
     - int isalnum(int c);
     - int isdigit(int c);
     - int islower(int c);
     - int isupper(int c);
     - int isspace(int c);
+    - int isblank(int c);
+(5) fputc() [stdio.h]
+    - designed for file output
+(6) fgetc() [stdio.h]
+    - designed for file input
+    - int fgetc (FILE * stream)
 
 EXAMPLE
 (1)
@@ -37,3 +47,7 @@ void toupper_s(char *s) {
 char ch;
 while ((ch = getchar()) != EOF)
 putchar(ch);
+(3)
+char ch[] = {'J','o','e'};
+for (int i = 0; i < (sizeof ch) / (sizeof ch[0]); i++)
+    putchar(ch[i]); // Joe

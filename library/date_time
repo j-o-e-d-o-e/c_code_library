@@ -1,26 +1,44 @@
 date/time
 
-modern, lvl.1.5/1.6.3
+modern, lvl.1.5/1.6.3/1.8.5
 
 defined in [time.h]
 (1) time_t for calendar time in secs since epoch
+    - mktime() (1.1)
+        - time_t mktime(struct tm *tp)
+        - converts struct tp into time_t-val according to local-time-zone
+        - if error, returns -1
 (2) clock_t for processor time
+    - returned by clock()
 (3) struct tm holds time and date
     - int tm_sec: Seconds after the minute
-    - int tm_min:  Minutes after the hour
+        - range: 0-60 (inclusive due to leap year)
+    - int tm_min: Minutes after the hour
     - int tm_hour: Hours since midnight
-    - int tm_mday:  Day of the month
+    - int tm_mday: Day of the month
+        - starts counting days in the month at 1
     - int tm_mon: Months since January
-    - int tm_year:  Years since 1900
-    - int tm_wday:  Days since Sunday
-    - int tm_yday:  Days since January
+    - int tm_year: Years since 1900
+        - therefore, must subtract 1900 to get year in Gregorian calendar
+    - int tm_wday: Days since Sunday
+    - int tm_yday: Days since January
     - int tm_isdst: Daylight Saving Time flag
+(4) funcs [time.h]
+    - time_t time(time_t * t) returns timestamp
+    - double difftime(time_t time1, time_t time0)
+    - time_t mktime(struct tm tm [1]): from struct tm to time_t
+    - localtime_s()/gmtime_s(): from time_t to struct tm
+    - strftime()/asctime() for textual representation
 
 EXAMPLE
 (1)
 time_t t = time(NULL);
 printf("Hours since January 1, 1970 = %ld\n", t/3600);
 // Hours since January 1, 1970 = 454429
+(1.1)
+struct tm me = { . tm_year = 2020 };
+time_t t = mktime(&me);
+printf("Timestamp = %ld\n", t);
 (2)
 clock_t c = clock();
 printf("Platform's model of processor-clock-cycles = %ld\n", c);
@@ -32,3 +50,13 @@ struct tm me = {
 };
 printf("Millenium: %d-%d-%d", me.tm_year, me.tm_mon, me.tm_mday);
 // Millenium: 2000-1-1
+(4)
+struct tm me = {
+        .tm_year = 1982 - 1900 ,
+        .tm_mon = 0,
+        .tm_mday = 3,
+        .tm_hour = 10,
+        .tm_wday = 0
+};
+printf("ASCII time: %s", asctime(&me));
+// ASCII time: Sun Jan  3 10:00:00 1982
