@@ -4,7 +4,7 @@ primer, ch.16
 
 qsort(): quick sort defined in [stdlib.h]
     - void qsort (void *base, size_t nmemb, size_t size, int (*compar)(const void *, const void *));
-    - 1st arg (*base): pointer to beginnig of array to be sorted
+    - 1st arg (*base): pointer to beginning of array to be sorted
     - 2nd arg (nmemb): number of items to be sorted
     - 3rd arg (size): size of the data obj, e.g. sizeof(double)
     - 4th arg ((*compar)): pointer to func to be used to determine the sorting order

@@ -10,10 +10,8 @@ int main(int argc, char **argv) {
         flags(argv);
         return EXIT_SUCCESS;
     }
-    DIR *d = read_dir();
     Library lib[LLEN];
-    int lib_len = setup_lib(d, lib);
-    sort_lib(lib_len, lib);
+    int lib_len = setup_lib(lib);
     print_toc(lib_len, lib);
     while (true) {
         printf("\nWhat would you like to read? ");
@@ -52,16 +50,12 @@ void flags(char **argv) {
     }
 }
 
-DIR *read_dir() {
+int setup_lib(Library lib[]) {
     DIR *d;
     if (!(d = opendir(DIR_PATH))) {
         printf("Opening Directory %s failed.\n", DIR_PATH);
         exit(EXIT_FAILURE);
     }
-    return d;
-}
-
-int setup_lib(DIR *d, Library lib[]){
     int count = 0;
     struct dirent *file;
     while ((file = readdir(d))) {
@@ -79,6 +73,7 @@ int setup_lib(DIR *d, Library lib[]){
         fclose(f);
     }
     closedir(d);
+    sort_lib(count, lib);
     return count;
 }
 

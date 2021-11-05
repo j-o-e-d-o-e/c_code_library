@@ -19,9 +19,7 @@ typedef struct {
 
 void flags(char **argv);
 
-DIR *read_dir();
-
-int setup_lib(DIR *d, Library lib[]);
+int setup_lib(Library lib[]);
 
 void sort_lib(int lib_len, Library lib[lib_len]);
 

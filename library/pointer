@@ -23,6 +23,7 @@ DO NOT DEREFERENCE AN UNINITIALIZED POINTER (2)
 
 assignment with 0 makes a pointer null (a null-pointer) (3)
     - evaluate to false
+    - useful if pointer does not have a valid address, yet
 
 EXAMPLE
 (1)
