@@ -2,70 +2,43 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <string.h>
+#include <stdbool.h>
+#include "code-library.h"
 
-#define LLEN 80
-#define LIT_LEN 3
-#define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
-#define DELIMITER_TOC "====================================="
-#define DELIMITER_ENTRY "-------------------------------------"
-#define TOC 0
-#define EXIT 667
-
-void flags(char **argv);
-
-int read_dir(void);
-
-void sort_lib(int library_len);
-
-int comp(const void *p1, const void *p2);
-
-void print_toc(int library_len);
-
-void print_entry(int i);
-
-void fget(char *string, int n, FILE *file);
+int main(int argc, char **argv) {
+    if (argc > 1) {
+        flags(argv);
+        return EXIT_SUCCESS;
+    }
+    Library lib[LLEN];
+    int lib_len = read_dir(lib);
+    sort_lib(lib, lib_len);
+    print_toc(lib, lib_len);
+    while (true) {
+        printf("\nWhat would you like to read? ");
+        int ch;
+        scanf("%d", &ch);
+        if (ch == TOC) {
+            printf("\n");
+            print_toc(lib, lib_len);
+            continue;
+        } else if (ch == EXIT) {
+            printf("Devil's neighbour wishes you a good day.\n");
+            break;
+        } else if (ch > lib_len || ch < 0) {
+            printf("Not a valid number.");
+            continue;
+        }
+        print_entry(&lib[ch - 1]);
+    }
+    return 0;
+}
 
 const char *literature[LIT_LEN] = {
         "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley.",
         "Jens Gustedt (2019): Modern C, 2nd Edition, Manning.",
         "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]."
 };
-
-struct file_struct {
-    int index;
-    char path[LLEN];
-    char title[LLEN];
-    char src[LLEN];
-};
-struct file_struct library[LLEN];
-
-int main(int argc, char **argv) {
-    if (argc > 1) {
-        flags(argv);
-        return 0;
-    }
-    int library_len = read_dir();
-    sort_lib(library_len);
-    print_toc(library_len);
-    while (1) {
-        printf("\nWhat would you like to read? ");
-        int ch;
-        scanf("%d", &ch);
-        if (ch == TOC) {
-            printf("\n");
-            print_toc(library_len);
-            continue;
-        } else if (ch == EXIT) {
-            printf("Devil's neighbour wishes you a good day.\n");
-            break;
-        } else if (ch > library_len || ch < 0) {
-            printf("Not a valid number.");
-            continue;
-        }
-        print_entry(ch);
-    }
-    return 0;
-}
 
 void flags(char **argv) {
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
@@ -77,7 +50,7 @@ void flags(char **argv) {
     }
 }
 
-int read_dir(void) {
+int read_dir(Library lib[]) {
     DIR *d;
     if (!(d = opendir(DIR_PATH))) {
         printf("Opening Directory %s failed.\n", DIR_PATH);
@@ -87,15 +60,15 @@ int read_dir(void) {
     struct dirent *file;
     while ((file = readdir(d))) {
         if (file->d_type != 8) continue;
-        library[count].index = count + 1;
+        lib[count].index = count + 1;
         char filename[] = DIR_PATH;
         strcat(filename, file->d_name);
-        strcpy(library[count].path, filename);
+        strcpy(lib[count].path, filename);
         FILE *f = fopen(filename, "r");
-        fget(library[count].title, LLEN, f);
+        fget(lib[count].title, LLEN, f);
         char s[LLEN];
         fget(s, LLEN, f); // empty line
-        fget(library[count].src, LLEN, f);
+        fget(lib[count].src, LLEN, f);
         count++;
         fclose(f);
     }
@@ -103,29 +76,29 @@ int read_dir(void) {
     return count;
 }
 
-void sort_lib(int library_len){
-    qsort(library, library_len, sizeof(struct file_struct), comp);
-    for (int i = 0; i < library_len; i++) library[i].index = i + 1;
+void sort_lib(Library lib[], int lib_len) {
+    qsort(lib, lib_len, sizeof(Library), comp);
+    for (int i = 0; i < lib_len; i++) lib[i].index = i + 1;
 }
 
 int comp(const void *p1, const void *p2) {
-    const struct file_struct *ps1 = (const struct file_struct *) p1;
-    const struct file_struct *ps2 = (const struct file_struct *) p2;
+    const Library *ps1 = (const Library *) p1;
+    const Library *ps2 = (const Library *) p2;
     return strcmp(ps1->title, ps2->title); // sort by title
 }
 
-void print_toc(int library_len) {
-    printf("%s%s%s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
-    for (int i = 0; i < library_len; i++) {
+void print_toc(const Library lib[], int lib_len) {
+    printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
+    for (int i = 0; i < lib_len; i++) {
         int n = i < 9 ? 29 : 30;
-        printf("%d - %-*s-> (%d) %s\n", library[i].index, LLEN - n, library[i].title, library[i].index, library[i].src);
+        printf("%d - %-*s-> (%d) %s\n", lib[i].index, LLEN - n, lib[i].title, lib[i].index, lib[i].src);
     }
 }
 
-void print_entry(int i) {
+void print_entry(const Library *lib) {
     FILE *f;
-    if ((f = fopen(library[i - 1].path, "r")) == NULL) {
-        printf("Opening File %s failed.\n", library[i - 1].title);
+    if ((f = fopen(lib->path, "r")) == NULL) {
+        printf("Opening File %s failed.\n", lib->title);
         return;
     }
     printf("\n%s\n", DELIMITER_ENTRY);
