@@ -4,7 +4,7 @@
 #include <string.h>
 
 #define LLEN 80
-#define LIT_LEN 2
+#define LIT_LEN 3
 #define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
 #define DELIMITER_TOC "====================================="
 #define DELIMITER_ENTRY "-------------------------------------"
@@ -27,7 +27,8 @@ void fget(char *string, int n, FILE *file);
 
 const char *literature[LIT_LEN] = {
         "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley.",
-        "Jens Gustedt (2019): Modern C, 2nd Edition, Manning."
+        "Jens Gustedt (2019): Modern C, 2nd Edition, Manning.",
+        "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]."
 };
 
 struct file_struct {
