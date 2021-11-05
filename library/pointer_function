@@ -15,9 +15,10 @@ int main(void) {
     printf("Now x = %d and y = %d.\n", x, y); // x == 10, y == 5
     return 0;
 }
-void interchange(int *u, int *v) {
+// * plays two different roles, here:
+void interchange(int *u, int *v) { // 1.creates new pointer-to-int
     int temp;
-    temp = *u;
+    temp = *u; // 2.dereferences
     *u = *v;
     *v = temp;
 }

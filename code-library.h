@@ -19,13 +19,15 @@ typedef struct {
 
 void flags(char **argv);
 
-int read_dir(Library lib[]);
+DIR *read_dir();
 
-void sort_lib(Library lib[], int lib_len);
+int setup_lib(DIR *d, Library lib[]);
+
+void sort_lib(int lib_len, Library lib[lib_len]);
 
 int comp(const void *p1, const void *p2);
 
-void print_toc(const Library lib[], int lib_len);
+void print_toc(int lib_len, const Library lib[lib_len]);
 
 void print_entry(const Library *lib);
 

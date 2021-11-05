@@ -10,17 +10,18 @@ int main(int argc, char **argv) {
         flags(argv);
         return EXIT_SUCCESS;
     }
+    DIR *d = read_dir();
     Library lib[LLEN];
-    int lib_len = read_dir(lib);
-    sort_lib(lib, lib_len);
-    print_toc(lib, lib_len);
+    int lib_len = setup_lib(d, lib);
+    sort_lib(lib_len, lib);
+    print_toc(lib_len, lib);
     while (true) {
         printf("\nWhat would you like to read? ");
         int ch;
         scanf("%d", &ch);
         if (ch == TOC) {
             printf("\n");
-            print_toc(lib, lib_len);
+            print_toc(lib_len, lib);
             continue;
         } else if (ch == EXIT) {
             printf("Devil's neighbour wishes you a good day.\n");
@@ -42,20 +43,25 @@ const char *literature[LIT_LEN] = {
 
 void flags(char **argv) {
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
-        printf("%s%s%s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
+        printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
         puts("Commands:");
         printf("\t- %d: Table of Content\n\t- %d: Exit\n", TOC, EXIT);
         puts("\nLiterature:");
         for (int i = 0; i < LIT_LEN; i++) printf("\t- %s\n", literature[i]);
+        puts("");
     }
 }
 
-int read_dir(Library lib[]) {
+DIR *read_dir() {
     DIR *d;
     if (!(d = opendir(DIR_PATH))) {
         printf("Opening Directory %s failed.\n", DIR_PATH);
         exit(EXIT_FAILURE);
     }
+    return d;
+}
+
+int setup_lib(DIR *d, Library lib[]){
     int count = 0;
     struct dirent *file;
     while ((file = readdir(d))) {
@@ -76,7 +82,7 @@ int read_dir(Library lib[]) {
     return count;
 }
 
-void sort_lib(Library lib[], int lib_len) {
+void sort_lib(int lib_len, Library lib[]) {
     qsort(lib, lib_len, sizeof(Library), comp);
     for (int i = 0; i < lib_len; i++) lib[i].index = i + 1;
 }
@@ -87,7 +93,7 @@ int comp(const void *p1, const void *p2) {
     return strcmp(ps1->title, ps2->title); // sort by title
 }
 
-void print_toc(const Library lib[], int lib_len) {
+void print_toc(int lib_len, const Library lib[]) {
     printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
     for (int i = 0; i < lib_len; i++) {
         int n = i < 9 ? 29 : 30;
