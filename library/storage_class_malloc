@@ -1,29 +1,30 @@
 storage class->mem-alloc
 
-primer, ch.12
+primer, ch.12; modern, lvl.2.13.1
 
-funcs to manage pool of memory
+funcs to manage pool of memory (dynamic allocation)
 
-(1) malloc() allocates memory [malloc.h]
+(1) malloc() allocates memory (memory allocate) [stdlib.h]
     - arg: num of bytes of memory you want
     - if success, returns the address of the first byte of that block
         -  otherwise, returns null-pointer (fails to find the required space)
+    - if error, returns null-pointer
     - allows to create array while program runs (like VLA)
         - e.g. during runtime create arrays with different sizes (100 vs. 10.000)
-(2) free() frees memory [malloc.h]
+(2) free() frees memory [stdlib.h]
     - each use of malloc()/calloc() should be balanced with a use of free()
     - arg: address returned earlier by malloc()
-(3) calloc() allocates memory [malloc.h]
+(3) calloc() allocates memory (clear allocate) [stdlib.h]
     - 1st arg: num of memory-cells you want
     - 2nd arg: size of each cell in bytes
     - returns pointer to 1st mem-location (like malloc())
     - sets all bits in the mem-block to 0
 
 EXAMPLE
-#include <malloc.h>
+#include <stdlib.h> // alternatively, <malloc.h>
 #define SIZE 3
 int main(void) {
-    int *ptr = (int *) malloc(SIZE * sizeof(int)); // (1): type-cast optional
+    int *ptr = malloc(SIZE * sizeof(int)); // (1) don't cast: (int *)
     for (int i = SIZE; i > 0; i--) ptr[SIZE - i] = i;
     for (int i = 0; i < SIZE; i++) printf("%d...\n", ptr[i]);
     free(ptr); // (2)
@@ -35,4 +36,4 @@ int main(void) {
 // 1...
 // Kaboom.
 (3)
-int *ptr = (int *) calloc(SIZE, sizeof(int));
+int *ptr =  calloc(SIZE, sizeof(int));
