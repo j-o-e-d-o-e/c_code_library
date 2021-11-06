@@ -1,6 +1,6 @@
 boolean
 
-primer, ch.3/modern, ch.3
+primer, ch.3; modern, ch.3
 
 since C99
 defined in [stdbool.h]

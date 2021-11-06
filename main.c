@@ -33,13 +33,15 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-const char *literature[LIT_LEN] = {
-        "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley.",
-        "Jens Gustedt (2019): Modern C, 2nd Edition, Manning.",
-        "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]."
-};
-
 void flags(char **argv) {
+    static const size_t LIT_LEN = 4;
+    static const char *literature[] = {
+            "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley. [p]",
+            "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [m]",
+            "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]. [t]",
+            "Brian Hall (2021): Beej's Guide to C Programming [beej.us/guide/bgc/html/split]. [b]",
+
+    };
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
         printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
         puts("Commands:");

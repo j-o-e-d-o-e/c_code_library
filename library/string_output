@@ -1,6 +1,6 @@
 string->output
 
-primer, ch.11/modern, lvl.1.8.3
+primer, ch.11; modern, lvl.1.8.3
 
 (1) printf()
     - arg: address of a string

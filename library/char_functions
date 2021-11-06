@@ -1,6 +1,6 @@
 char->functions
 
-primer, ch.8/11/modern, lvl.1.8.4
+primer, ch.8/11; modern, lvl.1.8.4
 
 can't be applied to a string as a whole, but to the individual chars in a string
 

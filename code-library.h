@@ -3,7 +3,6 @@
 #endif //CODE_LIBRARY_CODE_LIBRARY_H
 
 #define LLEN 80
-#define LIT_LEN 3
 #define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
 #define DELIMITER_TOC "======================================="
 #define DELIMITER_ENTRY "-------------------------------------"

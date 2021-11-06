@@ -1,6 +1,6 @@
 library->math
 
-primer, ch.16/modern, lvl.1.8.2
+primer, ch.16;modern, lvl.1.8.2
 
 defined in [math.h] and [tgmath.h] (latter simpler)
     - double ceil(double x) returns the smallest integral value not less than x

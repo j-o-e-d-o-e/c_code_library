@@ -1,6 +1,6 @@
 function
 
-primer, ch.9,10/modern, lvl.1.7
+primer, ch.9,10; modern, lvl.1.7
 
 param-names in prototype and definition do not need to be the same (1)
     - though, good for readability

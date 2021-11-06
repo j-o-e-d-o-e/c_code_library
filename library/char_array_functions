@@ -1,6 +1,6 @@
 char array->functions
 
-primer, ch.16/modern, lvl.1.6
+primer, ch.16; modern, lvl.1.6
 
 unlike funcs prefixed with `str`, operate on char-arrays (not strings)
     - see also entry: string->functions
