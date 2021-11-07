@@ -7,6 +7,6 @@ func defined with specifier 'inline'
     - and/or, perform some optimizations
     - or have no effect
 C99/C11 says:
-    - making a func inline suggests thatcalls to the func be as fast as possible
+    - making a func inline suggests that calls to the func be as fast as possible
     - the extent to which such suggestions are effective is implementation-defined
-inline-func should be short ...
+inline-func should be short
