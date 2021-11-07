@@ -9,7 +9,7 @@
 #define TOC 0
 #define EXIT 667
 
-typedef struct {
+typedef struct entry {
     int index;
     char path[LLEN];
     char title[LLEN];
@@ -26,6 +26,6 @@ int comp(const void *p1, const void *p2);
 
 void print_toc(int lib_len, const Library lib[lib_len]);
 
-void print_entry(const Library *lib);
+void print_entry(const struct entry *entry);
 
 void fget(char *string, int n, FILE *file);

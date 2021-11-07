@@ -37,10 +37,9 @@ void flags(char **argv) {
     static const size_t LIT_LEN = 4;
     static const char *literature[] = {
             "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley. [p]",
-            "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [m]",
-            "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]. [t]",
             "Brian Hall (2021): Beej's Guide to C Programming [beej.us/guide/bgc/html/split]. [b]",
-
+            "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]. [t]",
+            "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [m]",
     };
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
         printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
@@ -98,10 +97,10 @@ void print_toc(int lib_len, const Library lib[]) {
     }
 }
 
-void print_entry(const Library *lib) {
+void print_entry(const struct entry *entry) {
     FILE *f;
-    if ((f = fopen(lib->path, "r")) == NULL) {
-        printf("Opening File %s failed.\n", lib->title);
+    if ((f = fopen(entry->path, "r")) == NULL) {
+        printf("Opening File %s failed.\n", entry->title);
         return;
     }
     printf("\n%s\n", DELIMITER_ENTRY);
