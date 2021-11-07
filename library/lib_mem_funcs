@@ -1,6 +1,6 @@
 lib->mem-functions
 
-p, ch.16; m, lvl.1.6; b, ch.11
+p,ch.16; m,lvl.1.6; b,ch.11
 
 (1) memcpy() [string.h]
     - void *memcpy(void *s1, void *s2, size_t n);
@@ -22,6 +22,9 @@ p, ch.16; m, lvl.1.6; b, ch.11
 (4) memchr() [string.h]
     - searches array s for the appearance of char c
     - memchr(s, c, len)
+(5) memset() [string.h]
+    - sets all bits in a mem-block to a specified val
+    - e.g. memset(q, 0, sizeof(int) * 10): all 10 elems in int-arr to 0
 
 EXAMPLE
 (1)

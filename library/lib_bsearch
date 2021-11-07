@@ -1,6 +1,6 @@
 library->bsearch()
 
-m, lvl.2.11.4; t, /c_function_bsearch
+m,lvl.2.11.4; t,/c_function_bsearch
 
 bsearch(): binary search defined in [stdlib.h]
     - void * bsearch ( void const *key, void const *base, size_t n, size_t size, compare_function *compar)

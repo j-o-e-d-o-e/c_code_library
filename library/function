@@ -1,6 +1,6 @@
 function
 
-p, ch.9,10; m, lvl.1.7; b, ch.4
+p,ch.9,10; m,lvl.1.7; b,ch.4
 
 given args are copied into params of func
     - given address (&) by caller is assigned to a pointer-param (*)
