@@ -1,33 +1,35 @@
 library->qsort()
 
-primer, ch.16
+primer, ch.16, beej, ch.11
 
 qsort(): quick sort defined in [stdlib.h]
-    - void qsort (void *base, size_t nmemb, size_t size, int (*compar)(const void *, const void *));
-    - 1st arg (*base): pointer to beginning of array to be sorted
+    - void qsort (void *base, size_t nmemb, size_t size, int (*compar)(const void *, const void *))
+    - 1st arg (*base): pointer to beginning of array to be sorted (of any type due to void *)
     - 2nd arg (nmemb): number of items to be sorted
     - 3rd arg (size): size of the data obj, e.g. sizeof(double)
     - 4th arg ((*compar)): pointer to func to be used to determine the sorting order
         - two args: pointers to the two items being compared
-        - returns pos int (if 1st item follows 2nd item), 0 (same) or neg int
+        - returns positive int (if 1st item follows 2nd item), 0 (same) or neg int
 
 EXAMPLE
 (1)
 #define NUM 8
+
 void show_array(const double ar[], int n);
 
 /* sort by increasing value */
 int comp(const void *p1, const void *p2) {
-    const double *a1 = (const double *) p1; // need to use pointers to double to access values
-    const double *a2 = (const double *) p2;
-    if (*a1 < *a2) return -1;
-    else if (*a1 == *a2) return 0;
-    else return 1;
+    const double *a1 = p1;
+    const double *a2 = p2;
+    return *a1 - *a2;
+//    if (*a1 < *a2) return -1; // explicitly
+//    else if (*a1 == *a2) return 0;
+//    else return 1;
 }
 int main(void) {
-    double vals[NUM];
-    for (int index = 0; index < NUM; index++)
-        vals[index] = (double) rand() / ((double) rand() + 0.1);
+    double vals[NUM] = {8, 2, 7, 4, 3, 5, 1, 6};
+//    for (int index = 0; index < NUM; index++) // randomly
+//        vals[index] = (double) rand() / ((double) rand() + 0.1);
     puts("Random list:");
     show_array(vals, NUM);
     qsort(vals, NUM, sizeof(double), comp);
@@ -54,8 +56,8 @@ struct name names[NUM] = {
 };
 /* sort first by last name, then by first name */
 int comp(const void *p1, const void *p2) {
-    const struct name *ps1 = (const struct name *) p1;
-    const struct name *ps2 = (const struct name *) p2;
+    const struct name *ps1 = p1;
+    const struct name *ps2 = p2;
     int res = strcmp(ps1->last, ps2->last); // compare last name
     if (res != 0) return res;
     else return strcmp(ps1->first, ps2->first); // last name identical, so compare first name

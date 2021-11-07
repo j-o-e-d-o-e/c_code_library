@@ -1,10 +1,10 @@
 struct->functions
 
-primer, ch.14
+primer, ch.14; beej, ch.8.3
 
 telling funcs about structures
     (1) passing struct-members
-    (2) using struct-address
+    (2) passing pointer-to-struct
         - must use &-operator to get address
         - unlike array-name, struct-name is not a synonym for its address
     (3) passing struct as arg

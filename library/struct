@@ -1,6 +1,6 @@
 struct
 
-primer, ch.14
+primer, ch.14; beej, ch.8
 
 to represent complex data
 struct-member can be any C data type, including other structures (nested)
@@ -13,7 +13,7 @@ struct-member can be any C data type, including other structures (nested)
     - not possible with arrays
 (3) compound literals
     - for temporary stuct-var (like for arrays)
-(4) saving/reading structures to/from file
+(4) saving/reading structs to/from file
     - using fwrite()/fread() for binary mode
     - see: primer, ch.14, p.639ff.
 

@@ -21,19 +21,19 @@ struct name_st {
     char first[8];
     char last[8];
 };
-typedef struct name_st name;
+typedef struct name_st Name;
 // alternatively:
 // typedef struct { // name for struct also omitted
 //     char first[8];
 //     char last[8];
-// } name;
+// } Name;
 
-void get_name(name *n) {
+void getName(Name *n) {
     printf("%s %s", n->first, n->last);
 }
 
 int main(void) {
-    name me = {"joe", "doe"};
-    get_name(&me);
+    Name me = {"joe", "doe"};
+    getName(&me);
     return 0;
 }

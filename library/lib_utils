@@ -22,7 +22,7 @@ primer, ch.16
     - if expression evaluates to false (non-zero), error-message and program terminates
     - to identify ciritical locations in a program where certain conditions should be met
     - #define NDEBUG deactivates all assert()-statements (placed before #include <assert.h>)
-(5) memcpy()/memmove() (see entry: library->memcpy()/memmove()) [string.h]
+(5) memcpy()/memmove() (see entry: char->array functions) [string.h]
 
 EXAMPLE
 (2)

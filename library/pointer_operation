@@ -1,6 +1,6 @@
 pointer->operations
 
-primer, ch.10
+primer, ch.10; beej, ch.11
 
 (1) assignment
     - assign an address to a pointer

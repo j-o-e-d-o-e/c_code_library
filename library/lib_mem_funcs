@@ -1,12 +1,11 @@
-char array->functions
+lib->mem-functions
 
-primer, ch.16; modern, lvl.1.6
-
-unlike funcs prefixed with `str`, operate on char-arrays (not strings)
-    - see also entry: string->functions
+p, ch.16; m, lvl.1.6; b, ch.11
 
 (1) memcpy() [string.h]
-    - copies one array to another
+    - void *memcpy(void *s1, void *s2, size_t n);
+    - copies one array to another (of any type due to pointer of type void)
+        - n bytes of mem starting from s1 into mem starting at s2
     - 1st arg (s1): target location (pointer-to-void)
         - C allows to assign any pointer-type to pointers of the void *-type
     - 2nd arg (s2): source location (pointer-to-void)
