@@ -4,8 +4,7 @@ primer, ch.14; beej, ch.10
 
 to create own name for a type
     - unlike #define, names not for vals, but for types only
-    - used for
-        - aliasing a struct (2)
+    - used esp. for aliasing a struct (2)
     - naming: leading uppercase or snake_case (but not standardized)
 C standard uses typedef internally a lot, e.g. size_t (see entry: size_t)
     - often suffixed with _t (therefore, reserved)

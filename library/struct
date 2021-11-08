@@ -1,6 +1,6 @@
 struct
 
-primer, ch.14; beej, ch.8
+primer, ch.14; beej, ch.8/20
 
 to represent complex data
 struct-member can be any C data type, including other structures (nested)
@@ -8,6 +8,10 @@ struct-member can be any C data type, including other structures (nested)
 (1) declaring a struct and defining a struct-var can be combined into one step
     - to initialize var, use comma-separated list of initializers enclosed in braces
     - designated intializers to identify specific members
+      - initializing nested structures (of multiple structs)
+          (1) .<mem1>.<mem2> = <val>
+          (2) .<mem1> = { .<mem2> = <val> }
+      - initializing elem of array-member: [index].<mem> = <val>
 (2) one struct-var can be assigned to another one (if boths structs are of the same type)
     - each member of assigned struct is assigned val of corresponding member (copy)
     - not possible with arrays
@@ -18,18 +22,19 @@ struct-member can be any C data type, including other structures (nested)
     - see: primer, ch.14, p.639ff.
 
 EXAMPLE
+(1.1)
 struct file_struct {
     int index;
     char path[20];
     char title[20];
     char src[20];
-} ex = { // (1)
+} ex = {
         .path = "/path",
         .title = "ex",
         .src = "primer, ch.14"
 };
 printf("title: %s\n", ex.title); // title: ex
-
+(1.2)
 struct file_struct library[3] = {[1] = { // see entry: array
         1,
         "/path",
