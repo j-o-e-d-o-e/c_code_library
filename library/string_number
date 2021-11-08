@@ -5,20 +5,39 @@ primer, ch.11
 (1) num-to-string conversion
     - printf() (see string->output)
     - sprintf() (see->string->functions)
+    - snprintf() takes length as additional arg
 (2) string-to-num conversion
-    - scanf() (see string->input)
-    - atoi() (alphanumeric to integer) [stdlib.h]
+    (2.1) scanf() (see string->input)
+    (2.2) atoi() (alphanumeric/ASCII to integer) [stdlib.h]
         - arg: string
         - returns the corresponding integer val
         - e.g. see command-line args
-    - strtol() converts string to a long [stdlib.h]
-    - strtod() converts string to double [stdlib.h]
+    (2.3) strtol() converts string to long [stdlib.h]
+        - error-handling included (unlike atoi())
+        - strtod(): to double
+        - strtof(): to float
+        - strtoul(): for binary (2.3.1)
 
 EXAMPLE
 (1)
-printf("num: %d", 3);
-(2)
+#define LEN 5
+char s[LEN];
+snprintf(s, LEN, "%f", M_PI); // including \0
+printf("PI: %f\n", M_PI); // PI: 3.141593
+printf("String val: %s\n", s); // String val: 3.1415
+printf("String len: %d\n", (int) strlen(s)); // String len: 6
+(2.2)
 #include <stdlib.h>
 char argv[] = "3";
 int i = atoi(argv);
 printf("int: %d", i); // int: 3
+(2.3)
+char s[] = "3.141593";
+char *error;
+float x = strtof(s, &error);
+if (*error == '\0') printf("%.2f\n", x); // 3.14
+(2.3.1)
+char *s = "101010";
+char *error;
+unsigned long int x = strtoul(s, &error, 2); // base: 2
+if (*error == '\0') printf("%lu\n", x); // 42
