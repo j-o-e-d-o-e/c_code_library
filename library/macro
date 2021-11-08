@@ -1,6 +1,6 @@
 macro
 
-primer, ch.16
+primer, ch.16; beej, ch.19
 
 preprocessor-directives
 indicated by # at the beginning of the line
