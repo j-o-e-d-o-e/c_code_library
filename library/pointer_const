@@ -1,0 +1,22 @@
+pointer->const
+
+beej, ch.16
+
+(1) cannot change val to which pointer points, but pointer itself
+    - const <type> *p (equivalent to: <type> const *p)
+(2) cannot change pointer, but pointed-to val
+    - <type> *const p
+(3) cannot modify val nor pointer
+    - const <type> *const p
+
+EXAMPLE
+(1)
+int x[] = {10, 20};
+const int *p1 = x;
+printf("%d\n", *p1); // 10
+p1++;
+printf("%d\n", *p1); // 20
+(2)
+int *const p2 = x;
+*p2 = 20;
+for (int i = 0; i < 2; i++) printf("%d ", x[i]); // 20 20

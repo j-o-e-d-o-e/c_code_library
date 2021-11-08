@@ -1,6 +1,6 @@
 storage class->specifiers
 
-primer, ch.12
+primer, ch.12; beej, ch.16.2
 
 see also: storage classes
 
@@ -12,17 +12,19 @@ see also: storage classes
 (2) register
     - only be used with vars of block scope
     - puts var into the register storage class
-        - which amounts to request to minimize access time
+        - which amounts to a request to minimize access-time
         - &-operator not allowed
 (3) static
     - static duration for entire program runtime
     - if file-scope: var limited to that one file
     - if block-scope: var can be accessed only within that block
+        - val persists between calls
+        - by default, initialized to 0
 (4) extern
     - indicates that you are declaring a var that has been defined elsewhere
     - if file-scope: referred-to var must have external linkage
     - if block-scope: referred-to var has external or internal linkage
 
 func can be either external (the default) or static
-    - external: can be accessed by funcs in other files
+    - extern: can be accessed by funcs in other files
     - static: can be used only within the defining file

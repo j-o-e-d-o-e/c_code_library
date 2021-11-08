@@ -1,6 +1,6 @@
 string->functions
 
-primer, ch.11; modern, lvl.1.8.4
+p,ch.11; m,lvl.1.8.4; t,/c_function_strtok
 
 defined in <string.h>
 see also: primer, ch.11, p.489ff.
@@ -67,6 +67,8 @@ see also: primer, ch.11, p.489ff.
         - long int strtol(const char *str, char **endptr, int base)
     - strtod() converts strings to a float
         - double strtod(const char *str, char **endptr)
+(8) strtok() breaks string into tokens using a delimiter
+    - char *strtok(char *str, const char *delim)
 
 EXAMPLE
 (1)
@@ -106,3 +108,12 @@ char *ptr;
 long ret = strtol(str, &ptr, 10);
 printf("Num: %ld\n", ret); // Num: 3
 printf("String part: |%s|", ptr); // String part: | is three|
+(8)
+char s[] = "1000011 1010110 100000 1110011 1110100 1110101 1100100 1100101 1101110 1110100";
+char *token = strtok(s, " ");
+char *error;
+while (token != NULL) { // prints: CV student
+    unsigned int x = strtoul(token, &error, 2);
+    if (*error == '\0') printf("%c", x);
+    token = strtok(NULL, " ");
+}
