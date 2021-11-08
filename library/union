@@ -1,6 +1,6 @@
 union
 
-primer, ch.14
+primer, ch.14; beej, ch.20.9
 
 allows to use different data types, i.e. only one val is stored at a time
     - useful in conjunction with structs
