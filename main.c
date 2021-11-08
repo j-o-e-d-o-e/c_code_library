@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
         printf("\nWhat would you like to read? ");
         scanf("%s", input);
         ch = strtol(input, NULL, 10);
-       if (ch == TOC) {
+        if (ch == TOC) {
             printf("\n");
             print_toc(&lib);
             continue;
@@ -94,10 +94,12 @@ int comp(const void *p1, const void *p2) {
 
 void print_toc(const Library *lib) {
     printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
-    for (int i = 0; i < lib->len; i++) {
-        int n = i < 9 ? 29 : 30;
-        struct entry e = lib->entries[i];
-        printf("%d - %-*s-> (%d) %s\n", e.index, LLEN - n, e.title, e.index, e.src);
+    const struct entry *e = &(lib->entries[0]);
+    const struct entry *end = e + lib->len;
+    while (e < end) {
+        int n = e->index < 10 ? 29 : 30;
+        printf("%d - %-*s-> (%d) %s\n", e->index, LLEN - n, e->title, e->index, e->src);
+        e++;
     }
 }
 
