@@ -13,11 +13,13 @@ int main(int argc, char **argv) {
     Library lib[LLEN];
     int lib_len = setup_lib(lib);
     print_toc(lib_len, lib);
+    char input[3];
+    unsigned int long ch;
     while (true) {
         printf("\nWhat would you like to read? ");
-        int ch;
-        scanf("%d", &ch);
-        if (ch == TOC) {
+        scanf("%s", input);
+        ch = strtol(input, NULL, 10);
+       if (ch == TOC) {
             printf("\n");
             print_toc(lib_len, lib);
             continue;
@@ -44,7 +46,7 @@ void flags(char **argv) {
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
         printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
         puts("Commands:");
-        printf("\t- %d: Table of Content\n\t- %d: Exit\n", TOC, EXIT);
+        printf("\t- %d: Table of Content (or any char)\n\t- %d: Exit\n", TOC, EXIT);
         puts("\nLiterature:");
         for (int i = 0; i < LIT_LEN; i++) printf("\t- %s\n", literature[i]);
         puts("");

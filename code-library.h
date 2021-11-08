@@ -1,6 +1,5 @@
 #ifndef CODE_LIBRARY_CODE_LIBRARY_H
 #define CODE_LIBRARY_CODE_LIBRARY_H
-#endif //CODE_LIBRARY_CODE_LIBRARY_H
 
 #define LLEN 80
 #define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
@@ -29,3 +28,5 @@ void print_toc(int lib_len, const Library lib[lib_len]);
 void print_entry(const struct entry *entry);
 
 void fget(char *string, int n, FILE *file);
+
+#endif // CODE_LIBRARY_CODE_LIBRARY_H
