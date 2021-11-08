@@ -10,9 +10,9 @@ int main(int argc, char **argv) {
         flags(argv);
         return EXIT_SUCCESS;
     }
-    Library lib[LLEN];
-    int lib_len = setup_lib(lib);
-    print_toc(lib_len, lib);
+    Library lib;
+    setup_lib(&lib);
+    print_toc(&lib);
     char input[3];
     unsigned int long ch;
     while (true) {
@@ -21,16 +21,16 @@ int main(int argc, char **argv) {
         ch = strtol(input, NULL, 10);
        if (ch == TOC) {
             printf("\n");
-            print_toc(lib_len, lib);
+            print_toc(&lib);
             continue;
         } else if (ch == EXIT) {
             printf("Devil's neighbour wishes you a good day.\n");
             break;
-        } else if (ch > lib_len || ch < 0) {
+        } else if (ch > lib.len || ch < 0) {
             printf("Not a valid number.");
             continue;
         }
-        print_entry(&lib[ch - 1]);
+        print_entry(&lib.entries[ch - 1]);
     }
     return 0;
 }
@@ -53,7 +53,7 @@ void flags(char **argv) {
     }
 }
 
-int setup_lib(Library lib[]) {
+void setup_lib(Library *lib) {
     DIR *d;
     if (!(d = opendir(DIR_PATH))) {
         printf("Opening Directory %s failed.\n", DIR_PATH);
@@ -63,39 +63,41 @@ int setup_lib(Library lib[]) {
     struct dirent *file;
     while ((file = readdir(d))) {
         if (file->d_type != 8) continue;
-        lib[count].index = count + 1;
+        struct entry *e = &lib->entries[count];
+        e->index = count + 1;
         char filename[] = DIR_PATH;
         strcat(filename, file->d_name);
-        strcpy(lib[count].path, filename);
+        strcpy(e->path, filename);
         FILE *f = fopen(filename, "r");
-        fget(lib[count].title, LLEN, f);
+        fget(e->title, LLEN, f);
         char s[LLEN];
         fget(s, LLEN, f); // empty line
-        fget(lib[count].src, LLEN, f);
+        fget(e->src, LLEN, f);
         count++;
         fclose(f);
     }
     closedir(d);
-    sort_lib(count, lib);
-    return count;
+    lib->len = count;
+    sort_lib(lib);
 }
 
-void sort_lib(int lib_len, Library lib[]) {
-    qsort(lib, lib_len, sizeof(Library), comp);
-    for (int i = 0; i < lib_len; i++) lib[i].index = i + 1;
+void sort_lib(Library *lib) {
+    qsort(lib->entries, lib->len, sizeof(struct entry), comp);
+    for (int i = 0; i < lib->len; i++) lib->entries[i].index = i + 1;
 }
 
 int comp(const void *p1, const void *p2) {
-    const Library *ps1 = (const Library *) p1;
-    const Library *ps2 = (const Library *) p2;
+    const struct entry *ps1 = p1;
+    const struct entry *ps2 = p2;
     return strcmp(ps1->title, ps2->title); // sort by title
 }
 
-void print_toc(int lib_len, const Library lib[]) {
+void print_toc(const Library *lib) {
     printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
-    for (int i = 0; i < lib_len; i++) {
+    for (int i = 0; i < lib->len; i++) {
         int n = i < 9 ? 29 : 30;
-        printf("%d - %-*s-> (%d) %s\n", lib[i].index, LLEN - n, lib[i].title, lib[i].index, lib[i].src);
+        struct entry e = lib->entries[i];
+        printf("%d - %-*s-> (%d) %s\n", e.index, LLEN - n, e.title, e.index, e.src);
     }
 }
 

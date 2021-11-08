@@ -8,22 +8,26 @@
 #define TOC 0
 #define EXIT 667
 
-typedef struct entry {
+struct entry {
     int index;
     char path[LLEN];
     char title[LLEN];
     char src[LLEN];
+};
+typedef struct {
+    int len;
+    struct entry entries[LLEN];
 } Library;
 
 void flags(char **argv);
 
-int setup_lib(Library lib[]);
+void setup_lib(Library *lib);
 
-void sort_lib(int lib_len, Library lib[lib_len]);
+void sort_lib(Library *lib);
 
 int comp(const void *p1, const void *p2);
 
-void print_toc(int lib_len, const Library lib[lib_len]);
+void print_toc(const Library *lib);
 
 void print_entry(const struct entry *entry);
 
