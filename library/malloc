@@ -1,6 +1,6 @@
 memory allocation
 
-p,ch.12; m,lvl.2.13.1; b,ch.12
+p,ch.12; m,lvl.2.13.1; b,ch.12; g,/dynamic-memory-...
 
 funcs to manage pool of memory (dynamic allocation)
 

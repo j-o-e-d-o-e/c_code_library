@@ -36,11 +36,12 @@ int main(int argc, char **argv) {
 }
 
 void flags(char **argv) {
-    static const size_t LIT_LEN = 4;
+    static const size_t LIT_LEN = 5;
     static const char *literature[] = {
             "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley. [p]",
             "Brian Hall (2021): Beej's Guide to C Programming [beej.us/guide/bgc/html/split]. [b]",
             "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]. [t]",
+            "GeeksforGeeks: C Programming Language [geeksforgeeks.org/c-programming-language]. [g]",
             "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [m]",
     };
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
