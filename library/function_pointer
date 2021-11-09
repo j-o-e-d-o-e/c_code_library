@@ -1,6 +1,6 @@
 function->pointer
 
-primer, ch.14
+primer, ch.14; beej, ch.23.6
 
 typically, a pointer to a func is used as an arg to a 2nd func (1)
     - telling the 2nd func which func to use
@@ -48,7 +48,7 @@ void toupper_s(char *s) {
     }
 }
 (2)
-void (*pf)(char *);
-pf = toupper_s;
-pf(str);
-(*pf)(str);
+char str[] = "mary jane";
+void (*pf)(char *) = toupper_s;
+pf(str); // alternatively: (*pf)(str)
+puts(str); // MARY JANE
