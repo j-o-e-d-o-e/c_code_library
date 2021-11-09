@@ -5,22 +5,33 @@ p,ch.12; m,lvl.2.13.1; b,ch.12; g,/dynamic-memory-...
 funcs to manage pool of memory (dynamic allocation)
 
 (1) malloc() allocates memory (memory allocate) [stdlib.h]
-    - arg: num of bytes of memory you want
-    - if success, returns the address of the first byte of that block
-        -  otherwise, returns null-pointer (fails to find the required space)
-    - if error, returns null-pointer
+    - void* malloc(size_t size);
+        - arg: num of bytes of memory you want
+    - if success, returns the address of the first byte of that block (pointer)
+    - if error, returns null-pointer (fails to find the required space)
     - allows to create array while program runs (like VLA)
         - e.g. during runtime create arrays with different sizes (100 vs. 10.000)
 (2) free() frees memory [stdlib.h]
     - each use of malloc()/calloc() should be balanced with a use of free()
-    - arg: address returned earlier by malloc()
+    - void free(void *ptr)
+        - arg: address returned earlier by malloc()/calloc()
 (3) calloc() allocates memory (clear allocate) [stdlib.h]
-    - 1st arg: num of memory-cells you want
-    - 2nd arg: size of each cell in bytes
+    - void* calloc(size_t num, size_t size);
+        - 1st arg: num of memory-cells you want
+        - 2nd arg: size of each cell in bytes
     - returns pointer to 1st mem-location (like malloc())
     - sets/clears all bits in the mem-block to 0 (unlike malloc())
 (4) realloc() reallocates memory [stdlib.h]
-    - e.g. to enlarge previously allocated memory
+    - to enlarge/shrink previously allocated memory
+        - maintains already present vals
+            - i.e. contents identical up to lesser of new or old size
+        - sets new mem-blocks to 0
+    - void *realloc(void *ptr, size_t size);
+        - 1st arg: pointer returned by malloc() or calloc()
+            - realloc(NULL, size) equivalent to malloc(size)
+        - 2nd arg: new mem-size to be allocated
+            - realloc(prt, 0) is equivalent to free(ptr)
+    - returns pointer
 
 EXAMPLE
 #include <stdlib.h> // alternatively, <malloc.h>
@@ -39,3 +50,15 @@ int main(void) {
 // Kaboom.
 (3)
 int *ptr =  calloc(SIZE, sizeof(int));
+(4)
+int n = 2;
+int *ptr = (int *) calloc(n, sizeof(int));
+if (ptr == NULL) exit(0);
+for (int i = 0; i < n; ++i) ptr[i] = i + 1;
+for (int i = 0; i < n; ++i) printf("%d ", ptr[i]); // 1 2
+puts("");
+int m = n * 2;
+ptr = realloc(ptr, m * sizeof(int)); // dynamically re-allocate mem
+for (int i = n; i < m; ++i) ptr[i] = i + 1;
+for (int i = 0; i < m; ++i) printf("%d ", ptr[i]); // 1 2 3 4
+free(ptr);
