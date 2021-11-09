@@ -1,11 +1,13 @@
-array->VLA
+array->variable-length
 
-primer, ch.10
+primer, ch.10; beej, ch.30
 
-variable-length array (VLA) allows to use variables when dimensioning an array
-cannot be initialized in a declaration (two separate steps)
+variable-length array (VLA) allows to use variables when dimensioning an array at runtime
+restrictions
+    - cannot be declared in file-scope or as static in block-scope
+    - cannot be initialized in a declaration (two separate steps)
 'variable' means one can use a var to specify dimension
-    - length cannot be modified
+    - length cannot be modified later
     - once created, a VLA keeps the same size
     - still, useful for func to accept arr with different/variable dimensions (instead of constants)
 
