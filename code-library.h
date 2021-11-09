@@ -1,7 +1,7 @@
 #ifndef CODE_LIBRARY_CODE_LIBRARY_H
 #define CODE_LIBRARY_CODE_LIBRARY_H
 
-#define LLEN 80
+#define S_LEN 80
 #define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
 #define DELIMITER_TOC "======================================="
 #define DELIMITER_ENTRY "-------------------------------------"
@@ -10,9 +10,9 @@
 
 struct entry {
     int index;
-    char path[LLEN];
-    char title[LLEN];
-    char src[LLEN];
+    char path[S_LEN];
+    char title[S_LEN];
+    char src[S_LEN];
 };
 typedef struct {
     int len;

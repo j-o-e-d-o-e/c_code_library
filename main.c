@@ -78,10 +78,10 @@ Library *setup_lib(void) {
         strcat(filename, file->d_name);
         strcpy(e->path, filename);
         FILE *f = fopen(filename, "r");
-        fget(e->title, LLEN, f);
-        char s[LLEN];
-        fget(s, LLEN, f); // empty line
-        fget(e->src, LLEN, f);
+        fget(e->title, S_LEN, f);
+        char s[S_LEN];
+        fget(s, S_LEN, f); // empty line
+        fget(e->src, S_LEN, f);
         count++;
         fclose(f);
     }
@@ -105,12 +105,12 @@ int comp(const void *p1, const void *p2) {
 }
 
 void print_toc(const Library *lib) {
-    printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
+    printf("%s %s %s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
     while (e < end) {
         int n = e->index < 10 ? 29 : 30;
-        printf("%d - %-*s-> (%d) %s\n", e->index, LLEN - n, e->title, e->index, e->src);
+        printf("%d - %-*s-> (%d) %s\n", e->index, S_LEN - n, e->title, e->index, e->src);
         e++;
     }
 }
@@ -122,17 +122,17 @@ void print_entry(const struct entry *entry) {
         return;
     }
     printf("\n%s\n", DELIMITER_ENTRY);
-    char title[LLEN];
-    fget(title, LLEN, f);
+    char title[S_LEN];
+    fget(title, S_LEN, f);
     printf("%s\n\n", title);
-    char buffer[LLEN];
-    fget(buffer, LLEN, f); // empty line
-    fget(buffer, LLEN, f); // src
-    fget(buffer, LLEN, f); // empty line
-    char content[LLEN];
+    char buffer[S_LEN];
+    fget(buffer, S_LEN, f); // empty line
+    fget(buffer, S_LEN, f); // src
+    fget(buffer, S_LEN, f); // empty line
+    char content[S_LEN];
     while (1) {
         content[0] = '\0';
-        fgets(content, LLEN, f);
+        fgets(content, S_LEN, f);
         printf("%s", content);
         if (feof(f)) break;
     }
