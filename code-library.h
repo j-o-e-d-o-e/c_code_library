@@ -31,6 +31,6 @@ void print_toc(const Library *lib);
 
 void print_entry(const struct entry *entry);
 
-void fget(char *string, int n, FILE *file);
+void f_get(char *string, int n, FILE *file);
 
 #endif // CODE_LIBRARY_CODE_LIBRARY_H

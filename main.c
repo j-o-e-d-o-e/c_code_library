@@ -35,24 +35,6 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-void flags(char **argv) {
-    static const size_t LIT_LEN = 5;
-    static const char *literature[] = {
-            "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley. [p]",
-            "Brian Hall (2021): Beej's Guide to C Programming [beej.us/guide/bgc/html/split]. [b]",
-            "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]. [t]",
-            "GeeksforGeeks: C Programming Language [geeksforgeeks.org/c-programming-language]. [g]",
-            "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [m]",
-    };
-    if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
-        printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
-        puts("Commands:");
-        printf("\t- %d: Table of Content (or any char)\n\t- %d: Exit\n", TOC, EXIT);
-        puts("\nLiterature:");
-        for (int i = 0; i < LIT_LEN; i++) printf("\t- %s\n", literature[i]);
-        puts("");
-    }
-}
 
 Library *setup_lib(void) {
     DIR *d;
@@ -78,10 +60,10 @@ Library *setup_lib(void) {
         strcat(filename, file->d_name);
         strcpy(e->path, filename);
         FILE *f = fopen(filename, "r");
-        fget(e->title, S_LEN, f);
+        f_get(e->title, S_LEN, f);
         char s[S_LEN];
-        fget(s, S_LEN, f); // empty line
-        fget(e->src, S_LEN, f);
+        f_get(s, S_LEN, f); // empty line
+        f_get(e->src, S_LEN, f);
         count++;
         fclose(f);
     }
@@ -123,12 +105,12 @@ void print_entry(const struct entry *entry) {
     }
     printf("\n%s\n", DELIMITER_ENTRY);
     char title[S_LEN];
-    fget(title, S_LEN, f);
+    f_get(title, S_LEN, f);
     printf("%s\n\n", title);
     char buffer[S_LEN];
-    fget(buffer, S_LEN, f); // empty line
-    fget(buffer, S_LEN, f); // src
-    fget(buffer, S_LEN, f); // empty line
+    f_get(buffer, S_LEN, f); // empty line
+    f_get(buffer, S_LEN, f); // src
+    f_get(buffer, S_LEN, f); // empty line
     char content[S_LEN];
     while (1) {
         content[0] = '\0';
@@ -138,16 +120,4 @@ void print_entry(const struct entry *entry) {
     }
     fclose(f);
     printf("%s\n", DELIMITER_ENTRY);
-}
-
-/* wrapper for fgets - replaces first newline with null character */
-void fget(char *string, int n, FILE *f) {
-    fgets(string, n, f);
-    while (*string != '\0') {
-        if (*string == '\n') {
-            *string = '\0';
-            break;
-        }
-        string++;
-    }
 }
