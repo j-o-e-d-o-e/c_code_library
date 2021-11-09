@@ -2,7 +2,7 @@
 #define CODE_LIBRARY_CODE_LIBRARY_H
 
 #define S_LEN 80
-#define DIR_PATH "/media/joe/E/programming/c/code_library/library/"
+#define DIR_PATH "/media/joe/E/programming/c/code_library/library/" // TODO: relative path "(.)./library/"
 #define DELIMITER_TOC "======================================="
 #define DELIMITER_ENTRY "-------------------------------------"
 #define TOC 0
