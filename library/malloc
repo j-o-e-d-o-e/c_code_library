@@ -21,6 +21,7 @@ funcs to manage pool of memory (dynamic allocation)
         - 2nd arg: size of each cell in bytes
     - returns pointer to 1st mem-location (like malloc())
     - sets/clears all bits in the mem-block to 0 (unlike malloc())
+    - esp. for allocating arrays
 (4) realloc() reallocates memory [stdlib.h]
     - to enlarge/shrink previously allocated memory
         - maintains already present vals
