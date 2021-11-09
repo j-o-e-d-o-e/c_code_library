@@ -16,12 +16,12 @@ struct entry {
 };
 typedef struct {
     int len;
-    struct entry entries[LLEN];
+    struct entry entries[];
 } Library;
 
 void flags(char **argv);
 
-void setup_lib(Library *lib);
+Library *setup_lib(void);
 
 void sort_lib(Library *lib);
 

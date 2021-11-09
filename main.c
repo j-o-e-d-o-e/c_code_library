@@ -10,9 +10,8 @@ int main(int argc, char **argv) {
         flags(argv);
         return EXIT_SUCCESS;
     }
-    Library lib;
-    setup_lib(&lib);
-    print_toc(&lib);
+    Library *lib = setup_lib();
+    print_toc(lib);
     char input[3];
     unsigned int long ch;
     while (true) {
@@ -21,17 +20,18 @@ int main(int argc, char **argv) {
         ch = strtol(input, NULL, 10);
         if (ch == TOC) {
             printf("\n");
-            print_toc(&lib);
+            print_toc(lib);
             continue;
         } else if (ch == EXIT) {
             printf("Devil's neighbour wishes you a good day.\n");
             break;
-        } else if (ch > lib.len || ch < 0) {
+        } else if (ch > lib->len || ch < 0) {
             printf("Not a valid number.");
             continue;
         }
-        print_entry(&lib.entries[ch - 1]);
+        print_entry(&lib->entries[ch - 1]);
     }
+    free(lib);
     return 0;
 }
 
@@ -54,17 +54,25 @@ void flags(char **argv) {
     }
 }
 
-void setup_lib(Library *lib) {
+Library *setup_lib(void) {
     DIR *d;
     if (!(d = opendir(DIR_PATH))) {
         printf("Opening Directory %s failed.\n", DIR_PATH);
         exit(EXIT_FAILURE);
     }
+    int buffer = 10;
+    Library *lib = malloc(sizeof(Library) + sizeof(struct entry[buffer]));
+    if (lib == NULL) exit(0);
     int count = 0;
     struct dirent *file;
     while ((file = readdir(d))) {
         if (file->d_type != 8) continue;
-        struct entry *e = &lib->entries[count];
+        if (count == buffer) {
+            buffer *= 2;
+            lib = realloc(lib, sizeof(Library) + sizeof(struct entry) * buffer);
+            if (lib == NULL) exit(0);
+        }
+        struct entry *e = &(lib->entries[count]);
         e->index = count + 1;
         char filename[] = DIR_PATH;
         strcat(filename, file->d_name);
@@ -79,7 +87,10 @@ void setup_lib(Library *lib) {
     }
     closedir(d);
     lib->len = count;
+    lib = realloc(lib, sizeof(Library) + sizeof(struct entry) * lib->len);
+    if (lib == NULL) exit(0);
     sort_lib(lib);
+    return lib;
 }
 
 void sort_lib(Library *lib) {
