@@ -2,18 +2,18 @@ struct->functions
 
 primer, ch.14; beej, ch.8.3
 
-telling funcs about structures
-    (1) passing struct-members
-    (2) passing pointer-to-struct
+passing struct to func as
+    (1) struct-members
+    (2) pointer-to-struct
         - must use &-operator to get address
         - unlike array-name, struct-name is not a synonym for its address
-    (3) passing struct as arg
+    (3) struct (by value)
         - copy is created in called func
         - therefore, return-val might be needed
 
-typically, programmers use struct-pointers (2) instead of structs (3) as args for funcs
+typically, use struct-pointers (2) instead of structs (3) as args for funcs
     - using `const` when needed to protect data from unintended changes
-    - passing struct as arg (by value) most often done only for small data
+    - passing struct by value most often done only for small data
 
 EXAMPLE
 struct account {

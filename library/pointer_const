@@ -2,12 +2,13 @@ pointer->const
 
 beej, ch.16
 
-(1) cannot change val to which pointer points, but pointer itself
-    - const <type> *p (equivalent to: <type> const *p)
-(2) cannot change pointer, but pointed-to val
-    - <type> *const p
-(3) cannot modify val nor pointer
-    - const <type> *const p
+(1) const <type> *p
+    - cannot change val to which pointer points, but pointer itself
+    - equivalent to: <type> const *p
+(2) <type> *const p
+    - cannot change pointer, but pointed-to val
+(3) const <type> *const p
+    - cannot modify val nor pointer
 
 EXAMPLE
 (1)

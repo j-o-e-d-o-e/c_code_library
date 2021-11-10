@@ -5,7 +5,7 @@ primer, ch.16; beej, ch.19
 preprocessor-directives
 indicated by # at the beginning of the line
 limited to one line in length, i.e. ends with 1st newline (after #)
-    - \ + newline allows to spread directive over multiple lines
+    - '\' plus newline allows to spread directive over multiple lines
 - can appear anywhere in the source file
 - definition holds from its place to the end of the file
     - or, until it is the subject of an #undef (whichever comes first)

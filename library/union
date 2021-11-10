@@ -16,8 +16,9 @@ initialize
 struct vs. union
     - a struct has all declared members
     - an union has only one of the declared members
-to access member of pointer to an union (2)
-    - use indirect membership-operator (->) (like pointers to structs)
+
+to access member of type pointer-to-union (2)
+    - use indirect membership-operator `->` (like pointer-to-struct)
 
 EXAMPLE
 (1)

@@ -4,10 +4,10 @@ primer, ch.10/modern, lvl.1.6
 
 (1) initialization
     - less data than array size: compiler initializes remaining elems to 0
-        - therefore, shortcut `int arr[100] = {0}` sets all elems to zero
     - more data than array size: error
     - designated initializer: allows to choose specific elems (1.1)
-    - in braces (default intializer): T a = {0}
+    - default intializer: T a = {0}, e.g.
+        - `int arr[100] = {0}` sets all elems to zero
 (2) `const` for immutable arrays
 (3) compound literals
     - means for providing values that are needed only temporarily
@@ -30,15 +30,10 @@ int sum(const int ar[], int n) { // definition
     return total;
 }
 (3.1)
-int *x = (int[2]) {10, 20}; // instead of int x[] = {10, 20 }
+int *x = (int[2]) {10, 20}; // instead of int x[] = {10, 20}
 printf("%d\n", *x); // 10
 printf("%d\n", *(x + 1)); // 20
 (3.2)
-int sum(const int ar[], int n) {
-    int sum = 0;
-    for (int i = 0; i < n; i++) sum += ar[i];
-    return sum;
-}
 int total = sum((int[]) {4, 4, 4, 5, 5, 5}, 6);
 printf("%d", total); // 27
 (4)

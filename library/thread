@@ -2,7 +2,7 @@ threads
 
 beej, ch.39/47
 
-since C11, optional feature
+since C11: optional feature
     - if C11+ compiler defines __STDC_NO_THREADS, not supported
 
 defined in [threads.h]

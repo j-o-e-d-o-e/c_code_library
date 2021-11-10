@@ -3,7 +3,7 @@ header files
 primer, ch.16
 
 suffix: .h
-commonly found in header-files
+things commonly found in header-files
     - directives (see entry: preprocessor->directives)
     - struct-declarations (see entry: struct)
     - function-prototypes (see entry: function)

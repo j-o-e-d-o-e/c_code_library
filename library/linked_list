@@ -2,12 +2,12 @@ linked list
 
 primer, ch.17
 
-instead of array iwth fixed size
+instead of array with fixed size
     - `next` points to next elem in list
         - so, each preceding elem stores the address of the following elem
         - if NULL, no next elem (indicating end of list)
     - `head` always points to the 1st elem in list
-    - `current`: working/waling point (unlike head)
+    - `current`: working/walking pointer (unlike head)
     - `prev`: helper-pointer to the prev elem
 useful to allocate mem-space on demand (not in advance)
     - do not forget to counteract each malloc()-calls with free()

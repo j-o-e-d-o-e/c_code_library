@@ -2,12 +2,11 @@ pointer->function
 
 primer, ch.9/10
 
-(1) if var in calling func needs to be altered, use pointer to var as arg of called func
+if var in calling func needs to be altered, use pointer to var as arg of called func
     - if called func only needs its val of var for further calculation, transmit var
     - pointers might also be necessary, if callee shall communicate more than one value back
 
 EXAMPLE
-(1)
 int main(void) {
     int x = 5, y = 10;
     printf("Originally x = %d and y = %d.\n", x , y); // x == 5, y == 10

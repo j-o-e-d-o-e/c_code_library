@@ -3,7 +3,7 @@ struct
 primer, ch.14; beej, ch.8/20
 
 to represent complex data
-struct-member can be any C data type, including other structures (nested)
+struct-member can be any C data type, including other nested structures
 
 (1) declaring a struct and defining a struct-var can be combined into one step
     - to initialize var, use comma-separated list of initializers enclosed in braces

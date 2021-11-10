@@ -4,7 +4,7 @@ primer, ch.3; modern, ch.3
 
 since C99
 defined in [stdbool.h]
-no specific printf-specifier for bools (use e.g. %d instead)
+no specific printf-specifier for bools (use e.g. %d)
 
 false == 0, true == 1
     - 0 represents logical false

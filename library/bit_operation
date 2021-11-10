@@ -4,7 +4,7 @@ primer, ch.15
 
 called bitwise, because they operate on each bit independently (of the bit to the left or right)
 
-logical (for ints and chars)
+for ints and chars
     (1) NEGATION: unary ~-operator changes each 1 to a 0 and each 0 to a 1
         - does not change val of a var (like e.g. incrementing)
     (2) AND: binary &-operator combines two operands by bit-by-bit comparison

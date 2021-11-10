@@ -2,9 +2,11 @@ string->input
 
 primer, ch.11/13
 
-first, declare input var with enough space to store the string
-second, use input-func to fetch string
+steps 1-2:
+    (1) declare input var with enough space to store the string
+    (2) use input-func to fetch string
 
+input-funcs (2nd step):
 (1) scanf()
     - designed for single words from stdin
     - scan starts at the first non-whitespace char

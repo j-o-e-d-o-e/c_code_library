@@ -41,6 +41,3 @@ int x = rand();
 assert(x != 0);
 int y = 3 / x;
 printf("res: %d", y);
-(5.1)
-
-(5.2)

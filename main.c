@@ -106,7 +106,7 @@ void print_entry(const struct entry *entry) {
     printf("\n%s\n", DELIMITER_ENTRY);
     char title[S_LEN];
     f_gets(title, S_LEN, f);
-    printf("%s\n\n", title);
+    printf("%d - %s\n\n", entry->index, title);
     char buffer[S_LEN];
     f_gets(buffer, S_LEN, f); // empty line
     f_gets(buffer, S_LEN, f); // src

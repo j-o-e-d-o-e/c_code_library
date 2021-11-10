@@ -1,9 +1,9 @@
-thread->condition var
+threads->condition var
 
 beej, ch.39.8
 
 provides a way for threads to go to sleep until some event on another thread occurs
-    - often, used in combination with mutexes
+    - often, used in combination with mutexes (see entry: threads->mutexes)
 
 defined in [threads.h]
     - cnd_wait(union__anonymous *cond, union__anonymous *m) (1)

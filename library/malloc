@@ -6,7 +6,7 @@ funcs to manage pool of memory (dynamic allocation)
 
 (1) malloc() allocates memory (memory allocate) [stdlib.h]
     - void* malloc(size_t size);
-        - arg: num of bytes of memory you want
+        - arg: num of bytes of memory to be allocated
     - if success, returns the address of the first byte of that block (pointer)
     - if error, returns null-pointer (fails to find the required space)
     - allows to create array while program runs (like VLA)
@@ -17,7 +17,7 @@ funcs to manage pool of memory (dynamic allocation)
         - arg: address returned earlier by malloc()/calloc()
 (3) calloc() allocates memory (clear allocate) [stdlib.h]
     - void* calloc(size_t num, size_t size);
-        - 1st arg: num of memory-cells you want
+        - 1st arg: num of memory-cells to be allocated
         - 2nd arg: size of each cell in bytes
     - returns pointer to 1st mem-location (like malloc())
     - sets/clears all bits in the mem-block to 0 (unlike malloc())
