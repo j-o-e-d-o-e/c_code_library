@@ -4,13 +4,9 @@ beej, ch.39/47
 
 since C11, optional feature
     - if C11+ compiler defines __STDC_NO_THREADS, not supported
-    - CMAKE: additionally, set(CMAKE_C_FLAGS -pthread)
-    - to compile, e.g.
-        - gcc demo.c -lpthreads -o demo -std=c11
-        - gcc demo.c -pthread -o demo
 
-defined in [threads.h] (1)
-(1.1) thrd_create(thrd_t *t, thrd_start_t f, void *arg)
+defined in [threads.h]
+- thrd_create(thrd_t *t, thrd_start_t f, void *arg)
     - creates a new thread
     - 1st arg: unique identifier for new thread
     - 2nd arg: pointer to a func to run (f)
@@ -18,26 +14,15 @@ defined in [threads.h] (1)
             - to avoid race-conditions between threads
     - 3rd arg: pointer to arg to pass to the func
         - NULL, if no args
-(1.2) thrd_join(thrd_t t, int *ret)
+- thrd_join(thrd_t t, int *ret)
     - makes calling thread (e.g. main()) wait/block until child-thread t completes (joining)
         - generally, one must join threads to clean up (otherwise mem-leak)
     - 1st arg: unique identifier of thread
     - 2nd arg: return value
-(1.3) thrd_detach()
+- thrd_detach()
     - makes calling thread not to block (instead of thrd_join())
 
-defined in [pthread.h] (2)
-(2.1) pthread_create(pthread_t *t, pthread_attr_t *a, (void *) f, void *arg)
-    - 1st arg: unique identifier for new thread
-    - 2nd arg: attributes of newly created thread
-    - 3rd arg: pointer to a func to run (f)
-    - 4th arg: pointer to arg to pass to the func
-(2.2) pthread_join(pthread_t t, *ret)
-    - 1st arg: unique identifier of thread
-    - 2nd arg: return value
-
 EXAMPLE
-(1)
 #include <stdio.h>
 #include <threads.h>
 #include <malloc.h>
@@ -70,43 +55,4 @@ int main(void) {
         }
     }
     printf("All threads complete!\n");
-}
-(2)
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <pthread.h>
-#include <unistd.h>
-#define NUM_THREADS 5
-
-void *perform_work(void *arguments) {
-    int index = *((int *) arguments);
-    int sleep_time = 1 + rand() % NUM_THREADS;
-    printf("THREAD %d: Started.\n", index);
-    printf("THREAD %d: Will be sleeping for %d seconds.\n", index, sleep_time);
-    sleep(sleep_time);
-    printf("THREAD %d: Ended.\n", index);
-    return NULL;
-}
-// $ gcc pthreads_demo.c -pthread -o pthreads_demo
-// $ ./pthreads_demo
-int main(void) {
-    pthread_t threads[NUM_THREADS];
-
-    int thread_args[NUM_THREADS];
-    for (int i = 0; i < NUM_THREADS; i++) { //create all threads one by one
-        printf("IN MAIN: Creating thread %d.\n", i);
-        thread_args[i] = i;
-        int result_code = pthread_create(&threads[i], NULL, perform_work, &thread_args[i]);
-        assert(!result_code);
-    }
-    printf("IN MAIN: All threads are created.\n");
-
-    for (int i = 0; i < NUM_THREADS; i++) { //wait for each thread to complete
-        int result_code = pthread_join(threads[i], NULL);
-        assert(!result_code);
-        printf("IN MAIN: Thread %d has ended.\n", i);
-    }
-    printf("MAIN program has ended.\n");
-    return 0;
 }
