@@ -1,62 +1,94 @@
 date/time
 
-modern, lvl.1.5/1.6.3/1.8.5
+b,ch.38; m, lvl.1.5/1.6.3/1.8.5
 
 defined in [time.h]
-(1) time_t for calendar time in secs since epoch
-    - mktime() (1.1)
-        - time_t mktime(struct tm *tp)
-        - converts struct tp into time_t-val according to local-time-zone
-        - if error, returns -1
-(2) clock_t for processor time
-    - returned by clock()
-(3) struct tm holds time and date
-    - int tm_sec: Seconds after the minute
-        - range: 0-60 (inclusive due to leap year)
-    - int tm_min: Minutes after the hour
-    - int tm_hour: Hours since midnight
-    - int tm_mday: Day of the month
-        - starts counting days in the month at 1
-    - int tm_mon: Months since January
+(1) time_t for calendar time in secs since epoch (UTC)
+    - time(time_t *t) returns current time (1.1)
+        - and puts it in t, if t not NULL
+    - ctime(time_t *t) returns formatted string (1.1)
+        - string includes newline at the end
+        - equivalent to: asctime(localtime(time_t *t))
+    - localtime(time_t *t) converts time_t to struct tm in localtime (1.2)
+    - gmtime(time_t *t) converts time_t to struct tm in UTC (aka GMT) (1.2)
+    - difftime(time_t t1, time_t t0) subtracts t1 minus t0 (1.3)
+(2) struct tm holds components of calendar time
+    - int tm_sec: Seconds after the minute [0, 60]
+        - 60 inclusive due to leap year
+    - int tm_min: Minutes after the hour [0, 59]
+    - int tm_hour: Hours since midnight [0, 23]
+    - int tm_mday: Day of the month [1, 31]
+    - int tm_mon: Months since January [0, 11]
     - int tm_year: Years since 1900
-        - therefore, must subtract 1900 to get year in Gregorian calendar
-    - int tm_wday: Days since Sunday
-    - int tm_yday: Days since January
+        - therefore, subtract 1900 to get year in Gregorian calendar
+    - int tm_wday: Days since Sunday [0, 6]
+    - int tm_yday: Days since January, 1 [0, 365]
     - int tm_isdst: Daylight Saving Time flag
-(4) funcs [time.h]
-    - time_t time(time_t * t) returns timestamp
-    - double difftime(time_t time1, time_t time0)
-    - time_t mktime(struct tm tm [1]): from struct tm to time_t
-    - localtime_s()/gmtime_s(): from time_t to struct tm
-    - strftime()/asctime() for textual representation
+    - asctime(struct tm *tp) returns formatted string (2.1)
+        - form: "Day Mon dd hh:mm:ss yyyy\n"
+    - strftime(char *s, size_t n, char *format, struct tm *tp) formats string (2.2)
+        - format specifiers
+            - %c: print date as per current locale
+            - %A: full weekday name
+            - %B: full month name
+            - %d: day of the month
+            - %I: hour (12 hour clock)
+            - %M: minute
+            - %S: second
+            - %p: AM or PM
+            - %F: ISO 8601 yyyy-mm-dd
+            - %T: ISO 8601 hh:mm:ss
+            - %z: ISO 8601 timezone offset
+    - mktime(struct tm *tp) converts struct tm to time_t (2.1)
+        - if success, returns struct tm according to localtime
+            - sets vals for tm_wday and tm_yday automatically
+            - if tm_isdst = -1, sets it automatically, as well
+        - if error, returns -1
+(3) struct timespec holds secs (tv_sec) and nanosecs (tv_nsec)
+    - timespec_get(timespec *ts, int base) returns current time
+        - base = TIME_UTC: secs since Epoch
 
 EXAMPLE
-(1)
-time_t t = time(NULL);
-printf("Hours since January 1, 1970 = %ld\n", t/3600);
-// Hours since January 1, 1970 = 454429
 (1.1)
-struct tm me = { . tm_year = 2020 };
-time_t t = mktime(&me);
-printf("Timestamp = %ld\n", t);
-(2)
-clock_t c = clock();
-printf("Platform's model of processor-clock-cycles = %ld\n", c);
+time_t now;
+time(&now); // alternatively, now = time(NULL)
+printf("Timestamp: %ld, Formatted: %s", now, ctime(&now));
+(1.2)
+time_t now = time(NULL);
+struct tm *now_tm = localtime(&now);
+printf("Local: %s", asctime(now_tm));
+now_tm = gmtime(&now);
+printf("UTC: %s", asctime(now_tm));
+(1.3)
+struct tm d = {.tm_year=82,
+        .tm_mon=0,
+        .tm_mday=3,
+        .tm_hour=10,
+        .tm_min=45,
+        .tm_sec=30};
+time_t dt = mktime(&d);
+time_t now = time(NULL);
+double secs = difftime(now, dt);
+double days = secs / 365.2425;
+double years = days / 60 / 60 / 24;
+printf("%.2f years OR %.2f days OR %.2f secs\n", years, days, secs);
+(2.1)
+struct tm d = {.tm_year=82,
+        .tm_mon=0,
+        .tm_mday=3,
+        .tm_hour=10,
+        .tm_min=45,
+        .tm_sec=30,
+        .tm_isdst=-1};
+time_t d_sec = mktime(&d);
+// 378899130 <- Sun Jan  3 10:45:30 1982
+printf("%ld <- %s", d_sec, asctime(&d));
+(2.2)
+char s[128];
+// ISO 8601: 1982-01-03T10:45:30
+strftime(s, sizeof s, "ISO 8601: %FT%T%z", &d);
+puts(s);
 (3)
-struct tm me = {
-        . tm_year = 2000 ,
-        . tm_mon = 1,
-        . tm_mday = 1
-};
-printf("Millenium: %d-%d-%d", me.tm_year, me.tm_mon, me.tm_mday);
-// Millenium: 2000-1-1
-(4)
-struct tm me = {
-        .tm_year = 1982 - 1900 ,
-        .tm_mon = 0,
-        .tm_mday = 3,
-        .tm_hour = 10,
-        .tm_wday = 0
-};
-printf("ASCII time: %s", asctime(&me));
-// ASCII time: Sun Jan  3 10:00:00 1982
+struct timespec ts;
+timespec_get(&ts, TIME_UTC);
+printf("%ld secs, %ld nanosecs\n", ts.tv_sec, ts.tv_nsec);
