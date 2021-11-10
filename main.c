@@ -60,10 +60,10 @@ Library *setup_lib(void) {
         strcat(filename, file->d_name);
         strcpy(e->path, filename);
         FILE *f = fopen(filename, "r");
-        f_get(e->title, S_LEN, f);
+        f_gets(e->title, S_LEN, f);
         char s[S_LEN];
-        f_get(s, S_LEN, f); // empty line
-        f_get(e->src, S_LEN, f);
+        f_gets(s, S_LEN, f); // empty line
+        f_gets(e->src, S_LEN, f);
         count++;
         fclose(f);
     }
@@ -105,12 +105,12 @@ void print_entry(const struct entry *entry) {
     }
     printf("\n%s\n", DELIMITER_ENTRY);
     char title[S_LEN];
-    f_get(title, S_LEN, f);
+    f_gets(title, S_LEN, f);
     printf("%s\n\n", title);
     char buffer[S_LEN];
-    f_get(buffer, S_LEN, f); // empty line
-    f_get(buffer, S_LEN, f); // src
-    f_get(buffer, S_LEN, f); // empty line
+    f_gets(buffer, S_LEN, f); // empty line
+    f_gets(buffer, S_LEN, f); // src
+    f_gets(buffer, S_LEN, f); // empty line
     char content[S_LEN];
     while (1) {
         content[0] = '\0';

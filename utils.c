@@ -12,7 +12,7 @@ void flags(char **argv) {
             "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [m]",
     };
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
-        printf("%s%s%s\n", DELIMITER_TOC, " C CODE LIBRARY ", DELIMITER_TOC);
+        printf("%s %s %s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
         puts("Commands:");
         printf("\t- %d: Table of Content (or any char)\n\t- %d: Exit\n", TOC, EXIT);
         puts("\nLiterature:");
@@ -21,15 +21,13 @@ void flags(char **argv) {
     }
 }
 
-
-/* wrapper for fgets - replaces first newline with null character */
-void f_get(char *string, int n, FILE *f) {
-    fgets(string, n, f);
-    while (*string != '\0') {
-        if (*string == '\n') {
-            *string = '\0';
+void f_gets(char *s, int n, FILE *f) {
+    fgets(s, n, f);
+    while (*s != '\0') {
+        if (*s == '\n') {
+            *s = '\0';
             break;
         }
-        string++;
+        s++;
     }
 }
