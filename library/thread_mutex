@@ -1,0 +1,48 @@
+threads->mutexes
+
+beej, ch.39.7
+
+allows only a single thread into a critical section of code (mutual exclusion)
+    - i.e. a lock on this section that only one thread is permitted to execute
+
+defined in [threads.h]
+    (1) declare mutex-var of type mtx_t
+    (2) mtx_init(union__anonymous *mutex, int type) creates new mutex obj
+        - 1st arg: pointer to mutex
+        - 2nd arg: type of mutex obj
+            - mtx_plain: regular mutex
+            - mtx_timed: supports timeouts
+            - mtx_plain|mtx_recursive: recursive mutex
+            - mtx_timed|mtx_recursive: recursive and supports timeouts
+    (3) mtx_lock(union__anonymous *m) and mtx_unlock(union__anonymous *m)
+        - define the critical section in between
+        - each mtx_lock() is balanced with mtx_unlock()
+    (4) mtx_destroy() destroys mutex obj
+
+EXAMPLE
+#include <stdio.h>
+#include <threads.h>
+#define THREAD_COUNT 10
+
+mtx_t serial_mtx; // (1)
+
+int run(void *arg) {
+    (void) arg;
+    static int serial = 0;
+
+    mtx_lock(&serial_mtx); // (3)
+    printf("Thread running! %d\n", serial);
+    serial++;
+    mtx_unlock(&serial_mtx); // (3)
+
+    return 0;
+}
+
+int main(void) {
+    thrd_t t[THREAD_COUNT];
+    mtx_init(&serial_mtx, mtx_plain); // (2)
+    for (int i = 0; i < THREAD_COUNT; i++) thrd_create(t + i, run, NULL);
+    for (int i = 0; i < THREAD_COUNT; i++) thrd_join(t[i], NULL);
+    mtx_destroy(&serial_mtx); // (4)
+    return 0;
+}

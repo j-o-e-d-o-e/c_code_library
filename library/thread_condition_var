@@ -1,0 +1,91 @@
+thread->condition var
+
+beej, ch.39.8
+
+provides a way for threads to go to sleep until some event on another thread occurs
+    - often, used in combination with mutexes
+
+defined in [threads.h]
+    - cnd_wait(union__anonymous *cond, union__anonymous *m) (1)
+        - blocks thread to wait for signal
+        - 1st arg: pointer to condition variable
+        - 2nd arg: pointer to mutex
+        - func-call should be in a while-loop (not if-statement)
+    - cnd_signal(union__anonymous *cond) (1)
+        - unblocks currently waiting thread to wake up
+        - arg: pointer to condition variable
+    - cnd_timedwait(union__anonymous *c, union__anonymous *m, const timespec *t) (2)
+        - blocks current thread until condition variable is signaled or time is reached
+        - instead of cndwait()
+    -  cnd_broadcast(union__anonymous *cond)
+        - unblocks all threads currently waiting on condition variable
+        - instead of cnd_signal()
+
+EXAMPLE
+(1)
+#include <stdio.h>
+#include <threads.h>
+
+#define VALUE_COUNT_MAX 3
+int value[VALUE_COUNT_MAX]; // Shared global
+int value_count = 0;
+mtx_t value_mtx;
+cnd_t value_cnd;
+
+int run(void *arg) {
+    (void) arg;
+    for (;;) { // infinite loop
+        mtx_lock(&value_mtx); // lock mutex -START
+        while (value_count < VALUE_COUNT_MAX) {
+            printf("Thread: is waiting...\n");
+            cnd_wait(&value_cnd, &value_mtx); // wait until signal occurs
+        }
+        printf("Thread: is awake!\n");
+        int total = 0;
+        for (int i = 0; i < VALUE_COUNT_MAX; i++) total += value[i];
+        printf("Thread: total is %d\n", total);
+        value_count = 0;
+        mtx_unlock(&value_mtx); // unlock mutex -END
+    }
+    return 0;
+}
+
+int main(void) {
+    thrd_t t;
+    thrd_create(&t, run, NULL);
+    thrd_detach(t);
+    mtx_init(&value_mtx, mtx_plain); // init mutex
+    cnd_init(&value_cnd); // init conditional var
+    for (;;) { // infinite loop
+        int n;
+        scanf("%d", &n);
+        mtx_lock(&value_mtx); // lock mutex -START
+        value[value_count++] = n; // store input in arr
+        if (value_count == VALUE_COUNT_MAX) {
+            printf("Main: signaling thread\n");
+            cnd_signal(&value_cnd); // wake up child-thread
+        }
+        mtx_unlock(&value_mtx); // unlock mutex -END
+    }
+    mtx_destroy(&value_mtx);
+    cnd_destroy(&value_cnd);
+}
+(2) // in addition to (1)
+struct timespec timeout;
+int run(void *arg) {
+    [...]
+    while (value_count < VALUE_COUNT_MAX) {
+        printf("Thread: is waiting...\n");
+        int result = cnd_timedwait(&value_cnd, &value_mtx, &timeout);
+        if (result == thrd_timedout) printf("Condition variable timed out!\n");
+        }
+    [...]
+    return 0;
+}
+int main(void) {
+    [...]
+    cnd_init(&value_cnd);
+    timespec_get(&timeout, TIME_UTC);
+    timeout.tv_sec += 1; // Timeout 1 second after now
+    for (;;) {  [...]
+}
