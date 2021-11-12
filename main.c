@@ -19,7 +19,6 @@ int main(int argc, char **argv) {
         scanf("%s", input);
         ch = strtol(input, NULL, 10);
         if (ch == TOC) {
-            printf("\n");
             print_toc(lib);
             continue;
         } else if (ch == EXIT) {
@@ -34,7 +33,6 @@ int main(int argc, char **argv) {
     free(lib);
     return 0;
 }
-
 
 Library *setup_lib(void) {
     DIR *d;
@@ -87,6 +85,7 @@ int comp(const void *p1, const void *p2) {
 }
 
 void print_toc(const Library *lib) {
+    clear();
     printf("%s %s %s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
@@ -103,7 +102,7 @@ void print_entry(const struct entry *entry) {
         printf("Opening File %s failed.\n", entry->title);
         return;
     }
-    printf("\n%s\n", DELIMITER_ENTRY);
+    clear();
     char title[S_LEN];
     f_gets(title, S_LEN, f);
     printf("%d - %s\n\n", entry->index, title);
@@ -119,5 +118,4 @@ void print_entry(const struct entry *entry) {
         if (feof(f)) break;
     }
     fclose(f);
-    printf("%s\n", DELIMITER_ENTRY);
 }
