@@ -4,6 +4,7 @@
 #define S_LEN 80
 #define DIR_PATH "/media/joe/E/programming/c/code_library/library/" // TODO: relative path "(.)./library/"
 #define DELIMITER_TOC "======================================="
+#define DELIMITER_ENTRY "-------------------------------------"
 #define TOC 0
 #define EXIT 667
 #define clear() printf("\033[H\033[J")

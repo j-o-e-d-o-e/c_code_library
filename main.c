@@ -118,4 +118,5 @@ void print_entry(const struct entry *entry) {
         if (feof(f)) break;
     }
     fclose(f);
+    printf("%s\n", DELIMITER_ENTRY);
 }
