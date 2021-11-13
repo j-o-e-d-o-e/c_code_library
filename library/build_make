@@ -3,17 +3,13 @@ build->Make
 tutorialspoint.com/makefile
 
 - file-name: Makefile
-- built-in: make creates object-files automatically, e.g.
-	- `make main.o`
-	.c.o:
-		$(CC) $(CFLAGS) -c $<
-	- cc -c -o main.o main.c
+- Make creates automatically object-files (built-in), e.g.
+	- `make main.o` executes: cc -c -o main.o main.c
 - comments: #
 - indentation: tabs required (not spaces)
 - Error: Makefile:<LINE>: message
 - Make tracks changes upon timestamp of files
-	- therefore, if Make does not detect changes:
-	- use `touch <filename>` to set new timestamp
+	- therefore, if Make does not detect changes, use `touch <filename>` to set new timestamp
 - help: man make OR make -h
 
 targets

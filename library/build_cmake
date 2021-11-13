@@ -3,18 +3,17 @@ build->CMake
 cmake.org/cmake/help/latest/guide/tutorial
 
 - file-name: CMakeLists.txt
-- basically, uses Make for under the hood
+- uses Make under the hood
 - building steps:
     (1) `mkdir build`
     (2) `cmake -S . -B build/`
-        - generates i.a. a Makefile
+        - generates i.a. Makefile
     (3) `make -C build/`
-        - executes Makfile (outputs exec in build/)
+        - executes Makefile (outputs exec in build/)
         - alternatively: `cd build/ && make`
 - help: man cmake OR cmake -h
 - version: cmake --version
-
-add libraries
+- add libraries
     - `target_link_libraries()` always below `add_executable()`
 
 EXAMPLE
