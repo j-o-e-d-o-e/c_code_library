@@ -45,6 +45,12 @@ conditional directives
 	- ifneq (<macro1>,<macro2>)
 	- endif: every conditional must end with an endif
 
+gcc-flags
+	- `-c`: compile only, don't link
+	- `-o`: specifies output-file, i.e. exec
+	- `-g`: debug information
+	- `-Wall`: all warnings
+
 EXAMPLE
 all: main.o utils.o
 	$(CC) main.o utils.o -o code-library
