@@ -62,6 +62,7 @@ see also: primer, ch.11, p.489ff.
     - strstr()
         - char *strstr(const char * s1, const char * s2);
         - returns pointer to the 1st occurence of string s2 in string s1
+        - manipulates input-string
 (7) conversion
     - strtol() converts initial part of string to a long-int
         - long int strtol(const char *str, char **endptr, int base)
@@ -69,6 +70,13 @@ see also: primer, ch.11, p.489ff.
         - double strtod(const char *str, char **endptr)
 (8) strtok() breaks string into tokens using a delimiter
     - char *strtok(char *str, const char *delim)
+    - returns ptr to 1st token found in str
+    - modifies input-str (in-place)
+    - places \0 after token (where delimiter used to be)
+    - first time, pass input-string; subsequent calls, pass NULL
+        - strtok() remembers original str
+    - delim-string can contain mulitple chars
+        - but input-str is validated against each char (not string as a whole)
 
 EXAMPLE
 (1)

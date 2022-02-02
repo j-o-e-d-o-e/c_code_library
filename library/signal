@@ -1,0 +1,16 @@
+signal
+
+beej, ch.29; primer, p.945
+
+(1) signal() for handling signals (receiving server-side)
+    - 1st arg: signal (int) to be caught
+        - e.g. SIGUSR1 (user-defined) or SIGTERM (termination requested)
+    - 2nd arg: pointer to handler-func (takes an int as arg)
+        - use SIG_IGN to ignore signal
+        - use SIG_DFL to restore the default handler for the signal
+
+(2) raise() for sending signals (calling client-side)
+    - arg: signal (int) to be sent
+    - if success, returns zero; otherwise, non-zero
+
+sigaction() (for UNIX)
