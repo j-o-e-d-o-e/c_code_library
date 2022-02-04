@@ -1,0 +1,7 @@
+libcurl
+
+curl.se/libcurl/
+
+- UNIX-tool `curl-config` displays info about installation. Flags:
+    - `--libs`: library linking information (for Makefile)
+    - `--version`: version of libcurl
