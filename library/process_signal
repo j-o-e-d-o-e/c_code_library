@@ -1,8 +1,8 @@
-signal
+process->signal
 
-beej, ch.29; primer, p.945
+beej, ch.29;primer, p.945;ostep, ch.5 
 
-(1) signal() for handling signals (receiving server-side)
+(1) signal() for handling signals (receiving server-side) ("to catch signal")
     - 1st arg: signal (int) to be caught
         - e.g. SIGUSR1 (user-defined) or SIGTERM (termination requested)
     - 2nd arg: pointer to handler-func (takes an int as arg)

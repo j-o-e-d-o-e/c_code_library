@@ -10,6 +10,7 @@ void flags(char **argv) {
             "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]. [t]",
             "GeeksforGeeks: C Programming Language [geeksforgeeks.org/c-programming-language]. [g]",
             "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [m]",
+            "Arpaci-Dusseau/Remzi, Arpaci-Dusseau/Andrea (2018): Operating Systems. Three Easy Pieces. [ostep]",
     };
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
         printf("%s %s %s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
