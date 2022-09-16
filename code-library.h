@@ -9,6 +9,12 @@
 #define EXIT 667
 #define clear() printf("\033[H\033[J")
 
+#define RED 91
+#define PINK 95
+#define CYAN 96
+#define BLUE 44 // background
+static const int colors[2] = {PINK, CYAN};
+
 /* a file representation according to template
         index: sequential num
         path: DIR_PATH + filename

@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
     char input[3];
     unsigned int long ch;
     while (true) {
-        printf("\nWhat would you like to read? ");
+        printf("\n\033[%dmWhat would you like to read? \033[0m", RED);
         scanf("%s", input);
         ch = strtol(input, NULL, 10);
         if (ch == TOC) {
@@ -23,10 +23,10 @@ int main(int argc, char **argv) {
             print_toc(lib);
             continue;
         } else if (ch == EXIT) {
-            printf("Devil's neighbour wishes you a good day.\n");
+            printf("\033[%dmDevil's neighbour wishes you a good day.\033[0m\n", RED);
             break;
         } else if (ch > lib->len || ch < 0) {
-            printf("Not a valid number.");
+            printf("\033[%dmNot a valid number.\033[0m", RED);
             continue;
         }
         print_entry(&lib->entries[ch - 1]);
@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 Library *setup_lib(void) {
     DIR *d;
     if (!(d = opendir(DIR_PATH))) {
-        printf("Opening Directory %s failed.\n", DIR_PATH);
+        printf("\033[%dmOpening Directory %s failed.\033[0m\n", RED, DIR_PATH);
         exit(EXIT_FAILURE);
     }
     int buffer = 10;
@@ -87,12 +87,15 @@ int comp(const void *p1, const void *p2) {
 
 void print_toc(const Library *lib) {
 //    clear();
-    printf("%s %s %s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
+    printf("\033[%d;1m%s %s %s\033[0m\n", RED, DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
     while (e < end) {
-        int n = e->index < 10 ? 29 : 30;
-        printf("%d - %-*s-> (%d) %s\n", e->index, S_LEN - n, e->title, e->index, e->src);
+        if (e->index % 2 == 0) {
+            printf("\033[%d;%dm%*d - %-*s%s\033[0m\n", PINK, BLUE, 2, e->index, S_LEN - 30, e->title, e->src);
+        } else {
+            printf("\033[%dm%*d - %-*s%s\033[0m\n", CYAN, 2, e->index, S_LEN - 30, e->title, e->src);
+        }
         e++;
     }
 }
@@ -100,14 +103,14 @@ void print_toc(const Library *lib) {
 void print_entry(const struct entry *entry) {
     FILE *f;
     if ((f = fopen(entry->path, "r")) == NULL) {
-        printf("Opening File %s failed.\n", entry->title);
+        printf("\033[%dmOpening File %s failed.\033[0m\n", RED, entry->title);
         return;
     }
-    printf("\n%s\n", DELIMITER_ENTRY);
+    printf("\n\033[%dm%s\033[0m\n", RED, DELIMITER_ENTRY);
 //    clear();
     char title[S_LEN];
     f_gets(title, S_LEN, f);
-    printf("%d - %s\n\n", entry->index, title);
+    printf("\033[%d;1;4m%d - %s\033[0m\n\n", colors[entry->index % 2 == 0], entry->index, title);
     char buffer[S_LEN];
     f_gets(buffer, S_LEN, f); // empty line
     f_gets(buffer, S_LEN, f); // src
@@ -116,9 +119,10 @@ void print_entry(const struct entry *entry) {
     while (1) {
         content[0] = '\0';
         fgets(content, S_LEN, f);
-        printf("%s", content);
+        if (strcmp(content, "EXAMPLE\n") == 0) printf("\033[%d;1m%s\033[0m", colors[entry->index % 2 == 0], content);
+        else printf("\033[%dm%s\033[0m", colors[entry->index % 2 == 0], content);
         if (feof(f)) break;
     }
     fclose(f);
-    printf("%s\n", DELIMITER_ENTRY);
+    printf("\033[%dm%s\033[0m\n", RED, DELIMITER_ENTRY);
 }

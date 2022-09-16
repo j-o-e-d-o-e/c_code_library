@@ -17,7 +17,13 @@ ostep-code: `/ostep-code/cpu-api`
     - see: man wait
 (3) exec() runs process different from the calling process
     - if success, does not return anything
-    - variants: execl(), execlp(), execlpe(), execv(), execvp(), execvpe()
+    - variants:
+        - int execv(const char *path, char *const argv[])
+        - int execvp (const char *file, char *const argv[])
+        - int execvpe(const char *file, char *const argv[], char *const envp[])
+        - int execl(const char *path, const char *arg,.../* (char  *) NULL */)
+        - int execlp(const char *file, const char *arg,.../* (char  *) NULL */)
+        - int execle(const char *path, const char *arg, .../*, (char *) NULL, char * const envp[] */)
     - see: man exec
 
 EXAMPLE

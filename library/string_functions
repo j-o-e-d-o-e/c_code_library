@@ -45,6 +45,9 @@ see also: primer, ch.11, p.489ff.
         - copies up to max chars or up through \0 (whichever comes first)
             - if source is less than max, then the entire string is copied incl. \0
             - if source is more than max, no \0 is added
+    - char *strdup(const char *s) (4.3)
+        - returns duplicate of source string (arg)
+        - `man strdup`
 (5) combination
     - sprintf()
         - like printf(), but writes to a string (instead of writing to a display)
@@ -106,6 +109,10 @@ strcpy(target + 3, "y");
 puts(target); // Joey
 (4.2)
 strncpy(target + 3, "yyyyyyyy", strlen(target) - 3); // Joeyyyy
+(4.3)
+char *src = "duplicate";
+char *dest = strdup(src);
+printf("Source: %s, target: %s\n", src, dest); // Source: duplicate, target: duplicate
 (5)
 char target[SIZE];
 sprintf(target, "%s, %-10s: $%.2f\n", "Doe", "Joe", 6.666);
