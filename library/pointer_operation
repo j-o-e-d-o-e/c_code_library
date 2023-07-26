@@ -1,6 +1,6 @@
 pointer->operations
 
-primer, ch.10; beej, ch.11
+
 
 (1) assignment
     - assign an address to a pointer
@@ -32,6 +32,10 @@ primer, ch.10; beej, ch.11
 (9) comparisons
     - relational-operators to compare vals of two pointers
     - provided pointers are of the same type
+
+- SEE ALSO
+    - primer, ch.10
+    - beej, ch.11
 
 EXAMPLE
 (1)

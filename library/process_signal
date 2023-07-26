@@ -1,6 +1,6 @@
 process->signal
 
-beej, ch.29;primer, p.945;ostep, ch.5 
+
 
 (1) signal() for handling signals (receiving server-side) ("to catch signal")
     - 1st arg: signal (int) to be caught
@@ -12,5 +12,9 @@ beej, ch.29;primer, p.945;ostep, ch.5
 (2) raise() for sending signals (calling client-side)
     - arg: signal (int) to be sent
     - if success, returns zero; otherwise, non-zero
+- sigaction() (for UNIX)
 
-sigaction() (for UNIX)
+- SEE ALSO
+    - beej, ch.29
+    - primer, p.945
+    - ostep, ch.5

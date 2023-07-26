@@ -1,10 +1,8 @@
-file I/O->functions
+file->funcs
 
-primer, ch.13
 
-use FILE-pointer, like stdout or val returned by fopen() (see file I/O)
-other standard I/O funcs: see primer, ch.13, p.584ff.
 
+- funcs use FILE-pointer, like stdout or val returned by fopen() (see entry: file)
 (1) fprintf() (like printf()) [stdio.h]
     - 1st arg: file-pointer to file to be written to, e.g. stderr
     - unlike putc() (see file I/O), takes file-pointer as 1st arg
@@ -30,6 +28,9 @@ other standard I/O funcs: see primer, ch.13, p.584ff.
     - returns the num of bytes from the beginning of the file (long)
         - in binary mode, 1st byte of file == 0 (not necessarily in text mode)
 (6) fgets(): see string->input
+
+- SEE ALSO
+    - primer, ch.13, p.584ff. (other standard I/O funcs)
 
 EXAMPLE
 (1)

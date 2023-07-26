@@ -1,13 +1,17 @@
 typedef
 
-primer, ch.14; beej, ch.10
+data type
 
-to create own name for a type
+- to create own name for a type
     - unlike #define: names not for vals, but for types only
     - used esp. for aliasing a struct (2)
     - naming: leading uppercase or snake_case (but not standardized)
 C standard uses `typedef` internally a lot, e.g. size_t (see entry: size_t)
     - often suffixed with _t (therefore, reserved)
+
+- SEE ALSO
+    - primer, ch.14
+    - beej, ch.10
 
 EXAMPLE
 (1)

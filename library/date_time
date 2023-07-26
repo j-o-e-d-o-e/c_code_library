@@ -1,8 +1,8 @@
 date/time
 
-b,ch.38; m, lvl.1.5/1.6.3/1.8.5
 
-defined in [time.h]
+
+- defined in [time.h]
 (1) time_t for calendar time in secs since epoch (UTC)
     - time(time_t *t) returns current time (1.1)
         - and puts it in t, if t not NULL
@@ -47,6 +47,10 @@ defined in [time.h]
 (3) struct timespec holds secs (tv_sec) and nanosecs (tv_nsec)
     - timespec_get(timespec *ts, int base) returns current time
         - base = TIME_UTC: secs since Epoch
+
+- SEE ALSO
+    - beej, ch.38
+    - modern, lvl.1.5/1.6.3/1.8.5
 
 EXAMPLE
 (1.1)

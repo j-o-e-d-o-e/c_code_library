@@ -1,11 +1,10 @@
 threads->condition var
 
-beej, ch.39.8
 
-provides a way for threads to go to sleep until some event on another thread occurs
+
+- provides a way for threads to go to sleep until some event on another thread occurs
     - often, used in combination with mutexes (see entry: threads->mutexes)
-
-defined in [threads.h]
+- defined in [threads.h]
     - cnd_wait(union__anonymous *cond, union__anonymous *m) (1)
         - blocks thread to wait for signal
         - 1st arg: pointer to condition variable
@@ -20,6 +19,9 @@ defined in [threads.h]
     -  cnd_broadcast(union__anonymous *cond)
         - unblocks all threads currently waiting on condition variable
         - instead of cnd_signal()
+
+- SEE ALSO
+    - beej, ch.39.8
 
 EXAMPLE
 (1)

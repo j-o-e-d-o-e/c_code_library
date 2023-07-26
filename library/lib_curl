@@ -1,7 +1,11 @@
-libcurl
+lib->libcurl
 
-curl.se/libcurl/
+3rd party
 
-- UNIX-tool `curl-config` displays info about installation. Flags:
+- UNIX-tool `curl-config` displays info about installation
+- flags
     - `--libs`: library linking information (for Makefile)
     - `--version`: version of libcurl
+
+- SEE ALSO
+    - curl.se/libcurl/

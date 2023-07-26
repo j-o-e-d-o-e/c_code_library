@@ -5,11 +5,11 @@
 void flags(char **argv) {
     static const size_t LIT_LEN = 6;
     static const char *literature[] = {
-            "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley. [p]",
-            "Brian Hall (2021): Beej's Guide to C Programming [beej.us/guide/bgc/html/split]. [b]",
-            "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library]. [t]",
-            "GeeksforGeeks: C Programming Language [geeksforgeeks.org/c-programming-language]. [g]",
-            "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [m]",
+            "Stephen Prata (2014): C Primer Plus, 6th Edition, Addison-Wesley. [primer]",
+            "Brian Hall (2021): Beej's Guide to C Programming [beej.us/guide/bgc/html/split]. [beej]",
+            "TutorialsPoint: C Standard Library [tutorialspoint.com/c_standard_library].",
+            "GeeksforGeeks: C Programming Language [geeksforgeeks.org/c-programming-language].",
+            "Jens Gustedt (2019): Modern C, 2nd Edition, Manning. [modern]",
             "Arpaci-Dusseau/Remzi, Arpaci-Dusseau/Andrea (2018): Operating Systems. Three Easy Pieces. [ostep]",
     };
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {

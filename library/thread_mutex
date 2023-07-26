@@ -1,11 +1,10 @@
 threads->mutexes
 
-beej, ch.39.7
 
-allows only a single thread into a critical section of code (mutual exclusion)
+
+- allows only a single thread into a critical section of code (mutual exclusion)
     - i.e. a lock on this section that only one thread is permitted to execute
-
-defined in [threads.h]
+- defined in [threads.h]
     (1) declare mutex-var of type mtx_t
     (2) mtx_init(union__anonymous *mutex, int type) creates new mutex obj
         - 1st arg: pointer to mutex
@@ -18,6 +17,9 @@ defined in [threads.h]
         - define the critical section in between
         - each mtx_lock() is balanced with mtx_unlock()
     (4) mtx_destroy() destroys mutex obj
+
+- SEE ALSO
+    - beej, ch.39.7
 
 EXAMPLE
 #include <stdio.h>

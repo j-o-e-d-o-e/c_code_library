@@ -3,28 +3,29 @@
 
 #define S_LEN 80
 #define DIR_PATH "library/"
-#define DELIMITER_TOC "======================================="
-#define DELIMITER_ENTRY "-------------------------------------"
+//#define DIR_PATH "/home/joe/prog/c/code_library/library/"
+#define DELIMITER_TOC "================================"
+#define DELIMITER_ENTRY "------------------------------"
 #define TOC 0
 #define EXIT 667
 #define clear() printf("\033[H\033[J")
 
 #define RED 91
-#define PINK 95
+#define GREEN 92
 #define CYAN 96
-#define BLUE 44 // background
-static const int colors[2] = {PINK, CYAN};
+#define BLACK 40 // background
+static const int colors[2] = {GREEN, CYAN};
 
 /* a file representation according to template
         index: sequential num
         path: DIR_PATH + filename
         title: 1st line in file
-        src: 3rd line (literature) */
+        tags: 3rd line (category) */
 struct entry {
     int index;
     char path[S_LEN];
     char title[S_LEN];
-    char src[S_LEN]; // literature
+    char tags[S_LEN]; // literature
 };
 
 /* collection of entries */

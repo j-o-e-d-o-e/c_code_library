@@ -1,10 +1,9 @@
 struct
 
-primer, ch.14; beej, ch.8/20
+data structure
 
-to represent complex data
-struct-member can be any C data type, including other nested structures
-
+- to represent complex data
+- struct-member can be any C data type, including other nested structures
 (1) declaring a struct and defining a struct-var can be combined into one step
     - to initialize var, use comma-separated list of initializers enclosed in braces
     - designated intializers to identify specific members
@@ -20,6 +19,10 @@ struct-member can be any C data type, including other nested structures
 (4) saving/reading structs to/from file
     - using fwrite()/fread() for binary mode
     - see: primer, ch.14, p.639ff.
+
+- SEE ALSO
+    - primer, ch.14
+    - beej, ch.8/20
 
 EXAMPLE
 (1.1)

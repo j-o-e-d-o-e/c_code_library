@@ -1,9 +1,8 @@
 type qualifier
 
-primer, ch.12; beej, ch.16.1
 
-for vars
 
+- for vars
 (1) const
     - var whose cal cannot be modified by assignment or de-/in-crementing
     - however, const-var can be initialized (after that, read-only)
@@ -21,6 +20,10 @@ for vars
     - indicates that pointer is the sole initial means of accessing a data obj
 (4) _Atomic [stdatomic.h]
     - since C11: for concurrent programming
+
+- SEE ALSO
+    - primer, ch.12
+    - beej, ch.16.1
 
 EXAMPLE
 (1)

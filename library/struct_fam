@@ -1,12 +1,16 @@
 struct->flexible array member
 
-b,ch.20.4;g,/flexible-array-members-structure-c
 
-allows to declare array without dimension and allocate memory dynamically
+
+- allows to declare array without dimension and allocate memory dynamically
     - prerequisites
         - array is last member in struct
         - struct contains at least one more named member
     - memory allocation done by malloc()/realloc() (see entry: memory allocation)
+
+- SEE ALSO
+    - beej, ch.20.4
+    - geeksforgeeks.org/flexible-array-members-structure-c/
 
 EXAMPLE
 // see: source code to this code_library

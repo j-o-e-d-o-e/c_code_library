@@ -1,6 +1,6 @@
-string<->number
+type conversion
 
-primer, ch.11
+data types
 
 (1) num-to-string conversion
     - printf() (see string->output)
@@ -17,6 +17,9 @@ primer, ch.11
         - strtod(): to double
         - strtof(): to float
         - strtoul(): for binary (2.3.1)
+
+- SEE ALSO
+    - primer, ch.11
 
 EXAMPLE
 (1)

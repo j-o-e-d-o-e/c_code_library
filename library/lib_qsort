@@ -1,8 +1,8 @@
-library->qsort()
+lib->qsort
 
-primer, ch.16, beej, ch.11
 
-qsort(): quick sort defined in [stdlib.h]
+
+- qsort(): quick sort defined in [stdlib.h]
     - void qsort (void *base, size_t nmemb, size_t size, int (*compar)(const void *, const void *))
     - 1st arg (*base): pointer to beginning of array to be sorted (of any type due to void *)
     - 2nd arg (nmemb): number of items to be sorted
@@ -10,6 +10,10 @@ qsort(): quick sort defined in [stdlib.h]
     - 4th arg ((*compar)): pointer to func to be used to determine the sorting order
         - two args: pointers to the two items being compared
         - returns positive int (if 1st item follows 2nd item), 0 (same) or neg int
+
+- SEE ALSO
+    - primer, ch.16
+    - beej, ch.11
 
 EXAMPLE
 (1)

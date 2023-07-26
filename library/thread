@@ -1,11 +1,10 @@
 threads
 
-beej, ch.39/47
 
-since C11: optional feature
+
+- since C11: optional feature
     - if C11+ compiler defines __STDC_NO_THREADS, not supported
-
-defined in [threads.h]
+- defined in [threads.h]
 - thrd_create(thrd_t *t, thrd_start_t f, void *arg)
     - creates a new thread
     - 1st arg: unique identifier for new thread
@@ -21,6 +20,9 @@ defined in [threads.h]
     - 2nd arg: return value
 - thrd_detach()
     - makes calling thread not to block (instead of thrd_join())
+
+- SEE ALSO
+    - beej, ch.39/47
 
 EXAMPLE
 #include <stdio.h>

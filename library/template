@@ -1,8 +1,11 @@
 template
 
-src
+tags
 
-descr
+- descr
+
+- SEE AlSO
+    - ...
 
 EXAMPLE
 code

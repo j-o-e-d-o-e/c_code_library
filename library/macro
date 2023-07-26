@@ -1,10 +1,10 @@
 macro
 
-primer, ch.16; beej, ch.19
 
-preprocessor-directives
-indicated by # at the beginning of the line
-limited to one line in length, i.e. ends with 1st newline (after #)
+
+- preprocessor-directives
+- indicated by # at the beginning of the line
+- limited to one line in length, i.e. ends with 1st newline (after #)
     - '\' plus newline allows to spread directive over multiple lines
 - can appear anywhere in the source file
 - definition holds from its place to the end of the file
@@ -41,6 +41,10 @@ limited to one line in length, i.e. ends with 1st newline (after #)
     - __LINE__: line number in the current source-code-file (int)
 (5) #pragma allows to place compiler-instructions in the source-code
     - generally, each compiler has its own set of pragmas
+
+- SEE ALSO
+    - primer, ch.16
+    - beej, ch.19
 
 EXAMPLE
 (1)

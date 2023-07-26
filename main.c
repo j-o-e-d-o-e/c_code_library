@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
         } else if (ch == EXIT) {
             printf("\033[%dmDevil's neighbour wishes you a good day.\033[0m\n", RED);
             break;
-        } else if (ch > lib->len || ch < 0) {
+        } else if (ch > lib->len != 0) {
             printf("\033[%dmNot a valid number.\033[0m", RED);
             continue;
         }
@@ -62,7 +62,7 @@ Library *setup_lib(void) {
         f_gets(e->title, S_LEN, f);
         char s[S_LEN];
         f_gets(s, S_LEN, f); // empty line
-        f_gets(e->src, S_LEN, f);
+        f_gets(e->tags, S_LEN, f);
         count++;
         fclose(f);
     }
@@ -91,10 +91,10 @@ void print_toc(const Library *lib) {
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
     while (e < end) {
-        if (e->index % 2 == 0) {
-            printf("\033[%d;%dm%*d - %-*s%s\033[0m\n", PINK, BLUE, 2, e->index, S_LEN - 30, e->title, e->src);
+        if (e->index % 2 != 0) {
+            printf("\033[%dm%*d - %-*s%s\033[0m\n", GREEN, 2, e->index, S_LEN - 37, e->title, e->tags);
         } else {
-            printf("\033[%dm%*d - %-*s%s\033[0m\n", CYAN, 2, e->index, S_LEN - 30, e->title, e->src);
+            printf("\033[%d;%dm%*d - %-*s%s\033[0m\n", CYAN, BLACK, 2, e->index, S_LEN - 37, e->title, e->tags);
         }
         e++;
     }

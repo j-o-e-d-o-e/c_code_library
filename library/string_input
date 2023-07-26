@@ -1,12 +1,11 @@
 string->input
 
-primer, ch.11/13
+I/O
 
-steps 1-2:
+- two steps
     (1) declare input var with enough space to store the string
     (2) use input-func to fetch string
-
-input-funcs (2nd step):
+- input-funcs (2nd step):
 (1) scanf()
     - designed for single words from stdin
     - scan starts at the first non-whitespace char
@@ -27,6 +26,9 @@ input-funcs (2nd step):
         - if success, same address that was passed as 1st arg
         - if EOF, null-pointer (NULL)
     - often paired with fputs() (due to stored \n)
+
+- SEE ALSO
+    - primer, ch.11/13
 
 EXAMPLE
 (1)

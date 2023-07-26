@@ -1,8 +1,8 @@
-library->bsearch()
+lib->bsearch
 
-m,lvl.2.11.4; t,/c_function_bsearch
 
-bsearch(): binary search defined in [stdlib.h]
+
+- bsearch(): binary search defined in [stdlib.h]
     - void * bsearch ( void const *key, void const *base, size_t n, size_t size, compare_function *compar)
     - 1st arg (*key): pointer to obj to be searched for
     - 2nd arg (*base): pointer to beginning of array to be searched
@@ -10,9 +10,12 @@ bsearch(): binary search defined in [stdlib.h]
     - 4th arg (size): size of the data obj, e.g. sizeof(int)
     - 5th arg ((*compar)): pointer to func to be used to compare two elems
         - returns pos int (if 1st item follows 2nd item), 0 (same) or neg int
-
-supposses that array `base` is already sorted according to comparison func (5th arg)
+- supposes that array `base` is already sorted according to comparison func (5th arg)
     - but, seems to work also in unorderly fashion
+
+- SEE ALSO
+    - modern, lvl.2.11.4
+    - tutorialspoint.com/c_standard_library/c_function_bsearch
 
 EXAMPLE
 int comp(const void *a, const void *b) {

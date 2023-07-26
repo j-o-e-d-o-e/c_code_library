@@ -1,15 +1,17 @@
 size_t
 
-modern, lvl.1.4/1.5
+data type
 
-unsigned integer type defined in [stddefh.]
+- unsigned integer type defined in [stddefh.]
     - not a keyword of language itself
-represents values in the range [0, SIZE_MAX] (1)
+- represents values in the range [0, SIZE_MAX] (1)
     - SIZE_MAX defined in [stdint.h]
     - for sizes, cardinalities, etc.
-e.g. operator `sizeof` returns int of type size_t (2)
+- e.g. operator `sizeof` returns int of type size_t (2)
+- printf()-specifier: %zu
 
-printf()-specifier: %zu
+- SEE ALSO
+    - modern, lvl.1.4/1.5
 
 EXAMPLE
 (1)

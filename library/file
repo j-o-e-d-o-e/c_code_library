@@ -1,8 +1,8 @@
-file I/O
+file
 
-primer, ch.13; modern, lvl.1.8.3
+I/O
 
-steps 1-3:
+- three steps
 (1) fopen() opens file [stdio.h]
     - 1st arg: address of the string containing the name of the file to be opened
     - 2nd arg: string identifying the mode
@@ -24,21 +24,26 @@ steps 1-3:
     - returns pointer
         - if success, file-pointer of type pointer-to-FILE [stdio.h]
         - if error, null-pointer
-(1.1) freopen() associates a given stream to a different file and eventually changes the mode
-    - FILE * freopen (char const path [static 1], char const mode [static 1], FILE * stream)
-(2.1) getc() gets a char from specified file (like getchar())
-    - arg: file to be read
-    - getc(stdin) == getchar()
-    - returns EOF, if end of file reached
-        - discovers EOF only after trying to read past EOF
-        - avoid attempting to read empty file: (ch = getc(fp)) != EOF
-(2.2) putc() puts a specified char into specified file (like putchar())
-    - 1st arg: char to be written
-    - 2nd arg: file to be written into
-    - putc(ch, stdout) == putchar(ch)
+    - freopen() associates a given stream to a different file and eventually changes the mode
+        - FILE * freopen (char const path [static 1], char const mode [static 1], FILE * stream)
+(2) read/write
+    - read: getc() gets a char from specified file (like getchar())
+        - arg: file to be read
+        - getc(stdin) == getchar()
+        - returns EOF, if end of file reached
+            - discovers EOF only after trying to read past EOF
+            - avoid attempting to read empty file: (ch = getc(fp)) != EOF
+    - write: putc() puts a specified char into specified file (like putchar())
+        - 1st arg: char to be written
+        - 2nd arg: file to be written into
+        - putc(ch, stdout) == putchar(ch)
 (3) fclose() closes a specified file
     - arg: file-pointer
     - returns 0 (success) or EOF (error)
+
+- SEE ALSO
+    - primer, ch.13
+    - modern, lvl.1.8.3
 
 EXAMPLE
 FILE *fp;

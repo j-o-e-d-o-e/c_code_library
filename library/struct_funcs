@@ -1,8 +1,8 @@
-struct->functions
+struct->funcs
 
-primer, ch.14; beej, ch.8.3
 
-passing struct to func as
+
+- passing struct to func as
     (1) struct-members
     (2) pointer-to-struct
         - must use &-operator to get address
@@ -10,10 +10,13 @@ passing struct to func as
     (3) struct (by value)
         - copy is created in called func
         - therefore, return-val might be needed
-
-typically, use struct-pointers (2) instead of structs (3) as args for funcs
+- typically, use struct-pointers (2) instead of structs (3) as args for funcs
     - using `const` when needed to protect data from unintended changes
     - passing struct by value most often done only for small data
+
+- SEE ALSO
+    - primer, ch.14
+    - beej, ch.8.3
 
 EXAMPLE
 struct account {

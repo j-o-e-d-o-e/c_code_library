@@ -1,5 +1,8 @@
 for(;;)
 
-modern, lvl.1.3
+infinite loop
 
 equivalent to while(true) or while(1)
+
+- SEE ALSO
+    - modern, lvl.1.3

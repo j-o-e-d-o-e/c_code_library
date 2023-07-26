@@ -1,11 +1,10 @@
 string
 
-primer, ch.11
+data type
 
-series of chars (array) terminated by the null-character (\0)
+- series of chars (array) terminated by the null-character (\0)
     - \0 has the numeric value 0, i.e. false (for branching)
-
-defining a string
+- defining a string
     (1) string constant
         - enclosed in double quotation marks
         - enclosed chars plus terminating \0 (provided by compiler) are stored in memory
@@ -23,6 +22,9 @@ defining a string
         - since pointer is var on its own, its value (string-address) is mutuable
         - recommended: use `const` to initialize pointer to string literal
             - don't use pointer to a string literal if you plan to alter the string
+
+- SEE ALSO
+    - primer, ch.11
 
 EXAMPLE
 (1)

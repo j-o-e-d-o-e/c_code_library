@@ -1,29 +1,30 @@
 pointer
 
-primer, ch.9,10; modern, lvl.2.11
+operators
 
-a variable whose val is a memory address
-
-&-operator: address
+- a variable whose val is a memory address
+- &-operator: address
     - to get the address of the variable
     - %p is the specifier for addresses (1)
-*-operator: indirection (also called dereferencing operator)
+- *-operator: indirection (also called dereferencing operator)
     - to find the value stored in the variable the pointer points to
-regular vs. pointer variable (1)
+- regular vs. pointer variable (1)
     - a regular-var makes the val the primary quantity and the address a derived quantity (via &-operator)
     - a pointer-var makes the address the primary quantity and the val a derived quantity (via *-operator)
     - (ptr = &var; && val = *ptr;) == (val = var)
-
-DO NOT DEREFERENCE AN UNINITIALIZED POINTER (2)
+- DO NOT DEREFERENCE AN UNINITIALIZED POINTER (2)
     - uninitialized pointer has a random value
     - so, there is no knowing where assigned val will be stored
     - might overwrite data/code ...
     - pointer should be assigned a memory location that has already been allocated
     => ALWAYS INITIALIZE POINTERS
-
-assignment with 0 makes a pointer null (a null-pointer) (3)
-    - evaluate to false
+- assignment with 0 makes a pointer null (a null-pointer) (3)
+    - evaluates to false
     - useful if pointer does not have a valid address, yet
+
+- SEE ALSO
+    - primer, ch.9/10
+    - modern, lvl.2.11
 
 EXAMPLE
 (1)

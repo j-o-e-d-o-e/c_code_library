@@ -1,14 +1,16 @@
 boolean
 
-primer, ch.3; modern, ch.3
+data type
 
-since C99
-defined in [stdbool.h]
-no specific printf-specifier for bools (use e.g. %d)
-
-false == 0, true == 1
+- defined in [stdbool.h] (since C99)
+- no printf-specifier for bools; use e.g. %d
+- false == 0, true == 1
     - 0 represents logical false
     - any value different from 0 represents logical true
+
+- SEE ALSO
+    - primer, ch.3
+    - modern, ch.3
 
 EXAMPLE
 #include <stdbool.h>

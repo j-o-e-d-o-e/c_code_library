@@ -1,6 +1,6 @@
 string->output
 
-primer, ch.11; modern, lvl.1.8.3
+I/O
 
 (1) printf()
     - arg: address of a string
@@ -23,6 +23,10 @@ primer, ch.11; modern, lvl.1.8.3
         - buffer
     - 2nd arg: file to write to (file-pointer)
         - e.g. stdout (for standard output) [stdio.h]
+
+- SEE ALSO
+    - primer, ch.11
+    - modern, lvl.1.8.3
 
 EXAMPLE
 (1)

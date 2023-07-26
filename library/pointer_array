@@ -1,6 +1,6 @@
 pointer->array
 
-primer, ch.10
+
 
 (1) name of array == address of 1st elem
     - same address
@@ -11,6 +11,9 @@ primer, ch.10
 (4) declaring array params
     - C interprets `int ar[]` to mean the same as `int *ar`
     - that is, `ar` is of type pointer-to-int
+
+- SEE ALSO
+    - primer, ch.10
 
 EXAMPLE
 (1.1)

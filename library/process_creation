@@ -1,10 +1,8 @@
 process->creation
 
-ostep,ch.5
 
-system calls for UNIX
-ostep-code: `/ostep-code/cpu-api`
 
+- system calls for UNIX
 (1) fork() creates a new process (almost exact copy of calling process)
     - new process starts running from fork() onwards
         - i.e. previous instructions are ignored by the new process
@@ -25,6 +23,10 @@ ostep-code: `/ostep-code/cpu-api`
         - int execlp(const char *file, const char *arg,.../* (char  *) NULL */)
         - int execle(const char *path, const char *arg, .../*, (char *) NULL, char * const envp[] */)
     - see: man exec
+
+- SEE ALSO
+    - ostep,ch.5
+    - /ostep-code/cpu-api
 
 EXAMPLE
 (1)

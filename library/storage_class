@@ -1,8 +1,6 @@
 storage class
 
-primer, ch.12; modern, lvl.2.13.2
-
-see primer, table 12.1, p.517
+scopes
 
 (1) automatic vars
     - declared in a block
@@ -26,6 +24,11 @@ see primer, table 12.1, p.517
 (5) static vars with internal linkage
     - internal linkage: var can be used only in the file containing the definition
     - declaration outside of any func (file scope) (like (4))
+
+- SEE ALSO
+    - primer, ch.12
+    - primer, table 12.1, p.517
+    - modern, lvl.2.13.2
 
 EXAMPLE
 (1)

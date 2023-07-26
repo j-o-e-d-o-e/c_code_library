@@ -1,35 +1,35 @@
 enum
 
-primer, ch.14
 
-symbolic names to represent integer constants
-int constants useable e.g.
+
+- symbolic names to represent integer constants
+- int constants useful e.g.
     - as size in array declaration
     - as lables in switch-statement (multiple selection based on int-vals)
-
-by default, constants are assigned the integer vals: 0, 1, 2, ...
-to assign other vals: enum e {const = val, ... }
+- by default, constants are assigned the integer vals: 0, 1, 2, ...
+- to assign other vals: enum e {const = val, ... }
     - if following consts not specifically assigned: numbered sequentielly
+- if identical, enum-identifier and var-identifier don't conflict in the same scope
 
-if identical, enum-identifier and var-identifier don't conflict in the same scope
+- SEE ALSO
+    - primer, ch.14
 
 EXAMPLE
 enum spectrum {
     RED = 1,
-    GREEN, // 2
-    BLUE // 3
+    GREEN,        // 2
+    BLUE          // 3
 } color = RED;
-
-// %u: unsigned int
-// R: 1, G: 2, B: 3
+                  // %u: unsigned int
+                  // R: 1, G: 2, B: 3
 printf("R: %d, G: %d, B: %u\n", RED, GREEN, BLUE);
 if (color == RED) printf("color is red\n");
-++color; // 2
+++color;          // 2
 switch (color) {
     case RED:
         printf("color is red\n");
         break;
-    case GREEN: // <- switched-to
+    case GREEN:   // <- switched-to
         printf("color is green\n");
         break;
     case BLUE:

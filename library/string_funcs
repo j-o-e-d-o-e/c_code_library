@@ -1,10 +1,8 @@
-string->functions
+string->funcs
 
-p,ch.11; m,lvl.1.8.4; t,/c_function_strtok
+built-in funcs
 
-defined in <string.h>
-see also: primer, ch.11, p.489ff.
-
+- defined in <string.h>
 (1) length
     - strlen() returns length of a string
     - excluding the terminating null byte ('\0')
@@ -80,6 +78,11 @@ see also: primer, ch.11, p.489ff.
         - strtok() remembers original str
     - delim-string can contain mulitple chars
         - but input-str is validated against each char (not string as a whole)
+
+- SEE ALSO
+    - primer, ch.11, p.489ff.
+    - modern, lvl.1.8.4
+    - tutorialspoint.com/c_standard_library/c_function_strtok
 
 EXAMPLE
 (1)

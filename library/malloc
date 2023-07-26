@@ -1,9 +1,8 @@
 memory allocation
 
-p,ch.12; m,lvl.2.13.1; b,ch.12; g,/dynamic-memory-...
 
-funcs to manage pool of memory (dynamic allocation)
 
+- funcs to manage pool of memory (dynamic allocation)
 (1) malloc() allocates memory (memory allocate) [stdlib.h]
     - void* malloc(size_t size);
         - arg: num of bytes of memory to be allocated
@@ -33,6 +32,12 @@ funcs to manage pool of memory (dynamic allocation)
         - 2nd arg: new mem-size to be allocated
             - realloc(prt, 0) is equivalent to free(ptr)
     - returns pointer
+
+- SEE ALSO
+    - primer, ch.12
+    - modern, lvl.2.13.1
+    - beej, ch.12
+    - geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/
 
 EXAMPLE
 #include <stdlib.h> // alternatively, <malloc.h>

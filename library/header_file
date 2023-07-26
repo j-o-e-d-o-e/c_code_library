@@ -1,16 +1,18 @@
 header files
 
-primer, ch.16
 
-suffix: .h
-things commonly found in header-files
+
+- suffix: .h
+- commonly found in header-files
     - directives (see entry: preprocessor->directives)
     - struct-declarations (see entry: struct)
     - function-prototypes (see entry: function)
     - constants
-normally, do not include executable code (goes into source-code-file with .c-suffix)
+- normally, do not include executable code (goes into source-code-file with .c-suffix)
+- use header-files to declare external vars to be shared by several files (1)
 
-use header-files to declare external vars to be shared by several files (1)
+- SEE ALSO
+    - primer, ch.16
 
 EXAMPLE
 (1)

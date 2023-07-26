@@ -1,6 +1,6 @@
-library->utilities
+lib->utils
 
-primer, ch.16
+misc
 
 (1) random num generators [stdlib.h]
     - rand(), srand()
@@ -23,6 +23,9 @@ primer, ch.16
     - to identify ciritical locations in a program where certain conditions should be met
     - #define NDEBUG deactivates all assert()-statements (placed before #include <assert.h>)
 (5) memcpy()/memmove() (see entry: char->array functions) [string.h]
+
+- SEE ALSO
+    - primer, ch.16
 
 EXAMPLE
 (2)

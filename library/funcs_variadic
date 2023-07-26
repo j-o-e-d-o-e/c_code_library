@@ -1,10 +1,10 @@
-function->variadic
+funcs->variadic
 
-beej, ch.25
 
-allow funcs to take arbitrary number of args (like printf())
+
+- allow funcs to take arbitrary number of args (like printf())
     - must have at least one named arg
-defined in [stdarg.h] (proprocessor macros)
+- defined in [stdarg.h] (proprocessor macros)
     - va_list: variable argument list
     - va_start(): start processing/initialize list
         - 1st arg: va_list
@@ -15,6 +15,9 @@ defined in [stdarg.h] (proprocessor macros)
     - va_end(): when done
         - arg: va_list
     - va_copy(): makes copy of va_list in its current state
+
+- SEE ALSO
+    - beej, ch.25
 
 EXAMPLE
 #include <stdio.h>

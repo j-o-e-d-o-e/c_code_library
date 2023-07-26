@@ -1,6 +1,6 @@
 pointer->const
 
-beej, ch.16
+
 
 (1) const <type> *p
     - cannot change val to which pointer points, but pointer itself
@@ -9,6 +9,9 @@ beej, ch.16
     - cannot change pointer, but pointed-to val
 (3) const <type> *const p
     - cannot modify val nor pointer
+
+- SEE ALSO
+    - beej, ch.16
 
 EXAMPLE
 (1)

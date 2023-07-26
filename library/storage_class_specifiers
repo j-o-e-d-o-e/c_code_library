@@ -1,8 +1,6 @@
 storage class->specifiers
 
-primer, ch.12; beej, ch.16.2
 
-see also: storage classes
 
 (1) auto (default)
     - automatic storage duration
@@ -25,6 +23,10 @@ see also: storage classes
     - if file-scope: referred-to var must have external linkage
     - if block-scope: referred-to var has external or internal linkage
 
-func can be either external (the default) or static
+- func can be either external (the default) or static
     - extern: can be accessed by funcs in other files
     - static: can be used only within the defining file
+
+- SEE ALSO
+    - primer, ch.12
+    - beej, ch.16.2
