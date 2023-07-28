@@ -7,8 +7,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-Library *search(const Library *lib, char *line);
-
 int main(int argc, char **argv) {
     if (argc > 1) {
         flags(argv);
@@ -50,13 +48,15 @@ int main(int argc, char **argv) {
 }
 
 Library *search(const Library *lib, char *line) {
-    char *term = lowerAndTrim(line + 2);
+    char term[S_LEN];
+    lowerAndTrim(term, line + 2);
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
     int count = 0;
     Library *tmp = malloc(sizeof(Library) + sizeof(struct entry[lib->len]));
     while (e < end) {
-        char *tmp_s = lowerAndTrim(e->tags);
+        char tmp_s[S_LEN];
+        lowerAndTrim(tmp_s, e->tags);
         if (strstr(tmp_s, term)) {
             tmp->entries[count] = *e;
             count++;

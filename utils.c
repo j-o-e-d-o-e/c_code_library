@@ -34,19 +34,17 @@ void f_gets(char *s, int n, FILE *f) {
     }
 }
 
-char *lowerAndTrim(char *s) {
-    char *t = strdup(s);
+void lowerAndTrim(char *t, const char *s) {
     int i = 0, flag = 0;
-    while (*t) {
-        *t = tolower(*t);
-        if (*t != ' ') {
+    while (*s) {
+        if (*s != ' ') {
             flag = 1;
+            t[i] = tolower(*s);
             i++;
         } else if (flag) {
-            *t = '\0';
+            t[i] = '\0';
             break;
         }
-        t++;
+        s++;
     }
-    return (t - i);
 }
