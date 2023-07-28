@@ -49,4 +49,6 @@ void print_entry(const struct entry *entry);
 /* wrapper for fgets(): replaces first newline with null character */
 void f_gets(char *s, int n, FILE *f);
 
+char *lowerAndTrim(char *s);
+
 #endif // CODE_LIBRARY_CODE_LIBRARY_H

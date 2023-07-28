@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "code-library.h"
 
 void flags(char **argv) {
@@ -31,4 +32,21 @@ void f_gets(char *s, int n, FILE *f) {
         }
         s++;
     }
+}
+
+char *lowerAndTrim(char *s) {
+    char *t = strdup(s);
+    int i = 0, flag = 0;
+    while (*t) {
+        *t = tolower(*t);
+        if (*t != ' ') {
+            flag = 1;
+            i++;
+        } else if (flag) {
+            *t = '\0';
+            break;
+        }
+        t++;
+    }
+    return (t - i);
 }

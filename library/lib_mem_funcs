@@ -1,6 +1,6 @@
 lib->mem-funcs
 
-
+malloc
 
 (1) memcpy(void *dest, const void *src, size_t n) [string.h]
     - copies n bytes of src to dest

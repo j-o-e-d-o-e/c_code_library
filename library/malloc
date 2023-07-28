@@ -1,6 +1,6 @@
 memory allocation
 
-
+malloc
 
 - funcs to manage pool of memory (dynamic allocation)
 (1) malloc(size_t size) allocates memory (memory allocate) [stdlib.h]

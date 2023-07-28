@@ -49,37 +49,14 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-void tolower_s(char *s) {
-    while (*s) {
-        *s = tolower(*s);
-        s++;
-    }
-}
-
-void trimTrailing(char *t, char *s) {
-    strcpy(t, s);
-    size_t i = strlen(t) - 1;
-    while (1) {
-        if (t[i] == ' ') i--;
-        else break;
-    }
-    t[i + 1] = '\0';
-}
-
-
 Library *search(const Library *lib, char *line) {
-    line += 2;
-    tolower_s(line);
-    char term[S_LEN];
-    trimTrailing(term, line);
+    char *term = lowerAndTrim(line + 2);
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
     int count = 0;
     Library *tmp = malloc(sizeof(Library) + sizeof(struct entry[lib->len]));
     while (e < end) {
-        char tmp_s[S_LEN];
-        strcpy(tmp_s, e->tags);
-        tolower_s(tmp_s);
+        char *tmp_s = lowerAndTrim(e->tags);
         if (strstr(tmp_s, term)) {
             tmp->entries[count] = *e;
             count++;
