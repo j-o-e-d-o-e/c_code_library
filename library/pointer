@@ -1,6 +1,6 @@
 pointer
 
-operators
+operators/data type
 
 - a variable whose val is a memory address
 - &-operator: address

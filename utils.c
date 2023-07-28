@@ -16,7 +16,7 @@ void flags(char **argv) {
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
         printf("%s %s %s\n", DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
         puts("Commands:");
-        printf("\t- %d: Table of Content (or any char)\n\t- %d: Exit\n", TOC, EXIT);
+        printf("\t- %-3d: Table of Content (or any char)\n\t- %-3d: Exit\n\t- s: : Search\n", TOC, EXIT);
         puts("\nLiterature:");
         for (int i = 0; i < LIT_LEN; i++) printf("\t- %s\n", literature[i]);
         puts("");

@@ -1,6 +1,6 @@
 char
 
-built-in funcs
+built-in funcs/data type
 
 - funcs can't be applied to a string as a whole, but to the individual chars in a string
 (1) toupper(int c) returns c in uppercase [ctype.h]
