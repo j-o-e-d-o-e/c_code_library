@@ -4,6 +4,10 @@
 #include <string.h>
 #include <stdbool.h>
 #include "code-library.h"
+#include <readline/readline.h>
+#include <readline/history.h>
+
+Library *search(const Library *lib, char *line);
 
 int main(int argc, char **argv) {
     if (argc > 1) {
@@ -12,12 +16,22 @@ int main(int argc, char **argv) {
     }
     Library *lib = setup_lib();
     print_toc(lib);
-    char input[3];
+    char prompt[40];
+    sprintf(prompt, "\n\033[%dmWhat would you like to read? \033[0m", RED);
+    char *line;
     unsigned int long ch;
     while (true) {
-        printf("\n\033[%dmWhat would you like to read? \033[0m", RED);
-        scanf("%s", input);
-        ch = strtol(input, NULL, 10);
+        line = readline(prompt);
+        if (line[0] == 's' && line[1] == ':') {
+            add_history(line);
+            Library *tmp = search(lib, line);
+            printf("\n");
+            print_toc(tmp);
+            free(tmp);
+            continue;
+        }
+        ch = strtol(line, NULL, 10);
+        if (strlen(line) > 0 && ch != 0) add_history(line);
         if (ch == TOC) {
             printf("\n");
             print_toc(lib);
@@ -33,6 +47,47 @@ int main(int argc, char **argv) {
     }
     free(lib);
     return 0;
+}
+
+void tolower_s(char *s) {
+    while (*s) {
+        *s = tolower(*s);
+        s++;
+    }
+}
+
+void trimTrailing(char *t, char *s) {
+    strcpy(t, s);
+    size_t i = strlen(t) - 1;
+    while (1) {
+        if (t[i] == ' ') i--;
+        else break;
+    }
+    t[i + 1] = '\0';
+}
+
+
+Library *search(const Library *lib, char *line) {
+    line += 2;
+    tolower_s(line);
+    char term[S_LEN];
+    trimTrailing(term, line);
+    const struct entry *e = &(lib->entries[0]);
+    const struct entry *end = e + lib->len;
+    int count = 0;
+    Library *tmp = malloc(sizeof(Library) + sizeof(struct entry[lib->len]));
+    while (e < end) {
+        char tmp_s[S_LEN];
+        strcpy(tmp_s, e->tags);
+        tolower_s(tmp_s);
+        if (strstr(tmp_s, term)) {
+            tmp->entries[count] = *e;
+            count++;
+        }
+        e++;
+    }
+    tmp->len = count;
+    return tmp;
 }
 
 Library *setup_lib(void) {
@@ -90,13 +145,15 @@ void print_toc(const Library *lib) {
     printf("\033[%d;1m%s %s %s\033[0m\n", RED, DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
+    int count = 0;
     while (e < end) {
-        if (e->index % 2 != 0) {
-            printf("\033[%dm%*d - %-*s%s\033[0m\n", GREEN, 2, e->index, S_LEN - 37, e->title, e->tags);
+        if (count % 2 == 0) {
+            printf("\033[%dm%*d - %-*s%s\033[0m\n", GREEN, 2, e->index, S_LEN - 36, e->title, e->tags);
         } else {
-            printf("\033[%d;%dm%*d - %-*s%s\033[0m\n", CYAN, BLACK, 2, e->index, S_LEN - 37, e->title, e->tags);
+            printf("\033[%d;%dm%*d - %-*s%s\033[0m\n", CYAN, BLACK, 2, e->index, S_LEN - 36, e->title, e->tags);
         }
         e++;
+        count++;
     }
 }
 

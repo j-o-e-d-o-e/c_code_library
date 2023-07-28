@@ -8,8 +8,8 @@ data structure
     - to initialize var, use comma-separated list of initializers enclosed in braces
     - designated intializers to identify specific members
     - initializing nested structures (of multiple structs)
-        (1) .<mem1>.<mem2> = <val>
-        (2) .<mem1> = { .<mem2> = <val> }
+        (1.1) .<mem1>.<mem2> = <val>
+        (1.2) .<mem1> = { .<mem2> = <val> }
       - initializing elem of array-member: [index].<mem> = <val>
 (2) one struct-var can be assigned to another one (if boths structs are of the same type)
     - each member of assigned struct is assigned val of corresponding member (copy)
@@ -17,11 +17,10 @@ data structure
 (3) compound literals
     - for temporary stuct-var (like for arrays)
 (4) saving/reading structs to/from file
-    - using fwrite()/fread() for binary mode
-    - see: primer, ch.14, p.639ff.
+    - use fwrite()/fread() for binary mode
 
 - SEE ALSO
-    - primer, ch.14
+    - primer, ch.14, p.639ff.
     - beej, ch.8/20
 
 EXAMPLE
@@ -45,11 +44,13 @@ struct file_struct library[3] = {[1] = { // see entry: array
         "primer, ch.14"
 }};
 printf("title: %s\n", library[1].title); // title: one
+
 (2)
 ex = library[1];
 strcpy(library[1].title, "new title");
 printf("title: %s\n", ex.title); // title: one
 printf("title: %s\n", library[1].title); // title: new title
+
 (3)
 struct rect {
     double x;

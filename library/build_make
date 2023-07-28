@@ -9,7 +9,7 @@ build->Make
 - indentation: tabs required (not spaces)
 - Error: Makefile:<LINE>: message
 - Make tracks changes upon timestamp of files
-	- therefore, if Make does not detect changes, use `touch <filename>` to set new timestamp
+    - therefore, if Make does not detect changes, use `touch <filename>` to set new timestamp
 - help: man make OR make -h
 - targets
     - if <dependencies> change, run <commands>

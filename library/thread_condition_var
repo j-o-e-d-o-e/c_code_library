@@ -7,12 +7,12 @@ threads->condition var
 - defined in [threads.h]
     - cnd_wait(union__anonymous *cond, union__anonymous *m) (1)
         - blocks thread to wait for signal
-        - 1st arg: pointer to condition variable
-        - 2nd arg: pointer to mutex
+        - cond: pointer to condition variable
+        - m: pointer to mutex
         - func-call should be in a while-loop (not if-statement)
     - cnd_signal(union__anonymous *cond) (1)
         - unblocks currently waiting thread to wake up
-        - arg: pointer to condition variable
+        - cond: pointer to condition variable
     - cnd_timedwait(union__anonymous *c, union__anonymous *m, const timespec *t) (2)
         - blocks current thread until condition variable is signaled or time is reached
         - instead of cndwait()
@@ -72,6 +72,7 @@ int main(void) {
     mtx_destroy(&value_mtx);
     cnd_destroy(&value_cnd);
 }
+
 (2) // in addition to (1)
 struct timespec timeout;
 int run(void *arg) {

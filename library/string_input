@@ -6,21 +6,21 @@ I/O
     (1) declare input var with enough space to store the string
     (2) use input-func to fetch string
 - input-funcs (2nd step):
-(1) scanf()
+(1) scanf(const char *format, ...)
     - designed for single words from stdin
-    - scan starts at the first non-whitespace char
-    - scan ends
+    - scan starts at 1st non-whitespace char
+    - scan ends, e.g.
         - %s: at next whitespace (blank, \t or \n)
         - %10s: at specified field width (if no whitespace before)
     - returns num of read items (int) or EOF
-(2) fgets() [stdio.h]
+(2) fgets(char *s, int n, FILE *stream) [stdio.h]
     - designed for file input
-    - 1st arg: address (type char *) where input should be stored
-    - 2nd arg: max num of chars to be read
+    - s: pointer where input should be stored
+    - n: max num of chars to be read
         - reads up to n-1 chars or through the newline-char (\n), whichever comes first
         - stores \n in the string, only if it is read
         - adds a terminating null-character (\0) to form a string (-> SIZE + 1)
-    - 3rd arg: which file to read (file-pointer)
+    - stream: which file to read (file-pointer)
         - e.g. stdin (standard input) [stdio.h]
     - returns a pointer
         - if success, same address that was passed as 1st arg
@@ -34,21 +34,13 @@ EXAMPLE
 (1)
 char name[3];
 int num = scanf("%s", name);
-printf("%d, %s\n", num, name); // 1, joe
+printf("%d, %s\n", num, name);  // 1, joe
 scanf("%2s", name);
-printf("%s\n", name); // jo
+printf("%s\n", name);           // jo
+
 (2)
 #define SIZE 10
 char name[SIZE];
 puts("Enter strings (empty line to quit):");
 while (fgets(name, SIZE, stdin) != NULL && name[0] != '\n')
     fputs(name, stdout);
-(2.2)
-char name[SIZE];
-// input: "joedoe"
-printf("Enter strings with %d chars (empty line to quit): ", SIZE);
-int loop = 1;
-// loop: 1, name: joe
-// loop: 2, name: doe
-while (fgets(name, SIZE + 1, stdin) != NULL && name[0] != '\n')
-    printf("loop: %d, name: %s\n", loop++, name);

@@ -3,7 +3,7 @@ pointer->func
 
 
 - if var in calling func needs to be altered, use pointer to var as arg of called func
-    - if called func only needs its val of var for further calculation, transmit var
+    - if called func only needs its val for further calculation, transmit var itself
     - pointers might also be necessary, if callee shall communicate more than one value back
 
 - SEE ALSO

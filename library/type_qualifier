@@ -38,10 +38,13 @@ float const * pfc; /* same as const float * pfc; */
 /* ptr must always point to same loc and
 val stored at that loc must not change */
 const float * const ptr;
+
 (2)
 volatile int loc1; /* loc1 is a volatile location */
 volatile int * ploc; /* ploc points to a volatile location */
+
 (3)
 int * restrict restar = (int *) malloc(10 * sizeof(int));
+
 (4)
 _Atomic int hogs; // hogs an atomic variable

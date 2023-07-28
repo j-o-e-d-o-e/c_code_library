@@ -3,11 +3,11 @@ type conversion
 data types
 
 (1) num-to-string conversion
-    - printf() (see string->output)
-    - sprintf() (see->string->functions)
+    - printf() (see entry: string->output)
+    - sprintf() (see entry: string->funcs)
     - snprintf() takes length as additional arg
 (2) string-to-num conversion
-    (2.1) scanf() (see string->input)
+    (2.1) scanf() (see entry: string->input)
     (2.2) atoi() (alphanumeric/ASCII to integer) [stdlib.h]
         - arg: string
         - returns the corresponding integer val

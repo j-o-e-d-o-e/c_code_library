@@ -3,45 +3,52 @@ bitwise operations
 operators
 
 - called bitwise, because they operate on each bit independently (of bits to the left and right)
-- for ints and chars
-    (1) NEGATION: unary ~-operator changes each 1 to a 0 and each 0 to a 1
-        - does not change val of a var (like e.g. incrementing)
-    (2) AND: binary &-operator combines two operands by bit-by-bit comparison
-        - if both bits are 1, resulting bit is 1 (true)
-        - otherwisse, resulting bit is 0 (false)
-        - AND-assignment &=: (val &= 0377) == (val = val & 0377)
-        - often used with a mask (a bit pattern)
-            - e.g. #define MASK 2; flags &= MASK;
-            - causes all bits of `flags` to be set to 0 (except 2nd bit from right)
-            - therefore, zeros in `MASK` "hide" corresponding bits in `flags`
-            - 0s in MASK are opaque, 1s are transparent (only the bits under MASK’s 1s are visible)
-    (3) OR: binary |-operator produces new val by bit-by-bit comparison
-        - if either of the bits is 1, resulting bit is 1
-        - otherwise, 0
-        - OR-assignment: |=
-    (4) XOR (exclusive OR): binary ^-operator (like OR and AND)
-        - if one bit or the other (but not both) is 1, resulting bit is 1
-        - otherwise, 0
-        - XOR-assignment: ^=
-    (5) LEFT SHIFT: binary <<-operator shifts bits of the left operand to the left
-        - e.g. (10001010) << 2; (00101000) // resulting value
-        - produces a new bit-value, but doesn't change its operands
-        - number << n: multiplies number by 2 to the nth power
-        - LEFT SHIFT-assignment: <<=
-    (6) RIGHT SHIFT: binary >>-operator shifts bits of the left operand to the right
-        - e.g. (10001010) >> 2; (00100010) // resulting value
-        - bits moved past the right end of the left operand are lost
-        - number >> n: divides number by 2 to the nth power (if number not negative)
-        - RIGHT SHIFT-assignment: >>=
+- operators for ints and chars
+(1) NEGATION: ~
+    - each 1-bit results in a 0-bit and each 0-bit in a 1-bit
+    - the only unary operator in this list; others take two operands
+(2) AND: &
+    - if both bits are 1, resulting bit is 1; otherwise, resulting bit is 0
+    - AND-assignment: &=
+    - often used with a mask (a bit pattern)
+        - e.g. #define MASK 2; flags &= MASK;
+        - causes all bits of `flags` to be set to 0 (except 2nd bit from right)
+        - therefore, zeros in `MASK` "hide" corresponding bits in `flags`
+        - 0s in MASK are opaque, 1s are transparent (only the bits under MASK’s 1s are visible)
+(3) OR: |
+    - if either of the bits is 1, resulting bit is 1; otherwise, 0
+    - OR-assignment: |=
+(4) XOR (exclusive OR): ^
+    - if one bit or the other (but not both) is 1, resulting bit is 1; otherwise, 0
+    - XOR-assignment: ^=
+(5) LEFT SHIFT: <<
+    - shifts bits of the left operand to the left by n places
+    - number << n: multiplies number by 2**n
+    - LEFT SHIFT-assignment: <<=
+(6) RIGHT SHIFT: >>
+    - shifts bits of the left operand to the right
+    - bits moved past the right end of the left operand are lost
+    - number >> n: divides number by 2**n (if number not negative)
+    - RIGHT SHIFT-assignment: >>=
 
 - SEE ALSO
     - primer, ch.15
 
 EXAMPLE
 (1)
-unsigned char x = 2;
+unsigned char x = 'A';
 unsigned char y = ~x;
-printf("x: %d, y: %d\n", x, y); // x: 2, y: 253
+printf("x: %8b/%3d\ny: %8b/%3d", x, x, y, y); // x:  1000001/ 65
+                                              // y: 10111110/190
+(2)
+int x = 6;
+int y = 3;
+int z = x & y;
+printf("x: %3b/%d\ny: %3b/%d\nz: %3b/%d", x, x, y, y, z, z); // x: 110/6
+                                                             // y:  11/3
+                                                             // z:  10/2
 (5)
-int z = 1;
-z <<= 2; // changes z to 4
+int x = 3;
+int y = x << 3;
+printf("x: %5b/%2d\ny: %5b/%2d", x, x, y, y); // x:    11/ 3
+                                              // y: 11000/24

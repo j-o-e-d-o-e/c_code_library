@@ -4,7 +4,7 @@ scopes
 
 (1) automatic vars
     - declared in a block
-    - are not initialized unless you do so explicitly
+    - are not initialized unless done so explicitly
         - if uninitialized, var has garbage value (undetermined)
 (2) register vars
     - stored in CPU-registers (fastest memory available), if available

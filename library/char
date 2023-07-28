@@ -3,30 +3,26 @@ char
 built-in funcs
 
 - funcs can't be applied to a string as a whole, but to the individual chars in a string
-(1) toupper() capitalizes a char given as arg [ctype.h]
-    - tolower() converts given char to lowercase
-(2) getchar() reads char from stdin [stdio.h]
-    - performs input one char at a time (like putchar() for output)
+(1) toupper(int c) returns c in uppercase [ctype.h]
+    - tolower(int c) returns c in lowercase
+(2) getchar() returns a char read from stdin [stdio.h]
+    - one char at a time (like putchar() for output)
         - including every char: spaces, tabs, newlines
     - interprets each incoming byte as a char-code (ASCII)
     - returns EOF, when end of file reached
         - typically defined as `#define EOF (-1)` [stdio.h]
         - on Unix/Linux, Ctrl+D at beginning of a line causes EOF-signal to be transmitted
-(3) putchar() outputs a single char [stdio.h]
-    - int putchar ( int c )
+(3) putchar(int c) writes a char to stdout and returns written char [stdio.h]
     - if error, returns EOF
-(4) isalpha() checks e.g. for an alphabetic character [ctype.h]
+(4) isalpha(int c) checks if c is an alphabetic char [ctype.h]
     - int isalnum(int c);
     - int isdigit(int c);
     - int islower(int c);
     - int isupper(int c);
     - int isspace(int c);
     - int isblank(int c);
-(5) fputc() [stdio.h]
+(5) fgetc(FILE *stream)/fputc(int c, FILE *stream) read/write char from/to stream [stdio.h]
     - designed for file output
-(6) fgetc() [stdio.h]
-    - designed for file input
-    - int fgetc (FILE * stream)
 
 - SEE ALSO
     - primer, ch.8/11
@@ -34,22 +30,19 @@ built-in funcs
 
 EXAMPLE
 (1)
-include <ctype.h>
-
-char s[] = "joe doe";
-toupper_s(s);
-printf("%s", s); // JOE DOE
-
 void toupper_s(char *s) {
-    while (*s) { // exit: \0 == 0 (false)
+    while (*s) {    // exits, if s == \0 (false)
         *s = toupper(*s);
         s++;
     }
 }
+char s[] = "joe doe";
+toupper_s(s);
+printf("%s", s);    // JOE DOE
 (2)
-char ch;
+int ch;
 while ((ch = getchar()) != EOF)
-putchar(ch);
+    putchar(ch);
 (3)
 char ch[] = {'J','o','e'};
 for (int i = 0; i < (sizeof ch) / (sizeof ch[0]); i++)

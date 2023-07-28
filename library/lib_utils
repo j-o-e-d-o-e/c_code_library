@@ -3,26 +3,26 @@ lib->utils
 misc
 
 (1) random num generators [stdlib.h]
-    - rand(), srand()
+    - rand() returns pseudo-random int between 0 and RAND_MAX (incl)
 (2) exit program [stdlib.h]
-    - atexit() registers func to be executed when exit() is called
-        - arg: pointer-to-func
+    - atexit(void (*)(void) func) registers func to be executed when exit() is called
+        - func: pointer-to-func
         - up to 32 funcs are guaranted to be addable (by separate atexit()-calls)
         - registed funcs should take no args (typically, for housekeeping tasks)
-    - exit() executes funcs registered by atexit() and does tidying up on its own
+    -  exit(int status) executes funcs registered by atexit() and does tidying up on its own
         - flushes output streams
         - closes all open streams, temporaray files, etc.
         - returns control to the host-env
         - reports a termination-status to the env
             - 0: success (EXIT_SUCCESS)
             - otherwise: error, e.g. 1 (EXIT_FAILURE)
-(3) qsort() (see entry: library->qsort()) [stdlib.h]
-(4) assert [assert.h]
-    - arg: integer-expression
+(3) qsort() (see entry: lib->qsort) [stdlib.h]
+(4) assert(expr) [assert.h]
+    - expr: integer-expression
     - if expression evaluates to false (non-zero), error-message and program terminates
     - to identify ciritical locations in a program where certain conditions should be met
     - #define NDEBUG deactivates all assert()-statements (placed before #include <assert.h>)
-(5) memcpy()/memmove() (see entry: char->array functions) [string.h]
+(5) memcpy()/memmove() (see entry: lib->mem-funcs) [string.h]
 
 - SEE ALSO
     - primer, ch.16
@@ -34,11 +34,9 @@ void sign_off(void) {
 }
 int main(void) {
     atexit(sign_off);
-    puts("After @exit(sign_off)");
-    exit(EXIT_SUCCESS);
+    puts("After @exit(sign_off)");  // After @exit(sign_off)
+    exit(EXIT_SUCCESS);             // sign-off
 }
-// After @exit(sign_off)
-// sign-off
 (4)
 int x = rand();
 assert(x != 0);

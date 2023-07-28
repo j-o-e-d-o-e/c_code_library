@@ -5,7 +5,7 @@ pointer->operations
 (1) assignment
     - assign an address to a pointer
     - assigned val: array name, &var, or another pointer
-(2) value finding (dereferencing)
+(2) retrieving val (dereferencing)
     - *operator gives val stored in the pointed-to location
 (3) taking a pointer address
     - &operator tells where the pointer itself is stored
@@ -13,7 +13,7 @@ pointer->operations
 (4) adding an integer to a pointer
     - +operator adds an integer to a pointer
     - int is multiplied by the number of bytes in the pointed-to type
-    - esp. for array iteration
+    - esp. useful for array iteration
 (5) incrementing a pointer
     - ++operator moves pointer to the next elem of the array
     - increases numerical val of pointer by number of bytes in the pointed-to type
@@ -27,7 +27,7 @@ pointer->operations
     - opposite of (5)
 (8) differencing
     - `ptr2 - ptr1` tells how far apart its pointed-to elems are
-    - returns val in pointed-to type, e.g. 2 ints apart
+    - returns difference as pointed-to type, e.g. 2 ints apart
     - normally, for pointers to elems within the same array
 (9) comparisons
     - relational-operators to compare vals of two pointers

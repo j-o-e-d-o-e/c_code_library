@@ -4,13 +4,13 @@ operators
 
 - a variable whose val is a memory address
 - &-operator: address
-    - to get the address of the variable
-    - %p is the specifier for addresses (1)
+    - gets the address of the variable
+    - printf-specifier: %p (1)
 - *-operator: indirection (also called dereferencing operator)
-    - to find the value stored in the variable the pointer points to
+    - finds the value stored in the variable the pointer points to
 - regular vs. pointer variable (1)
-    - a regular-var makes the val the primary quantity and the address a derived quantity (via &-operator)
-    - a pointer-var makes the address the primary quantity and the val a derived quantity (via *-operator)
+    - a regular-var makes the val the primary quantity and the address a derived one (via &-operator)
+    - a pointer-var makes the address the primary quantity and the val a derived one (via *-operator)
     - (ptr = &var; && val = *ptr;) == (val = var)
 - DO NOT DEREFERENCE AN UNINITIALIZED POINTER (2)
     - uninitialized pointer has a random value

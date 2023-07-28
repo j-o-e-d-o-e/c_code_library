@@ -7,17 +7,17 @@ threads
 - defined in [threads.h]
 - thrd_create(thrd_t *t, thrd_start_t f, void *arg)
     - creates a new thread
-    - 1st arg: unique identifier for new thread
-    - 2nd arg: pointer to a func to run (f)
+    - t: unique identifier for new thread
+    - f: pointer to a func to run (f)
         - thread_local: additional specifier for static vars with block-scope
             - to avoid race-conditions between threads
-    - 3rd arg: pointer to arg to pass to the func
+    - arg: pointer to arg to pass to the func
         - NULL, if no args
 - thrd_join(thrd_t t, int *ret)
     - makes calling thread (e.g. main()) wait/block until child-thread t completes (joining)
         - generally, one must join threads to clean up (otherwise mem-leak)
-    - 1st arg: unique identifier of thread
-    - 2nd arg: return value
+    - t: unique identifier of thread
+    - ret: return value
 - thrd_detach()
     - makes calling thread not to block (instead of thrd_join())
 

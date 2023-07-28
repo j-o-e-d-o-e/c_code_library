@@ -3,10 +3,10 @@ struct->flexible array member
 
 
 - allows to declare array without dimension and allocate memory dynamically
-    - prerequisites
-        - array is last member in struct
-        - struct contains at least one more named member
-    - memory allocation done by malloc()/realloc() (see entry: memory allocation)
+- prerequisites
+    - array is last member in struct
+    - struct contains at least one more named member
+- memory allocation done by malloc()/realloc() (see entry: memory allocation)
 
 - SEE ALSO
     - beej, ch.20.4

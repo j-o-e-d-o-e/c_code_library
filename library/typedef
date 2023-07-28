@@ -18,6 +18,7 @@ EXAMPLE
 typedef unsigned char BYTE;
 BYTE x = 1,  *y = &x, z[3] = {1,2,3};
 printf("%d, %d, %d",x, *(++y), z[2] );
+
 (2)
 struct name_st {
     char first[8];

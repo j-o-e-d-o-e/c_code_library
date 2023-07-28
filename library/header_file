@@ -4,9 +4,9 @@ header files
 
 - suffix: .h
 - commonly found in header-files
-    - directives (see entry: preprocessor->directives)
+    - directives (see entry: macro)
     - struct-declarations (see entry: struct)
-    - function-prototypes (see entry: function)
+    - function-prototypes (see entry: funcs)
     - constants
 - normally, do not include executable code (goes into source-code-file with .c-suffix)
 - use header-files to declare external vars to be shared by several files (1)

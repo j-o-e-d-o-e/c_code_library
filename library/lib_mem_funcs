@@ -2,29 +2,23 @@ lib->mem-funcs
 
 
 
-(1) memcpy() [string.h]
-    - void *memcpy(void *s1, void *s2, size_t n);
+(1) memcpy(void *dest, const void *src, size_t n) [string.h]
     - copies one array to another (of any type due to pointer of type void)
-        - n bytes of mem starting from s1 into mem starting at s2
-    - 1st arg (s1): target location (pointer-to-void)
-        - C allows to assign any pointer-type to pointers of the void *-type
-    - 2nd arg (s2): source location (pointer-to-void)
-    - 3rd arg  (n): number of bytes to be copied (size_t), e.g. 10*sizeof(double)
-    - returns the value of s1
-    - assumes no overlap between the two memory ranges (s1 and s2)
-(2) memmove() [string.h]
+        - n bytes to be copied from memory area src to memory area dest
+    - returns pointer to dest
+    - assumes no overlap between the two memory ranges
+(2) memmove(void *dest, const void *src, size_t n) [string.h]
     - unlike memcpy(), does not make assumption of non-overlapping
-(3) memcmp() [string.h]
-    - compares two arrays in lexicographic order
-    - memcmp (s0, s1, len)
-    - returns the difference between 1st chars that are distinct
-    - if no difference, returns 0
-(4) memchr() [string.h]
-    - searches array s for the appearance of char c
-    - memchr(s, c, len)
-(5) memset() [string.h]
-    - sets all bits in a mem-block to a specified val
-    - e.g. memset(q, 0, sizeof(int) * 10): all 10 elems in int-arr to 0
+(3) memcmp(void *s1, void *s2, size_t n) [string.h]
+    - compares two memory areas
+    - if s1 less/greater than s2, returns negative/positive int
+        - if no difference, returns 0
+(4) memchr(void *s, int c, size_t n) [string.h]
+    - scans initial n bytes of memory area pointed to by s for c
+    - returns pointer to the matching byte or NULL if character does not occur
+(5) memset(void *s, int c, size_t n) [string.h]
+    - sets n bytes of s to c
+    - returns pointer to the memory area s
 
 - SEE ALSO
     - primer, ch.16
@@ -33,19 +27,31 @@ lib->mem-funcs
 
 EXAMPLE
 (1)
-#define SIZE 10
-int source[SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-int target[SIZE];
-puts("Source: ");
-show_array(source, SIZE); // 1 2 3 4 5 6 7 8 9 10
-memcpy(target, source, SIZE * sizeof(int));
-puts("\nTarget (copy of source):");
-show_array(target, SIZE); // 1 2 3 4 5 6 7 8 9 10
-
-void show_array(const int ar[], int n) {
+#define SIZE 3
+void print(char *s, const int ar[], int n) {
+    printf("%-11s: ", s);
     for (int i = 0; i < n; i++) printf("%d ", ar[i]);
 }
-(2)
-memmove(source + 2, source, 5 * sizeof(int));
-puts("\nElems at pos 0-5 (source) copied to pos 2-7 (target):");
-show_array(source, SIZE); // 1 2 1 2 3 4 5 8 9 10
+int src[SIZE] = {6, 6, 7};
+int dest[SIZE];
+print("Source", src, SIZE);         // Source     : 6 6 7
+memcpy(dest, src, SIZE * sizeof(int));
+print("\nDestination", dest, SIZE); // Destination: 6 6 7
+
+(3)
+int s1[SIZE] = {6, 6, 7};
+int *s2 = (int[SIZE]) {6, 6, 7};
+int res = memcmp(s1, s2, SIZE);
+printf("Equals? %s", res == 0 ? "true": "false"); // Equals? true
+
+(4)
+int s[SIZE] = {6, 6, 7};
+int *res = memchr(s, 6, SIZE);
+printf("%d", *res);
+
+(5)
+char str[SIZE + 1];
+strcpy(str,"777");
+puts(str);      // 777
+memset(str,'6',2);
+puts(str);      // 667

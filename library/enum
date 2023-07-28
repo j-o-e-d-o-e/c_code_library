@@ -2,14 +2,10 @@ enum
 
 
 
-- symbolic names to represent integer constants
-- int constants useful e.g.
-    - as size in array declaration
-    - as lables in switch-statement (multiple selection based on int-vals)
-- by default, constants are assigned the integer vals: 0, 1, 2, ...
-- to assign other vals: enum e {const = val, ... }
-    - if following consts not specifically assigned: numbered sequentielly
-- if identical, enum-identifier and var-identifier don't conflict in the same scope
+- symbolic names to represent int constants
+- by default, constants are assigned sequentielly to: 0, 1, 2, ...
+    - a constant may be assigned to an int
+        - if following consts not assigned, they are numbered sequentielly
 
 - SEE ALSO
     - primer, ch.14

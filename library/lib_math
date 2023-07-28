@@ -2,13 +2,13 @@ lib->math
 
 
 
-defined in [math.h] and [tgmath.h] (latter simpler)
-    - double ceil(double x) returns the smallest integral value not less than x
-    - double fabs(double x) returns the absolute value of x
-    - double floor(double x) returns the largest integral value not greater than x
-    - ...
-    - by default, each func expects arg(s) of type double and return a double-val
-        - for each func, versions for float and long also provided (f- or l-suffix)
+- defined in [math.h] and [tgmath.h] (latter simpler)
+- by default, each func expects arg(s) of type double and returns a double
+    - for each func, versions for float and long also provided (f- or l-suffix)
+- e.g.
+    - double floor(double x) rounds down
+    - double ceil(double x) rounds up
+    - double fabs(double x) returns absolute val of x
 
 - SEE ALSO
     - primer, ch.16
@@ -17,6 +17,6 @@ defined in [math.h] and [tgmath.h] (latter simpler)
 EXAMPLE
 #include <math.h>
 #include <stdio.h>
-printf("%.2f\n", fabsf(4.5f));// 4.50
 printf("%.2Lf\n", floorl(4.5l)); // 4.00
 printf("%.2f\n", ceil(4.5)); // 5.00
+printf("%.2f\n", fabsf(4.5f));// 4.50

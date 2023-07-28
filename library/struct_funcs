@@ -32,12 +32,14 @@ void doubleB(double *b) {
 }
 doubleB(&joe.balance); // transmit address of member
 printf("%s's balance: %.2f\n", joe.name, joe.balance); // 20000.00
+
 (2)
 void halveB(struct account *account){
     account->balance /= 2;
 }
 halveB(&joe);
 printf("%s's balance: %.2f\n", joe.name, joe.balance); // 10000.00
+
 (3)
 double reduceB(const struct account account, double minus) {
     return account.balance - minus;

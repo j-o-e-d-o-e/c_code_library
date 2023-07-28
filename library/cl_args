@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
     printf("\n");
     return 0;
 }
+// $ ./c_test joe doe
 // The command line has 2 arguments:
 // 1: joe
 // 2: doe

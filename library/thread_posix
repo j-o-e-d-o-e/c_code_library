@@ -10,16 +10,16 @@ threads->pthreads
         - gcc demo.c -o demo -pthread
 - defined in [pthread.h]
   - pthread_create(pthread_t *t, pthread_attr_t *a, (void *) f, void *arg)
-      - 1st arg: unique identifier for new thread
-      - 2nd arg: attributes of newly created thread
+      - t: unique identifier for new thread
+      - a: attributes of newly created thread
           - if NULL, uses default vals
-      - 3rd arg: pointer to a func to run (f)
-      - 4th arg: pointer to arg to pass to the func
+      - f: pointer to a func to run
+      - arg: pointer to arg to pass to the func
           - if no args, set to NULL
       - if success, returns 0; otherwise non-zero
   - pthread_join(pthread_t t, void *ret)
-      - 1st arg: unique identifier of thread
-      - 2nd arg: return value
+      - t: unique identifier of thread
+      - ret: return value
   - pthread_detach(pthread_t t)
       - resources of t are freed immediately when it terminates
       - instead of waiting for another thread (pthread_join())

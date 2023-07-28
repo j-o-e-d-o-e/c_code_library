@@ -3,9 +3,9 @@ file
 I/O
 
 - three steps
-(1) fopen() opens file [stdio.h]
-    - 1st arg: address of the string containing the name of the file to be opened
-    - 2nd arg: string identifying the mode
+(1) fopen(const char *fn, const char *mode) opens file [stdio.h]
+    - fn: address of the string containing the name of the file to be opened
+    - mode: string declaring the mode to be used
         - "r": reading
         - "w": writing
             - first, truncates an existing file to zero length
@@ -25,20 +25,20 @@ I/O
         - if success, file-pointer of type pointer-to-FILE [stdio.h]
         - if error, null-pointer
     - freopen() associates a given stream to a different file and eventually changes the mode
-        - FILE * freopen (char const path [static 1], char const mode [static 1], FILE * stream)
+        - freopen(char const *fn, char const *mode, FILE *stream)
 (2) read/write
-    - read: getc() gets a char from specified file (like getchar())
-        - arg: file to be read
+    - read: getc(FILE *stream) gets a char from specified file (like getchar())
+        - stream: file to be read
         - getc(stdin) == getchar()
         - returns EOF, if end of file reached
             - discovers EOF only after trying to read past EOF
             - avoid attempting to read empty file: (ch = getc(fp)) != EOF
-    - write: putc() puts a specified char into specified file (like putchar())
-        - 1st arg: char to be written
-        - 2nd arg: file to be written into
+    - write: putc(int c, FILE *stream) puts c into stream (like putchar())
+        - c: char to be written
+        - stream: file to be written into
         - putc(ch, stdout) == putchar(ch)
-(3) fclose() closes a specified file
-    - arg: file-pointer
+(3) fclose(FILE *stream) closes specified file
+    - stream: file-pointer
     - returns 0 (success) or EOF (error)
 
 - SEE ALSO
@@ -51,6 +51,6 @@ char f[] = "input.c";
 if ((fp = fopen(f, "r")) == NULL) // (1)
     exit(EXIT_FAILURE);
 int ch;
-while ((ch = getc(fp)) != EOF) // (2.1)
-    putc(ch, stdout); // (2.2) same as putchar(ch);
-fclose(fp); // (3)
+while ((ch = getc(fp)) != EOF)    // (2)
+    putc(ch, stdout);             // (2), same as: putchar(ch);
+fclose(fp);                       // (3)

@@ -14,8 +14,8 @@ data type
             - if omitted, compiler determines array-size (by looking for \0)
         - unused elems are automatically initialized to \0
         - name of array == address of 1st char (see pointer->array)
-            - ar == &ar[0] // same address
-            - *(ar+1) == ar[1] // same val
+            - ar == &ar[0]      // same address
+            - *(ar+1) == ar[1]  // same val
         - increment-operator not supported (since name of arr is a constant)
     (3) char pointer
         - unlike char-array, pointer can be incremented

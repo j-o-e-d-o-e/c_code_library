@@ -39,6 +39,7 @@ for (int i = 0; i < 2; i++) {
     if (whats[i].isNum) printf("%.2f\n", whats[i].u.d);
     else printf("%s\n", whats[i].u.c);
 }
+
 (2)
 union numOrChar u =  {1.5};;
 union numOrChar *pu = &u;

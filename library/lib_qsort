@@ -1,13 +1,12 @@
 lib->qsort
 
 
-
-- qsort(): quick sort defined in [stdlib.h]
-    - void qsort (void *base, size_t nmemb, size_t size, int (*compar)(const void *, const void *))
-    - 1st arg (*base): pointer to beginning of array to be sorted (of any type due to void *)
-    - 2nd arg (nmemb): number of items to be sorted
-    - 3rd arg (size): size of the data obj, e.g. sizeof(double)
-    - 4th arg ((*compar)): pointer to func to be used to determine the sorting order
+- quick sort defined in [stdlib.h]
+- qsort(void *base, size_t n, size_t size, (*comp))
+    - base: pointer to beginning of array to be sorted (of any type due to void *)
+    - n: number of items to be sorted
+    - size: size of the data type
+    - comp: pointer-to-func to be used to determine the sorting order
         - two args: pointers to the two items being compared
         - returns positive int (if 1st item follows 2nd item), 0 (same) or neg int
 
@@ -17,10 +16,12 @@ lib->qsort
 
 EXAMPLE
 (1)
-#define NUM 8
-
-void show_array(const double ar[], int n);
-
+#define SIZE 3
+void print(char *s, const double ar[], int n) {
+    printf("%-6s: ", s);
+    for (int index = 0; index < n; index++)
+        printf("%.f ", ar[index]);
+}
 /* sort by increasing value */
 int comp(const void *p1, const void *p2) {
     const double *a1 = p1;
@@ -30,25 +31,15 @@ int comp(const void *p1, const void *p2) {
 //    else if (*a1 == *a2) return 0;
 //    else return 1;
 }
-int main(void) {
-    double vals[NUM] = {8, 2, 7, 4, 3, 5, 1, 6};
-//    for (int index = 0; index < NUM; index++) // randomly
-//        vals[index] = (double) rand() / ((double) rand() + 0.1);
-    puts("Random list:");
-    show_array(vals, NUM);
-    qsort(vals, NUM, sizeof(double), comp);
-    puts("\nSorted list:");
-    show_array(vals, NUM);
-    return 0;
-}
-void show_array(const double ar[], int n) {
-    for (int index = 0; index < n; index++)
-        printf("%6.2f ", ar[index]);
-}
+double base[SIZE] = {3, 1, 2};
+// for (int index = 0; index < SIZE; index++) // randomly
+//     base[index] = (double) rand() / ((double) rand() + 0.1);
+print("Input", base, SIZE);     // Input : 3 1 2
+qsort(base, SIZE, sizeof(double), comp);
+print("\nSorted", base, SIZE);  // Sorted: 1 2 3
+
 (2)
 #define NUM 3
-void show_array();
-
 struct name {
     char first[40];
     char last[40];
@@ -58,6 +49,11 @@ struct name names[NUM] = {
         {"Mary", "Jane"},
         {"Jane",  "Doe"}
 };
+void print(char *s) {
+    printf("%-9s: ", s);
+    for (int index = 0; index < NUM; index++)
+        printf("%4s %4s   ", names[index].first, names[index].last);
+}
 /* sort first by last name, then by first name */
 int comp(const void *p1, const void *p2) {
     const struct name *ps1 = p1;
@@ -66,15 +62,6 @@ int comp(const void *p1, const void *p2) {
     if (res != 0) return res;
     else return strcmp(ps1->first, ps2->first); // last name identical, so compare first name
 }
-int main(void) {
-    puts("\nOriginal list:");
-    show_array();
-    qsort(names, NUM, sizeof(struct name), comp);
-    puts("\nSorted list:");
-    show_array();
-    return 0;
-}
-void show_array() {
-    for (int index = 0; index < NUM; index++)
-        printf("%s %s   ", names[index].first, names[index].last);
-}
+print("\nOriginal");  // Original:  Joe  Doe   Mary Jane   Jane  Doe
+qsort(names, NUM, sizeof(struct name), comp);
+print("\nSorted");    // Sorted  : Jane  Doe    Joe  Doe   Mary Jane

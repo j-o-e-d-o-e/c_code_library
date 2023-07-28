@@ -3,31 +3,31 @@ file->funcs
 
 
 - funcs use FILE-pointer, like stdout or val returned by fopen() (see entry: file)
-(1) fprintf() (like printf()) [stdio.h]
-    - 1st arg: file-pointer to file to be written to, e.g. stderr
-    - unlike putc() (see file I/O), takes file-pointer as 1st arg
-(2) fscanf() (like scanf()) [stdio.h]
+(1) fprintf(FILE *stream, const char *format, ...) (like printf()) [stdio.h]
+    - stream: file-pointer to file to be written to, e.g. stderr
+    - unlike putc() (see entry: file), takes file-pointer as 1st arg
+(2) fscanf(FILE *stream, const char *format, ...) (like scanf()) [stdio.h]
     - copies chunk of data from file to buffer (like getc() or fgets())
-(3) rewind() takes program to beginning of file [stdio.h]
-(4) fseek() moves to any particular byte in a file [stdio.h]
-    - 1st arg: FILE-pointer to the file being searched (provided by fopen())
-    - 2nd arg: offset how far to move from starting point (type long)
+(3) rewind(FILE *stream) sets stream to beginning of file [stdio.h]
+(4) fseek(FILE *stream, long off, int whence) moves to specified byte in a file [stdio.h]
+    - stream: pointer of the file being searched (provided by fopen())
+    - off: offset how far to move from starting point
         - positive: move forward
         - negative: move backward
         - zero: stay put
-    - 3rd arg: mode identifying the starting point
+    - whence: mode identifying the starting point
         - SEEK_SET: beginning of file (0L)
         - SEEK_CUR: current position (1L)
         - SEEK_END: end of file (2L)
     - returns int value
         - if success: 0
         - if error: -1
-(5) ftell() tells the current file-location [stdio.h]
-    - in conjunction with fseek()
-    - arg: file-pointer
+(5) ftell(FILE *stream) tells the current file-location [stdio.h]
+    - stream: file-pointer
+    - used in conjunction with fseek()
     - returns the num of bytes from the beginning of the file (long)
         - in binary mode, 1st byte of file == 0 (not necessarily in text mode)
-(6) fgets(): see string->input
+(6) fgets(char *s, int size, FILE *stream): see entry: string->input
 
 - SEE ALSO
     - primer, ch.13, p.584ff. (other standard I/O funcs)

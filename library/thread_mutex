@@ -7,8 +7,8 @@ threads->mutexes
 - defined in [threads.h]
     (1) declare mutex-var of type mtx_t
     (2) mtx_init(union__anonymous *mutex, int type) creates new mutex obj
-        - 1st arg: pointer to mutex
-        - 2nd arg: type of mutex obj
+        - mutex: pointer to mutex
+        - type: type of mutex obj
             - mtx_plain: regular mutex
             - mtx_timed: supports timeouts
             - mtx_plain|mtx_recursive: recursive mutex

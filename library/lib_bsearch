@@ -2,26 +2,28 @@ lib->bsearch
 
 
 
-- bsearch(): binary search defined in [stdlib.h]
-    - void * bsearch ( void const *key, void const *base, size_t n, size_t size, compare_function *compar)
-    - 1st arg (*key): pointer to obj to be searched for
-    - 2nd arg (*base): pointer to beginning of array to be searched
-    - 3rd arg (n): number of items to be searched
-    - 4th arg (size): size of the data obj, e.g. sizeof(int)
-    - 5th arg ((*compar)): pointer to func to be used to compare two elems
-        - returns pos int (if 1st item follows 2nd item), 0 (same) or neg int
-- supposes that array `base` is already sorted according to comparison func (5th arg)
-    - but, seems to work also in unorderly fashion
+- binary search defined in [stdlib.h]
+- bsearch(const void *key, const void *base, size_t n, size_t size, (*comp))
+    - key: pointer to val to be searched for
+    - base: pointer to the beginning of array to be searched
+    - n: number of items to be searched
+    - size: size of data type
+    - comp: pointer-to-func to compare two elems
+        - returns positive int (if 1st item follows 2nd item), 0 (same) or neg int
+    - if key is found in base, returns pointer to matching member
+        - if multiple matches, returned element is unspecified
+        - if no match is found, returns NULL
 
 - SEE ALSO
     - modern, lvl.2.11.4
     - tutorialspoint.com/c_standard_library/c_function_bsearch
 
 EXAMPLE
+#define LEN 5
 int comp(const void *a, const void *b) {
     return (*(int *) a - *(int *) b);
 }
 int key = 32;
-int values[] = {20, 5, 29, 63, 32};
-int *item = bsearch(&key, values, LEN, sizeof(int), comp);
-printf("Found: %d\n", *item); // Found: 32
+int base[] = {20, 5, 29, 63, 32};
+int *item = bsearch(&key, base, LEN, sizeof(int), comp);
+printf("Found: %d\n", *item);   // Found: 32

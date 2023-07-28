@@ -2,27 +2,26 @@ string->output
 
 I/O
 
-(1) printf()
-    - arg: address of a string
-    - formats various data types
+(1) printf(const char *format, ...)
+    - format: pointer to string
+    - format-specifiers
         - %p: addresses
         - %s: strings
         - %d: ints
         - %f: float/double
         - %g: float/double
         - %c: chars
-(2) puts() [stdio.h]
-    - arg: address of a string
-    - appends newline to string it displays
+(2) puts(const char *s) [stdio.h]
+    - s: pointer to string
+    - appends newline to s
         - like printf("%s\n", words)
     - stops printing when it encounters \0
-(3) fputs() [stdio.h]
-    - designed for file output
-    - does not append a newline on output (unlike puts())
-    - 1st arg: address of a string
-        - buffer
-    - 2nd arg: file to write to (file-pointer)
+(3) fputs(const char *s, FILE *stream) [stdio.h]
+    - s: pointer to string (buffer)
+    - stream: file to write to
         - e.g. stdout (for standard output) [stdio.h]
+    - designed for file output
+    - does not append a newline
 
 - SEE ALSO
     - primer, ch.11
@@ -33,9 +32,11 @@ EXAMPLE
 char name[10] = "Joe Doe";
 // Joe Doe, 0x7ffc90728ad0, 7, J
 printf("%s, %p, %d, %c\n", name, &name, (int) strlen(name), *name);
+
 (2)
 const char *name = "Joe Doe";
-puts(name); // Joe Doe
+puts(name);     // Joe Doe
 puts(name + 4); // Doe
+
 (3)
 fputs(&"Joe Doe"[1], stdout);

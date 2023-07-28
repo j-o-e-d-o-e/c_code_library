@@ -33,6 +33,6 @@ int add(int count, ...) {
 }
 
 int main(void) {
-    printf("%d\n", add(2, 2, 2)); // 4
+    printf("%d\n", add(2, 2, 2));     // 4
     printf("%d\n", add(3, 2, 2, -1)); // 3
 }
