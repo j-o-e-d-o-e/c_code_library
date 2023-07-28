@@ -4,7 +4,7 @@ memory allocation
 
 - funcs to manage pool of memory (dynamic allocation)
 (1) malloc(size_t size) allocates memory (memory allocate) [stdlib.h]
-    - SIZE: num of bytes of memory to be allocated
+    - size: num of bytes of memory to be allocated
     - if success, returns address of 1st byte of that block (pointer)
     - if error, returns null-pointer (fails to find the required space)
     - allows to create arrays with different sizes during runtime (like VLA)
@@ -16,7 +16,7 @@ memory allocation
     - size: size of each cell in bytes
     - returns pointer to 1st mem-location (like malloc())
     - sets/clears all bits in the mem-block to 0 (unlike malloc())
-    - esp. for allocating arrays
+    - esp. useful for allocating arrays
 (4) realloc(void *ptr, size_t size) reallocates memory [stdlib.h]
     - ptr: pointer returned by malloc() or calloc()
         - realloc(NULL, size) is equivalent to malloc(size)
@@ -35,7 +35,7 @@ memory allocation
     - geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/
 
 EXAMPLE
-(1+2)
+(1)
 int *ptr = malloc(SIZE * sizeof(int)); // (1) don't cast: (int *)
 for (int i = SIZE; i > 0; i--) ptr[SIZE - i] = i;
 for (int i = 0; i < SIZE; i++) printf("%d...\n", ptr[i]); // 3...
@@ -44,6 +44,7 @@ puts("Kaboom.");                                          // 1...
                                                           // Kaboom.
 (3)
 int *ptr =  calloc(SIZE, sizeof(int));
+free(ptr);
 
 (4)
 int n = 2;

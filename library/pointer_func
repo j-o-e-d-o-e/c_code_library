@@ -10,17 +10,18 @@ pointer->func
     - primer, ch.9/10
 
 EXAMPLE
+// * has two different uses, here:
+void interchange(int *u, int *v) {  // 1.stores pointer-to-int
+    int tmp = *u;                   // 2.dereferences
+    *u = *v;
+    *v = tmp;
+}
+
 int main(void) {
     int x = 5, y = 10;
-    printf("Originally x = %d and y = %d.\n", x , y); // x == 5, y == 10
+    printf("Before: x = %d, y = %d\n", x , y); // Before: x =  5, y = 10
     interchange(&x, &y);
-    printf("Now x = %d and y = %d.\n", x, y); // x == 10, y == 5
+    printf("After : x = %d, y = %d\n", x, y);  // After : x = 10, y =  5
+
     return 0;
-}
-// * plays two different roles, here:
-void interchange(int *u, int *v) { // 1.creates new pointer-to-int
-    int temp;
-    temp = *u; // 2.dereferences
-    *u = *v;
-    *v = temp;
 }

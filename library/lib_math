@@ -6,9 +6,11 @@ lib->math
 - by default, each func expects arg(s) of type double and returns a double
     - for each func, versions for float and long also provided (f- or l-suffix)
 - e.g.
-    - double floor(double x) rounds down
-    - double ceil(double x) rounds up
-    - double fabs(double x) returns absolute val of x
+    - floor(double x) rounds down
+    - ceil(double x) rounds up
+    - fabs(double x) returns absolute val of x
+    - pow(double x, double y) returns x to the y power
+    - sqrt(double x) returns the square root of x
 
 - SEE ALSO
     - primer, ch.16

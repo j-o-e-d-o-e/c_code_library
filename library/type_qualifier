@@ -2,9 +2,9 @@ type qualifier
 
 
 
-- for vars
+- qualifiers for vars
 (1) const
-    - var whose cal cannot be modified by assignment or de-/in-crementing
+    - var whose val cannot be modified by assignment or de-/in-crementing
     - however, const-var can be initialized (after that, read-only)
     - pointers
         - making the pointer itself const (1.1)
@@ -12,7 +12,7 @@ type qualifier
         - both (1.3)
 (2) volative
     - tells compiler that var can have its val altered by agencies other than the program
-    - typically used for hardware addresses and for data shared with other programs
+    - typically used for hardware addresses and data shared with other programs
     - for compiler optimization
 (3) restrict
     - since C99 (for compiler optimization)
@@ -27,24 +27,24 @@ type qualifier
 
 EXAMPLE
 (1)
-const int nochange = 12; /* qualifies m as being constant */
-nochange = 12; /* not allowed */
+const int un_modifiable = 12;
+un_modifiable = 12;     // not allowed
 (1.1)
-float * const pt; /* pt is a const pointer */
+float *const pt;        // pt is a const pointer
 (1.2)
-const float * pf; /* pf points to a constant float value */
-float const * pfc; /* same as const float * pfc; */
+const float *pf;        // pf points to a constant float value
+float const *pfc;       // same as const float * pfc;
 (1.3)
 /* ptr must always point to same loc and
 val stored at that loc must not change */
 const float * const ptr;
 
 (2)
-volatile int loc1; /* loc1 is a volatile location */
-volatile int * ploc; /* ploc points to a volatile location */
+volatile int loc1;      // loc1 is a volatile location
+volatile int * ploc;    // ploc points to a volatile location
 
 (3)
 int * restrict restar = (int *) malloc(10 * sizeof(int));
 
 (4)
-_Atomic int hogs; // hogs an atomic variable
+_Atomic int at;

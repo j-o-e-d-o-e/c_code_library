@@ -39,19 +39,14 @@ qsort(base, SIZE, sizeof(double), comp);
 print("\nSorted", base, SIZE);  // Sorted: 1 2 3
 
 (2)
-#define NUM 3
+#define SIZE 3
 struct name {
     char first[40];
     char last[40];
 };
-struct name names[NUM] = {
-        {"Joe",  "Doe"},
-        {"Mary", "Jane"},
-        {"Jane",  "Doe"}
-};
-void print(char *s) {
+void print(char *s, struct name *names) {
     printf("%-9s: ", s);
-    for (int index = 0; index < NUM; index++)
+    for (int index = 0; index < SIZE; index++)
         printf("%4s %4s   ", names[index].first, names[index].last);
 }
 /* sort first by last name, then by first name */
@@ -62,6 +57,11 @@ int comp(const void *p1, const void *p2) {
     if (res != 0) return res;
     else return strcmp(ps1->first, ps2->first); // last name identical, so compare first name
 }
-print("\nOriginal");  // Original:  Joe  Doe   Mary Jane   Jane  Doe
-qsort(names, NUM, sizeof(struct name), comp);
-print("\nSorted");    // Sorted  : Jane  Doe    Joe  Doe   Mary Jane
+struct name names[SIZE] = {
+        {"Joe",  "Doe"},
+        {"Mary", "Jane"},
+        {"Jane",  "Doe"}
+};
+print("\nOriginal", names);  // Original:  Joe  Doe   Mary Jane   Jane  Doe
+qsort(names, SIZE, sizeof(struct name), comp);
+print("\nSorted", names);    // Sorted  : Jane  Doe    Joe  Doe   Mary Jane

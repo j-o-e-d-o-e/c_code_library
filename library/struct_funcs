@@ -19,8 +19,9 @@ struct->funcs
     - beej, ch.8.3
 
 EXAMPLE
+#define SIZE 20
 struct account {
-    char name[LEN];
+    char name[SIZE];
     double balance;
 } joe = {
         .name = "Joe Doe",
@@ -30,19 +31,19 @@ struct account {
 void doubleB(double *b) {
     *b *= 2;
 }
-doubleB(&joe.balance); // transmit address of member
-printf("%s's balance: %.2f\n", joe.name, joe.balance); // 20000.00
+doubleB(&joe.balance);
+printf("%s's balance: %.2f\n", joe.name, joe.balance); // Joe Doe's balance: 20000.00
 
 (2)
 void halveB(struct account *account){
     account->balance /= 2;
 }
 halveB(&joe);
-printf("%s's balance: %.2f\n", joe.name, joe.balance); // 10000.00
+printf("%s's balance: %.2f\n", joe.name, joe.balance); // Joe Doe's balance: 10000.00
 
 (3)
 double reduceB(const struct account account, double minus) {
     return account.balance - minus;
 }
 joe.balance = reduceB(joe, 5000);
-printf("%s's balance: %.2f\n", joe.name, joe.balance); // 5000.00
+printf("%s's balance: %.2f\n", joe.name, joe.balance); // Joe Doe's balance:  5000.00

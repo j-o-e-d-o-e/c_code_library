@@ -32,25 +32,22 @@ scopes
 
 EXAMPLE
 (1)
-int main(void){
-    int x; // whatever val happened to previously occpuy the assigned space
+int main(void) {
+    int x; // whatever val happened to previously occupy the assigned space
 }
 (2)
-int main(void){
+int main(void) {
     register int x;
 }
 (3)
-void incr(void);
-
-int main(void) {
-    incr(); // 1, 1
-    incr(); // 1, 2
-    return 0;
-}
 void incr(void) {
-    int x = 1; // declaration executed each time:
-    static int y = 1; // not executed during runtime
-    printf("x = %d and y = %d\n", x++, y++);
+    int x = 1;          // executed each time
+    static int y = 1;   // not executed during runtime
+    printf("x = %d, y = %d\n", x++, y++);
+}
+int main(void) {
+    incr(); // x = 1, y = 1
+    incr(); // x = 1, y = 2
 }
 (4)
 extern char c; // mandatory declaration if c defined in another file

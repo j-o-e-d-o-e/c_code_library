@@ -1,11 +1,11 @@
-lib->utils
+lib-> misc utils
 
-misc
+
 
 (1) random num generators [stdlib.h]
     - rand() returns pseudo-random int between 0 and RAND_MAX (incl)
 (2) exit program [stdlib.h]
-    - atexit(void (*)(void) func) registers func to be executed when exit() is called
+    - atexit((*)(void) func) registers func to be executed when exit() is called
         - func: pointer-to-func
         - up to 32 funcs are guaranted to be addable (by separate atexit()-calls)
         - registed funcs should take no args (typically, for housekeeping tasks)
@@ -16,18 +16,22 @@ misc
         - reports a termination-status to the env
             - 0: success (EXIT_SUCCESS)
             - otherwise: error, e.g. 1 (EXIT_FAILURE)
-(3) qsort() (see entry: lib->qsort) [stdlib.h]
-(4) assert(expr) [assert.h]
+(3) assert(expr) [assert.h]
     - expr: integer-expression
     - if expression evaluates to false (non-zero), error-message and program terminates
     - to identify ciritical locations in a program where certain conditions should be met
     - #define NDEBUG deactivates all assert()-statements (placed before #include <assert.h>)
-(5) memcpy()/memmove() (see entry: lib->mem-funcs) [string.h]
 
 - SEE ALSO
     - primer, ch.16
 
 EXAMPLE
+(1)
+int x = rand();
+assert(x != 0);
+double y = 1000000.0 / x;
+printf("res: %.6f", y);
+
 (2)
 void sign_off(void) {
     puts("sign-off");
@@ -37,8 +41,3 @@ int main(void) {
     puts("After @exit(sign_off)");  // After @exit(sign_off)
     exit(EXIT_SUCCESS);             // sign-off
 }
-(4)
-int x = rand();
-assert(x != 0);
-int y = 3 / x;
-printf("res: %d", y);

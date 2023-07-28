@@ -6,7 +6,7 @@ pointer->operations
     - assign an address to a pointer
     - assigned val: array name, &var, or another pointer
 (2) retrieving val (dereferencing)
-    - *operator gives val stored in the pointed-to location
+    - *operator retrieves val stored in the pointed-to location
 (3) taking a pointer address
     - &operator tells where the pointer itself is stored
     - like all vars, a pointer has an address and a val
@@ -17,8 +17,7 @@ pointer->operations
 (5) incrementing a pointer
     - ++operator moves pointer to the next elem of the array
     - increases numerical val of pointer by number of bytes in the pointed-to type
-    - still, the address of the pointer itself remains the same
-    - in-/de-crementing beyond limits of array is undefined (see pointer->array)
+    - in-/de-crementing beyond limits of array is undefined (see: pointer->array)
 (6) subtracting an integer from a pointer
     - -operator subtracts an integer from a pointer
     - int is multiplied by the num of bytes in the pointed-to type
@@ -62,4 +61,4 @@ printf("ptr1 = %p, *ptr1 =%d, &ptr1 = %p\n", ptr1, *ptr1, &ptr1); // *ptr1 == 10
 int *ptr2 = nums[3]
 printf("diff = %d\n", ptr2 - ptr1); // diff == 3 (if *ptr1 == 100 && *ptr2 == 400)
 (9)
-while (arr < end) total += *arr++; // see pointer->array
+while (arr < end) total += *arr++;

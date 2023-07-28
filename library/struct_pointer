@@ -11,31 +11,29 @@ struct->pointer
     - primer, ch.14
 
 EXAMPLE
-#define LEN 20
+#define SIZE 20
 struct name {
-    char first[LEN];
-    char last[LEN];
+    char first[SIZE];
+    char last[SIZE];
 };
 struct person {
     struct name name;
-    char favfood[LEN];
+    char movies[SIZE];
 };
 struct person list[2] = {
         {
-            {"Mary", "Jane"},
-            "grilled salmon",
+                {"mary", "jane"},
+                "cloud atlas",
         },
         {
-            {"Joe",  "Doe"},
-            "burger",
+                {"joe",  "doe"},
+                "donnie darko",
         }
 };
 struct person *p;
-// address #1: 0x557109dc3020 #2: 0x557109dc305c
-printf("address #1: %p #2: %p\n", &list[0], &list[1]);
-p = &list[0]; /* tell the pointer where to point */
-// Mary Jane's favorite food is grilled salmon
-printf("%s %s's favorite food is %s.\n", p->name.first, p->name.last, (*p).favfood);
+p = &list[0];
+printf("%s %s watched %s\n", // mary jane watched cloud atlas
+       p->name.first, p->name.last, (*p).movies);
 p++;
-// Joe Doe's favorite food is burger
-printf("%s %s's favorite food is %s.\n", p->name.first, (*p).name.last, p->favfood);
+printf("%s %s watched %s\n", // joe doe watched donnie darko
+        p->name.first, (*p).name.last, p->movies);

@@ -3,15 +3,14 @@ lib->mem-funcs
 
 
 (1) memcpy(void *dest, const void *src, size_t n) [string.h]
-    - copies one array to another (of any type due to pointer of type void)
-        - n bytes to be copied from memory area src to memory area dest
+    - copies n bytes of src to dest
     - returns pointer to dest
     - assumes no overlap between the two memory ranges
 (2) memmove(void *dest, const void *src, size_t n) [string.h]
     - unlike memcpy(), does not make assumption of non-overlapping
 (3) memcmp(void *s1, void *s2, size_t n) [string.h]
     - compares two memory areas
-    - if s1 less/greater than s2, returns negative/positive int
+    - if s1 is less/greater than s2, returns negative/positive int
         - if no difference, returns 0
 (4) memchr(void *s, int c, size_t n) [string.h]
     - scans initial n bytes of memory area pointed to by s for c
@@ -26,32 +25,34 @@ lib->mem-funcs
     - beej, ch.11
 
 EXAMPLE
-(1)
 #define SIZE 3
+(1)
 void print(char *s, const int ar[], int n) {
     printf("%-11s: ", s);
     for (int i = 0; i < n; i++) printf("%d ", ar[i]);
 }
 int src[SIZE] = {6, 6, 7};
-int dest[SIZE];
+int dest[SIZE] = {0};
 print("Source", src, SIZE);         // Source     : 6 6 7
-memcpy(dest, src, SIZE * sizeof(int));
-print("\nDestination", dest, SIZE); // Destination: 6 6 7
+memcpy(dest, src, (SIZE - 2) * sizeof(int));
+print("\nDestination", dest, SIZE); // Destination: 6 0 0
 
 (3)
 int s1[SIZE] = {6, 6, 7};
-int *s2 = (int[SIZE]) {6, 6, 7};
-int res = memcmp(s1, s2, SIZE);
-printf("Equals? %s", res == 0 ? "true": "false"); // Equals? true
+int *s2 = (int[SIZE]) {6, 6, 6};
+int res = memcmp(s1, s2, SIZE * sizeof(int));
+printf("Equals? %s", res == 0 ? "true" : "false"); // Equals? false
 
 (4)
-int s[SIZE] = {6, 6, 7};
-int *res = memchr(s, 6, SIZE);
-printf("%d", *res);
+char s[SIZE] = {'a', 'b', 'c'};
+char *res = memchr(s, 'c', SIZE * sizeof(char));
+printf("res : %d/%p\ns[2]: %d/%p", *res, res, s[2], &s[2]);
+// res : 99/0x7ffd4300b6d7
+// s[2]: 99/0x7ffd4300b6d7
 
 (5)
 char str[SIZE + 1];
-strcpy(str,"777");
+strcpy(str, "777");
 puts(str);      // 777
-memset(str,'6',2);
-puts(str);      // 667
+char *res = memset(str, '6', 2 * sizeof(char));
+puts(res);      // 667

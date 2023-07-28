@@ -27,7 +27,9 @@ file->funcs
     - used in conjunction with fseek()
     - returns the num of bytes from the beginning of the file (long)
         - in binary mode, 1st byte of file == 0 (not necessarily in text mode)
-(6) fgets(char *s, int size, FILE *stream): see entry: string->input
+(6) fgets(char *s, int n, FILE *stream): see entry: string->input
+(7) fputs(const char *s, FILE *stream): see entry: string->output
+
 
 - SEE ALSO
     - primer, ch.13, p.584ff. (other standard I/O funcs)

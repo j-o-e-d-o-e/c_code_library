@@ -4,11 +4,11 @@ built-in funcs
 
 - defined in [string.h]
 (1) length
-    - strlen(const char *s) returns length of a s
+    - strlen(const char *s) returns length of s
     - excluding the terminating null byte ('\0')
 (2) concatenate
     - strcat(char *dest, const char *src)
-        - modifies dest (but not src)
+        - modifies dest (needs to have enough space)
         - returns pointer to the resulting string dest
     - strncat(char *dest, const char *src, size_t n)
         - checks whether src fits in dest (unlike strcat())
@@ -17,32 +17,28 @@ built-in funcs
             - dest should be large enough to hold max num plus one \0
 (3) compare
     - strcmp(const char *s1, const char *s2)
-        - compares string contents (not string addresses)
-        - can be used to compare strings stored in arrays of different sizes
-        - returns 0, if s1 and s2 are equal
-        - otherwise, returns non-zero (according to ASCII)
-            - negative: if s1 comes before s2 alphabetically
-            - positive: if s2 comes before s1
+        - if s1 is before/after s2, returns negative/positive int
+            - if no difference, returns 0
     - strncmp(const char *s1, const char *s2, size_t n)
-        - compares strings until it has compared n chars
+        - compares n chars
 (4) copy
     - strcpy(char *dest, const char *src)
-        - copies string itself (not address of a string)
-        - string-equivalent of the assignment-operator
-        - dest: target (copy)
+        - copies src to dest
+        - dest: copy to be made
             - should point to a data structure with enough space
             - needs not point to beginning of an array (for partly copying)
-        - src: source (original string)
+        - src: original
             - may be a declared pointer, an array-name, or a string-constant
         - returns pointer to the resulting string dest
     - strncopy(char *dest, const char *src, size_t n)
-        - checks whether src fits into dest
         - n: max num of chars to be copied
-        - copies up to max chars or up through \0 (whichever comes first)
-            - if source is less than max, then the entire string is copied incl. \0
-            - if source is more than max, no \0 is added
+        - checks whether src fits into dest
+        - copies up to n chars or until \0 (whichever comes first)
+            - if src-length is less than n, copy includes \0
+            - if src-length is more than n, \0 is not included
     - strdup(const char *s)
         - returns duplicate of s
+        - allocates the memory space needed for copy (unlike strcpy())
         - `man strdup`
 (5) combine
     - sprintf(char *s, const char *format, ...)
@@ -51,6 +47,8 @@ built-in funcs
         - format: conversion specification
         - remaining args: list of items to be written
         - returns the number of chars printed
+    - snprintf(char *s, size_t n, const char *format, ...)
+        - n: max num of chars to be written to the buffer
 (6) search
     - strchr(const char *s, int c);
         - returns pointer to the 1st loc in s that holds c
@@ -59,12 +57,11 @@ built-in funcs
         - returns pointer to the 1st loc in s1 that holds any char found in s2
     - strstr(const char *s1, const char *s2);
         - returns pointer to the 1st occurrence of s2 in s1
-        - manipulates input-string
 (7) convert
     - strtol(const char *str, char **endptr, int base) converts initial part of str to a long-int
     - strtod(const char *str, char **endptr) converts str to double
 (8) strtok(char *str, const char *delim) breaks str into tokens using a delim
-    - returns ptr to 1st token found in str
+    - returns pointer to 1st token found in str
     - modifies input-str (in-place)
     - places \0 after token (where delimiter used to be)
     - first time, pass input-string; subsequent calls, pass NULL
@@ -81,13 +78,12 @@ EXAMPLE
 #define SIZE 30
 (1)
 printf("%d", (int) strlen("Joe Doe")); // 7
+
 (2)
-char first[] = "Joe";
-char last[] = "Doe";
+char first[10] = "joe";
+char *last = "doe";
 char *name = strcat(first, last);
-printf("%p, %s\n", name, name); // address, JoeDoe
-puts(first);                    // JoeDoe
-puts(last);                     // Doe
+printf("%s, %s, %s", name, first, last); // joedoe, joedoe, doe
 
 (3)
 #define ANSWER "Heisenberg\n"
@@ -106,6 +102,10 @@ puts(target);     // Joey
 char target[SIZE];
 sprintf(target, "%s, %-10s: %.2f\n", "Doe", "Joe", 6.666);
 puts(target);   // Doe, Joe       : 6.67
+
+(6)
+char *c = strstr("joe", "oe");
+putchar(*c);    // o
 
 (7)
 char str[30] = "3 is three";

@@ -6,7 +6,7 @@ data structure
 - struct-member can be any C data type, including other nested structures
 (1) declaring a struct and defining a struct-var can be combined into one step
     - to initialize var, use comma-separated list of initializers enclosed in braces
-    - designated intializers to identify specific members
+    - designated intializers to identify specific members (see entry: array)
     - initializing nested structures (of multiple structs)
         (1.1) .<mem1>.<mem2> = <val>
         (1.2) .<mem1> = { .<mem2> = <val> }
@@ -29,27 +29,24 @@ struct file_struct {
     int index;
     char path[20];
     char title[20];
-    char src[20];
-} ex = {
+} example = {
         .path = "/path",
-        .title = "ex",
-        .src = "primer, ch.14"
+        .title = "example"
 };
-printf("title: %s\n", ex.title); // title: ex
+printf("title: %s\n", example.title);     // title: example
 (1.2)
-struct file_struct library[3] = {[1] = { // see entry: array
+struct file_struct library[3] = {[1] = {
         1,
         "/path",
-        "one",
-        "primer, ch.14"
+        "one"
 }};
-printf("title: %s\n", library[1].title); // title: one
+printf("title: %s\n", library[1].title);  // title: one
 
 (2)
-ex = library[1];
+example = library[1];
 strcpy(library[1].title, "new title");
-printf("title: %s\n", ex.title); // title: one
-printf("title: %s\n", library[1].title); // title: new title
+printf("title: %s\n", example.title);     // title: one
+printf("title: %s\n", library[1].title);  // title: new title
 
 (3)
 struct rect {
@@ -59,4 +56,4 @@ struct rect {
 double rect_area(struct rect r) { return r.x * r.y; }
 
 double area = rect_area((struct rect) {3., 4.0});
-printf("area: %.2f", area); // area: 12.00
+printf("area: %.2f", area);             // area: 12.00

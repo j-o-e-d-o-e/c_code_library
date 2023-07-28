@@ -5,15 +5,14 @@ funcs->pointer
 - typically, a pointer to a func is used as an arg to a 2nd func
     - e.g. qsort() [stdlib.h] takes a pointer-to-func to compare elems of arrays (of any type)
     - allows also to create array of func-pointers (since arr of funcs is not allowed)
-(1) to create a pointer for a particular type of function
+- to create a pointer for a particular type of function
     - first, declare a func of the desired type, e.g. void toupper_s(char *)
-    - then, replace the func-name with (*pf)
-        - e.g. void (*pf)(char *)
+    - then, replace the func-name with (*pf), e.g. void (*pf)(char *)
         - pf then becomes a pointer to that func
         - pointer holds address marking the start of the code of the func
-(2) func may be assigned to a var of type pointer-to-func
+- func may be assigned to a var of type pointer-to-func
     - pointer can point to any func with same signature (args and return type)
-(3) two ways to call a func via a pointer
+- two ways to call a func via a pointer
     - since (*pf) == func: use *-operator in parenthesis, e.g. (*pf)(str);
     - since func-name is a pointer (func == pf): use pointer-name, e.g. pf(str);
 

@@ -15,12 +15,13 @@ pointer->const
 
 EXAMPLE
 (1)
-int x[] = {10, 20};
+int x[] = {1, 2};
 const int *p1 = x;
-printf("%d\n", *p1); // 10
+printf("%d\n", *p1); // 1
 p1++;
-printf("%d\n", *p1); // 20
+printf("%d\n", *p1); // 2
+
 (2)
 int *const p2 = x;
-*p2 = 20;
-for (int i = 0; i < 2; i++) printf("%d ", x[i]); // 20 20
+*p2 = 2;
+for (int i = 0; i < 2; i++) printf("%d ", x[i]); // 2 2

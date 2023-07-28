@@ -16,7 +16,7 @@ data type
         - name of array == address of 1st char (see pointer->array)
             - ar == &ar[0]      // same address
             - *(ar+1) == ar[1]  // same val
-        - increment-operator not supported (since name of arr is a constant)
+        - increment-operator is not supported (since name of arr is a constant)
     (3) char pointer
         - unlike char-array, pointer can be incremented
         - since pointer is var on its own, its value (string-address) is mutuable
@@ -28,15 +28,15 @@ data type
 
 EXAMPLE
 (1)
-// Joe, 0x556c801ed004 (address of first char), D
-printf("%s, %p, %c\n", "Joe", "Avery", *"Doe");
+printf("%s, %c", "joe", *"doe"); // joe, d
+
 (2)
-char me[] = "Joe Doe";
-// 0x7ffdf082ce40, 0x7ffdf082ce40, J, o, o
-printf("%p, %p, %c, %c, %c", me, &me[0], *me, *(me + 1), me[1]);
+char me[] = "joe";
+printf("%c, %c, %c", *me, *(me + 1), me[2]); // j, o, e
+
 (3)
-const char *me = "Joe Doe";
+const char *me = "joe";
 while (*me != '\0') {
-    printf("%p, %c\n", me, *me);
+    printf("%c ", *me); // j o e
     me++;
 }

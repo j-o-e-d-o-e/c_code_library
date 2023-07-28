@@ -4,19 +4,17 @@ data type
 
 - unsigned integer type defined in [stddefh.]
     - not a keyword of language itself
-(1) represents vals in range [0, SIZE_MAX]
+- represents vals in range [0, SIZE_MAX]
     - SIZE_MAX defined in [stdint.h]
-    - for sizes, cardinalities, etc.
-(2) sizeof returns int of type size_t
+- for sizes, cardinalities, etc.
+    - e.g. sizeof returns int of type size_t
 - printf-specifier: %zu
 
 - SEE ALSO
     - modern, lvl.1.4/1.5
 
 EXAMPLE
-(1)
 printf("%zu", SIZE_MAX); // 18446744073709551615 == 2^64 - 1
 
-(2)
 char a[3];
 printf("%zu\n", sizeof a); // 3

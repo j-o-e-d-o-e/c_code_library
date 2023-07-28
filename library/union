@@ -32,8 +32,8 @@ struct what {
     union numOrStr u;
 };
 struct what whats[2] = {
-        {1, {1.5}}, // true
-        {0, {.c="Joe"}} // false
+        {1, {1.5}},
+        {0, {.c="Joe"}}
 };
 for (int i = 0; i < 2; i++) {
     if (whats[i].isNum) printf("%.2f\n", whats[i].u.d);

@@ -2,16 +2,16 @@ array
 
 data structure
 
-(1) initialize
-    - less data than array size: compiler initializes remaining elems to 0 (1.1)
+- initialize
+    - less data than array size: compiler initializes remaining elems to 0 (1)
     - more data than array size: error
-    - designated initializer: allows to set elems at specified index (1.2)
-    - default intializer: sets all elems to default val (1.3)
-    - compound literals (1.4)
+    - designated initializer: allows to set elems at specified index (2)
+    - default intializer: sets all elems to default val (3)
+    - compound literals (4)
         - for providing vals that are needed only temporarily
         - typically, to pass data to func without having to create an array first
-(2) size of array: (sizeof arr) / (sizeof arr[0])
-(3) `const` for immutable arrays
+- size of array: (sizeof arr) / (sizeof arr[0])
+- `const` for immutable arrays
 
 - SEE ALSO
     - primer, ch.10
@@ -25,20 +25,20 @@ int sum(const int ar[], int n) {
     for (int i = 0; i < n; i++) total += ar[i];
     return total;
 }
-(1.1)
+(1)
 int a[SIZE] = {6, 6};
 int total = sum(a, SIZE);
 printf("%d ", total); // 12
 
-(1.2)
+(2)
 int b[SIZE] = {[1] = 6};
 printf("%d ", sum(b, SIZE)); // 6
 
-(1.3)
+(3)
 int c[SIZE] = {0};
 printf("%lu ", (sizeof c) / (sizeof c[0])); // 3
 
-(1.4)
+(4)
 int *d = (int[SIZE]) {6, 6, 7};
 printf("%d ", sum(d, SIZE)); // 19
 int *end = d + SIZE;

@@ -2,11 +2,11 @@ typedef
 
 data type
 
-- to create own name for a type
+- to create custom type
     - unlike #define: names not for vals, but for types only
-    - used esp. for aliasing a struct (2)
+    - esp. useful for aliasing a struct
     - naming: leading uppercase or snake_case (but not standardized)
-C standard uses `typedef` internally a lot, e.g. size_t (see entry: size_t)
+- C standard uses `typedef` internally a lot, e.g. size_t (see entry: size_t)
     - often suffixed with _t (therefore, reserved)
 
 - SEE ALSO
@@ -14,29 +14,20 @@ C standard uses `typedef` internally a lot, e.g. size_t (see entry: size_t)
     - beej, ch.10
 
 EXAMPLE
-(1)
-typedef unsigned char BYTE;
-BYTE x = 1,  *y = &x, z[3] = {1,2,3};
-printf("%d, %d, %d",x, *(++y), z[2] );
+typedef struct {
+    char first[8];
+    char last[8];
+} Name;
 
-(2)
+void printName(Name *n) {
+    printf("%s %s", n->first, n->last);
+}
+Name me = {"joe", "doe"};
+printName(&me); // joe doe
+
+// alternatively, same type definition
 struct name_st {
     char first[8];
     char last[8];
 };
-typedef struct name_st Name;
-// alternatively:
-// typedef struct { // name for struct also omitted
-//     char first[8];
-//     char last[8];
-// } Name;
-
-void getName(Name *n) {
-    printf("%s %s", n->first, n->last);
-}
-
-int main(void) {
-    Name me = {"joe", "doe"};
-    getName(&me);
-    return 0;
-}
+typedef struct name_st Name1;
