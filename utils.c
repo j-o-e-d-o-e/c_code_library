@@ -34,6 +34,12 @@ void f_gets(char *s, int n, FILE *f) {
     }
 }
 
+void lower(char *t, const char *s) {
+    int i = 0;
+    while (*s) t[i++] = tolower(*s++);
+    t[i] = '\0';
+}
+
 void lowerAndTrim(char *t, const char *s) {
     int i = 0, flag = 0;
     while (*s) {

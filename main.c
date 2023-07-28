@@ -53,18 +53,19 @@ Library *search(const Library *lib, char *line) {
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
     int count = 0;
-    Library *tmp = malloc(sizeof(Library) + sizeof(struct entry[lib->len]));
+    Library *tmp_lib = malloc(sizeof(Library) + sizeof(struct entry[lib->len]));
     while (e < end) {
         char tmp_s[S_LEN];
-        lowerAndTrim(tmp_s, e->tags);
+        lower(tmp_s, e->tags);
         if (strstr(tmp_s, term)) {
-            tmp->entries[count] = *e;
+            tmp_lib->entries[count] = *e;
             count++;
         }
         e++;
     }
-    tmp->len = count;
-    return tmp;
+    tmp_lib->len = count;
+    tmp_lib = realloc(tmp_lib, sizeof(Library) + sizeof(struct entry) * tmp_lib->len);
+    return tmp_lib;
 }
 
 Library *setup_lib(void) {
