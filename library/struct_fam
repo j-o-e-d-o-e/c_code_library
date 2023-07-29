@@ -10,6 +10,7 @@ struct->flexible array member
 
 - SEE ALSO
     - beej, ch.20.4
+    - /exercism/c/grade-school
     - geeksforgeeks.org/flexible-array-members-structure-c/
 
 EXAMPLE

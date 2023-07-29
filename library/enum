@@ -9,6 +9,7 @@ enum
 
 - SEE ALSO
     - primer, ch.14
+    - /exercism/c/resistor-color
 
 EXAMPLE
 enum spectrum {
