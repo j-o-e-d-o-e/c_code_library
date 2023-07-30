@@ -15,6 +15,7 @@ pointer->array
 
 - SEE ALSO
     - primer, ch.10
+    - /exercism/c/pascals-triangle-without-zeros (pointer to 2-dim-array)
 
 EXAMPLE
 #define SIZE 3
