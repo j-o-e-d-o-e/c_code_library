@@ -19,6 +19,7 @@ struct->func
 - SEE ALSO
     - primer, ch.14
     - beej, ch.8.3
+    - stackoverflow.com/questions/9653072/return-a-struct-from-a-function-in-c
     - /exercism/c/robot-simulator
 
 EXAMPLE
