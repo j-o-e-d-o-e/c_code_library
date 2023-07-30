@@ -1,0 +1,41 @@
+array->func
+
+
+
+- C does not allow to return a newly created array from a func
+    - its var has automatic storage duration (see entry: storage class->specifiers)
+    - therefore, its reference becomes invalid once the declaring scope is exited
+- two options to provide an array modified by a func to caller
+    (1) func dynamically allocates memory for array
+        - func modifies array and returns pointer
+        - caller of the func is responsible for freeing memory
+        - see entries: memory allocation, pointer->array
+    (2) caller passes pre-allocated array to func
+        - func modifies array and returns void
+
+- SEE ALSO
+    - stackoverflow.com/questions/11656532/returning-an-array-using-c
+
+EXAMPLE
+char *reverse1(const char *val) {
+    size_t len = strlen(val);
+    char *dest = malloc(len * sizeof(char));
+    for (size_t i = 0; i <= len; i++) dest[i] = val[len - 1 - i];
+    return dest;
+}
+
+void reverse2(char *dest, const char *val) {
+    size_t len = strlen(val);
+    for (size_t i = 0; i <= len; i++) dest[i] = val[len - 1 - i];
+}
+
+
+int main(void) {
+    char *res1 = reverse1("joe");
+    puts(res1); // eoj
+    free(res1);
+
+    char res2[5];
+    reverse2(res2, "joe");
+    puts(res2); // eoj
+}
