@@ -1,6 +1,6 @@
 enum
 
-
+enum/switch
 
 - symbolic names to represent int constants
 - by default, constants are assigned sequentielly to: 0, 1, 2, ...
@@ -10,6 +10,7 @@ enum
 - SEE ALSO
     - primer, ch.14
     - /exercism/c/resistor-color
+    - /exercism/c/robot-simulator
 
 EXAMPLE
 enum spectrum {

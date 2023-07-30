@@ -1,4 +1,4 @@
-struct->funcs
+struct->func
 
 
 
@@ -13,10 +13,13 @@ struct->funcs
 - typically, use struct-pointers (2) instead of structs (3) as args for funcs
     - using `const` when needed to protect data from unintended changes
     - passing struct by value most often done only for small data
+- C allows to return a newly created struct from a func (unlike arrays)
+    - see entry: array->func
 
 - SEE ALSO
     - primer, ch.14
     - beej, ch.8.3
+    - /exercism/c/robot-simulator
 
 EXAMPLE
 #define SIZE 20
