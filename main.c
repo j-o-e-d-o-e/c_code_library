@@ -18,18 +18,23 @@ int main(int argc, char **argv) {
     sprintf(prompt, "\n\033[%dmWhat would you like to read? \033[0m", RED);
     char *line;
     unsigned int long ch;
+    using_history();
     while (true) {
         line = readline(prompt);
         if (line[0] == 's' && line[1] == ':') {
-            add_history(line);
             Library *tmp = search(lib, line);
-            printf("\n");
-            print_toc(tmp);
+            if (tmp->len > 0) {
+                if (!check_duplicate(line)) add_history(line);
+                printf("\n");
+                print_toc(tmp);
+            } else {
+                printf("\033[%dmNo match found.\033[0m", RED);
+                printf("\n");
+            }
             free(tmp);
             continue;
         }
         ch = strtol(line, NULL, 10);
-        if (strlen(line) > 0 && ch != 0) add_history(line);
         if (ch == TOC) {
             printf("\n");
             print_toc(lib);
@@ -39,25 +44,36 @@ int main(int argc, char **argv) {
             break;
         } else if (ch > lib->len != 0) {
             printf("\033[%dmNot a valid number.\033[0m", RED);
+            printf("\n");
             continue;
         }
-        print_entry(&lib->entries[ch - 1]);
+        struct entry *e = &lib->entries[ch - 1];
+        char item[S_LEN + 40];
+        sprintf(item, "%lu (%s)", ch, e->title);
+        if (strlen(line) > 0 && !check_duplicate(item)) add_history(item);
+        print_entry(e);
     }
     free(lib);
     return 0;
 }
 
+int check_duplicate(char *line) {
+    HIST_ENTRY **e = history_list();
+    for (int i = 0; i < history_length; i++) {
+        char *s = e[i]->line;
+        if (strcmp(s, line) == 0) return true;
+    }
+    return false;
+}
+
 Library *search(const Library *lib, char *line) {
-    char term[S_LEN];
-    lowerAndTrim(term, line + 2);
+    line += 2;
     const struct entry *e = &(lib->entries[0]);
     const struct entry *end = e + lib->len;
     int count = 0;
     Library *tmp_lib = malloc(sizeof(Library) + sizeof(struct entry[lib->len]));
     while (e < end) {
-        char tmp_s[S_LEN];
-        lower(tmp_s, e->tags);
-        if (strstr(tmp_s, term)) {
+        if (strstr(e->tags, line)) {
             tmp_lib->entries[count] = *e;
             count++;
         }

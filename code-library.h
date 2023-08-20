@@ -51,6 +51,8 @@ void f_gets(char *s, int n, FILE *f);
 
 Library *search(const Library *lib, char *line);
 
+int check_duplicate(char* line);
+
 void lower(char *t, const char *s);
 
 void lowerAndTrim(char *t, const char *s);
