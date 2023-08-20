@@ -1,6 +1,6 @@
 string->funcs
 
-built-in funcs
+
 
 - defined in [string.h]
 (1) length

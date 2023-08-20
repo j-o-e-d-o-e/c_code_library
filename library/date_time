@@ -1,6 +1,6 @@
 date/time
 
-built-in data type/struct
+built-in struct
 
 - defined in [time.h]
 (1) time_t for calendar time in secs since epoch (UTC)

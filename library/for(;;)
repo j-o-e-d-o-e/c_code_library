@@ -1,8 +1,9 @@
 for(;;)
 
-infinite loop
 
-equivalent to while(true) or while(1)
+
+- inifinite loop
+- equivalent to while(true) or while(1)
 
 - SEE ALSO
     - modern, lvl.1.3

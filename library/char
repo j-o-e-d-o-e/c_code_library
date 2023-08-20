@@ -1,8 +1,8 @@
 char
 
-built-in funcs/data type
+data type
 
-- funcs can't be applied to a string as a whole, but to the individual chars in a string
+- following funcs can't be applied to a string as a whole, but to the individual chars in a string
 (1) toupper(int c) returns c in uppercase [ctype.h]
     - tolower(int c) returns c in lowercase
 (2) getchar() returns a char read from stdin [stdio.h]

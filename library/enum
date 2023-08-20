@@ -1,6 +1,6 @@
-enum
-
 enum/switch
+
+
 
 - symbolic names to represent int constants
 - by default, constants are assigned sequentielly to: 0, 1, 2, ...
