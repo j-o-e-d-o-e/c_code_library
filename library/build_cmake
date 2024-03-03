@@ -4,30 +4,41 @@ build->CMake
 
 - build-file: CMakeLists.txt
 - uses Make under the hood
-- steps:
-    (1) create build-file
-    (2) create /build: mkdir build
-    (3) cmake -S . -B build/
-        - generates i.a. Makefile
-    (4) make -C build/
-        - executes Makefile (outputs exec in build/)
-        - alternatively: cd build/ && make
-- help: man cmake OR cmake -h
+- setup:
+    (1) create build-file: see example below
+    (2) create build-dir: mkdir build
+    (3) specify source- and build-dir: cmake -S . -B build/
+        - generates Makefile, etc. in build-dir
+- build: make -C build/
+    - executes Makefile and outputs executable in build/
+    - alternatively: cd build/ && make
+- execute: ./build/${PROJECT_NAME} (as declared in CMakeLists.txt)
+- comments
+    - single line: #
+    - multiline: #[[ ... ]]
+- help
+    - project-specific: make help (in build-dir)
+    - general:  man cmake OR cmake -h
 - version: cmake --version
-- add libraries
-    - `target_link_libraries()` always below `add_executable()`
+
+- CMakeLists.txt
+    - add libraries
+        - `target_link_libraries()` always below `add_executable()`
 
 - SEE ALSO
     - cmake.org/cmake/help/latest/guide/tutorial
+    - https://www.youtube.com/watch?v=nlKcXPUJGwA&list=PLalVdRk2RC6o5GHu618ARWh0VO0bFlif4 (Tutorial)
 
 EXAMPLE
-cmake_minimum_required(VERSION 3.10)
-project(lib)
+cmake_minimum_required(VERSION 3.10)    # typically, corresponds to local version
+project(lib)                            # declare project-name
 
 set(CMAKE_C_STANDARD 99)
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
-# $ cc main.c utils.c input-handler.c -o code_library -lncurses
-add_executable(${PROJECT_NAME} main.c code-library.h utils.c)
+add_executable(${PROJECT_NAME} main.c code-library.h utils.c)   # name and sources of executable
+install(TARGETS ${PROJECT_NAME} DESTINATION bin}                # adds target 'install' to Makefile
+                                                                # 'make install' installs executable to /usr/local/
+                                                                # therefore, globally available on machine
 target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES})

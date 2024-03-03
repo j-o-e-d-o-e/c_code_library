@@ -2,8 +2,7 @@
 #define CODE_LIBRARY_CODE_LIBRARY_H
 
 #define S_LEN 80
-#define DIR_PATH "library/"
-//#define DIR_PATH "/home/joe/prog/c/code_library/library/"
+#define DIR_PATH "/home/joe/prog/c/code_library/library/"
 #define DELIMITER_TOC "================================="
 #define DELIMITER_ENTRY "-------------------------------"
 #define TOC 0
