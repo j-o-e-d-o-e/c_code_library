@@ -1,0 +1,36 @@
+build->CMake->submodule
+
+
+
+- allows to download/use external libs from GitHub
+- setup
+    (1) git init
+    (2) git submodule add <lib-repo-clone-link> external/<lib name>
+        - adds file .gitmodules
+        - external/ may contain several subdirs for each lib
+    (3) git commit -am "submodule <lib name> added"
+    (4) in CMakeLists.txt
+        - add_subdirectory(external/<lib name>) (path in root/)
+        - target_include_directories(${PROJECT_NAME} PUBLIC external/<lib name>/include) (path in root/)
+            - by convention, dir to be included called 'include'
+        - target_link_directories(${PROJECT_NAME} PRIVATE external/<lib name>/src) (path in build/)
+        - target_link_libraries(${PROJECT_NAME} <lib name>)
+            - <lib name> (more specifally, target name) as defined in external/<lib name>/src/CMakeLists.txt
+    (5) in *.c: #include <lib-name/lib.h>, e.g. #include <GLFW/glfw3.h>
+- configure (see: build->CMake)
+    - toggle options in lib's CMakeLists.txt: cmake -D<OPTION_NAME>=OFF||ON -S . -B build/
+- build (see: build->CMake)
+    - build/ contains subdir external/<lib name> and executable lib (e.g. libglfw3.a in src/)
+- execute (see: build->CMake)
+
+- SEE ALSO
+    - /snippets/cmake/03-github-lib
+
+EXAMPLE
+cmake_minimum_required(VERSION 3.22.1)
+project(github-lib)
+add_executable(${PROJECT_NAME} main.c)
+add_subdirectory(external/glfw)
+target_include_directories(${PROJECT_NAME} PUBLIC external/glfw/include)
+target_link_directories(${PROJECT_NAME} PRIVATE external/glfw/src)
+target_link_libraries(${PROJECT_NAME} glfw)

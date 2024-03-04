@@ -7,38 +7,21 @@ build->CMake
 - setup:
     (1) create build-file: see example below
     (2) create build-dir: mkdir build
-    (3) specify source- and build-dir: cmake -S . -B build/
+    (3) configure: specify source- and build-dir: cmake -S . -B build/
         - generates Makefile, etc. in build-dir
-- build: make -C build/
+- build: cmake --build build/
     - executes Makefile and outputs executable in build/
-    - alternatively: cd build/ && make
+    - --clean-first: builds target 'clean' first, then builds
+    - alternatively: make -C build/
 - execute: ./build/${PROJECT_NAME} (as declared in CMakeLists.txt)
+- clean: cmake --build build/ --target clean
 - comments
     - single line: #
     - multiline: #[[ ... ]]
-- help
-    - project-specific: make help (in build-dir)
-    - general:  man cmake OR cmake -h
-- version: cmake --version
-
-- CMakeLists.txt
-    - add libraries
-        - `target_link_libraries()` always below `add_executable()`
+- in CMakeCache.txt, absolute paths are saved
+    - therefore, do not rename or move build-dir
 
 - SEE ALSO
+    - cmake.org/cmake/help/v3.22/ (documentation)
     - cmake.org/cmake/help/latest/guide/tutorial
-    - https://www.youtube.com/watch?v=nlKcXPUJGwA&list=PLalVdRk2RC6o5GHu618ARWh0VO0bFlif4 (Tutorial)
-
-EXAMPLE
-cmake_minimum_required(VERSION 3.22.1)                          # typically, corresponds to local version
-project(code-library)                                           # declare project-name
-set(CMAKE_C_STANDARD 99)
-
-find_package(Curses REQUIRED)
-include_directories(${CURSES_INCLUDE_DIR})
-
-add_executable(${PROJECT_NAME} main.c code-library.h utils.c)   # name and sources of executable
-install(TARGETS ${PROJECT_NAME} DESTINATION bin}                # adds target 'install' to Makefile
-                                                                # 'make install' installs executable to /usr/local/
-                                                                # therefore, globally available on machine
-target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES})
+    - /snippets/cmake
