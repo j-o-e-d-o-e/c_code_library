@@ -31,13 +31,12 @@ EXAMPLE
 int a = 5;
 int *ptr = &a;
 int b = *ptr;
-int c = a;
-int *d = (int[3]) {a, b, c};
+int *d = (int[3]) {a, b, 5};
 int *end = d + 3;
 while (d < end) {
-    printf("val: %d, addr: %p\n", *d, &d);  // val: 5, addr: 0x7ffe88772cf0
-    d++;                                    // val: 5, addr: 0x7ffe88772cf0
-}                                           // val: 5, addr: 0x7ffe88772cf0
+    printf("val: %d, addr: %p\n", *d, (void *) d);  // val: 5, addr: 0x7ffe95a988f0
+    d++;                                            // val: 5, addr: 0x7ffe95a988f4
+}                                                   // val: 5, addr: 0x7ffe95a988f8
 (2)
 int *pt; // an uninitialized pointer
 *pt = 5; // a terrible error: stores 5 in location to which pt points

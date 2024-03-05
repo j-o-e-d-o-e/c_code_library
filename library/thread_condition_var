@@ -1,4 +1,4 @@
-threads->condition var
+thread->condition var
 
 
 

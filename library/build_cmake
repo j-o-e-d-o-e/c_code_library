@@ -5,9 +5,9 @@ build->CMake
 - build-file: CMakeLists.txt
 - uses Make under the hood
 - setup:
-    (1) create build-file: see example below
+    (1) create build-file: see build->CMake->build-file
     (2) create build-dir: mkdir build
-    (3) configure: specify source- and build-dir: cmake -S . -B build/
+    (3) configure cmake: cmake -S . -B build/
         - generates Makefile, etc. in build-dir
 - build: cmake --build build/
     - executes Makefile and outputs executable in build/

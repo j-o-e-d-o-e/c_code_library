@@ -27,17 +27,16 @@ lib->utils
 
 EXAMPLE
 (1)
-int x = rand();
-assert(x != 0);
-double y = 1000000.0 / x;
-printf("res: %.6f", y);
+time_t t;
+srand((unsigned) time(&t));
+printf("random: %d\n", rand()); // random: 1279469515
 
 (2)
 void sign_off(void) {
-    puts("sign-off");
+    puts("Sign-off");
 }
 int main(void) {
     atexit(sign_off);
-    puts("After @exit(sign_off)");  // After @exit(sign_off)
-    exit(EXIT_SUCCESS);             // sign-off
+    puts("Before exit");    // Before exit
+    exit(EXIT_SUCCESS);     // Sign-off
 }

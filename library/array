@@ -6,7 +6,7 @@ data structure
     - less data than array size: compiler initializes remaining elems to 0 (1)
     - more data than array size: error
     - designated initializer: allows to set elems at specified index (2)
-    - default intializer: sets all elems to default val (3)
+    - default intializer: sets all elems to zero (3)
     - compound literals (4)
         - for providing vals that are needed only temporarily
         - typically, to pass data to func without having to create an array first
@@ -28,21 +28,15 @@ int sum(const int ar[], int n) {
 (1)
 int a[SIZE] = {6, 6};
 int total = sum(a, SIZE);
-printf("%d ", total); // 12
+printf("%d\n", total); // 12
 
 (2)
 int b[SIZE] = {[1] = 6};
-printf("%d ", sum(b, SIZE)); // 6
+printf("%d\n", sum(b, SIZE)); // 6
 
 (3)
 int c[SIZE] = {0};
-printf("%lu ", (sizeof c) / (sizeof c[0])); // 3
+printf("%lu\n", (sizeof c) / (sizeof c[0])); // 3
 
 (4)
-int *d = (int[SIZE]) {6, 6, 7};
-printf("%d ", sum(d, SIZE)); // 19
-int *end = d + SIZE;
-while (d < end) {
-    printf("%d ", *d); // 6 6 7
-    d++;
-}
+printf("%d\n ", sum((int[3]) {6, 6, 7}, SIZE)); // 19

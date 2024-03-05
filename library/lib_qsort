@@ -18,39 +18,39 @@ lib->qsort
 EXAMPLE
 (1)
 #define SIZE 3
+
 void print(char *s, const double ar[], int n) {
     printf("%-6s: ", s);
-    for (int index = 0; index < n; index++)
-        printf("%.f ", ar[index]);
+    for (int index = 0; index < n; index++) printf("%.f ", ar[index]);
 }
-/* sort by increasing value */
+
+/* sorts by increasing value */
 int comp(const void *p1, const void *p2) {
     const double *a1 = p1;
     const double *a2 = p2;
-    return *a1 - *a2;
-//    if (*a1 < *a2) return -1; // explicitly
-//    else if (*a1 == *a2) return 0;
-//    else return 1;
+    return (int) (*a1 - *a2);
 }
-double base[SIZE] = {3, 1, 2};
-// for (int index = 0; index < SIZE; index++) // randomly
-//     base[index] = (double) rand() / ((double) rand() + 0.1);
-print("Input", base, SIZE);     // Input : 3 1 2
-qsort(base, SIZE, sizeof(double), comp);
-print("\nSorted", base, SIZE);  // Sorted: 1 2 3
 
+int main(void) {
+    double base[SIZE] = {3, 1, 2};
+    print("Input", base, SIZE);     // Input : 3 1 2
+    qsort(base, SIZE, sizeof(double), comp);
+    print("\nSorted", base, SIZE);  // Sorted: 1 2 3
+}
 (2)
 #define SIZE 3
+
 struct name {
     char first[40];
     char last[40];
 };
+
 void print(char *s, struct name *names) {
     printf("%-9s: ", s);
-    for (int index = 0; index < SIZE; index++)
-        printf("%4s %4s   ", names[index].first, names[index].last);
+    for (int index = 0; index < SIZE; index++) printf("%4s %4s   ", names[index].first, names[index].last);
 }
-/* sort first by last name, then by first name */
+
+/* sorts first by last name, then by first name */
 int comp(const void *p1, const void *p2) {
     const struct name *ps1 = p1;
     const struct name *ps2 = p2;
@@ -58,11 +58,15 @@ int comp(const void *p1, const void *p2) {
     if (res != 0) return res;
     else return strcmp(ps1->first, ps2->first); // last name identical, so compare first name
 }
+
 struct name names[SIZE] = {
         {"Joe",  "Doe"},
         {"Mary", "Jane"},
-        {"Jane",  "Doe"}
+        {"Jane", "Doe"}
 };
-print("\nOriginal", names);  // Original:  Joe  Doe   Mary Jane   Jane  Doe
-qsort(names, SIZE, sizeof(struct name), comp);
-print("\nSorted", names);    // Sorted  : Jane  Doe    Joe  Doe   Mary Jane
+
+int main(void) {
+    print("Original", names);  // Original:  Joe  Doe   Mary Jane   Jane  Doe
+    qsort(names, SIZE, sizeof(struct name), comp);
+    print("\nSorted", names);    // Sorted  : Jane  Doe    Joe  Doe   Mary Jane
+}

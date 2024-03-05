@@ -19,16 +19,16 @@ array->func
 EXAMPLE
 char *reverse1(const char *val) {
     size_t len = strlen(val);
-    char *dest = malloc(len * sizeof(char));
-    for (size_t i = 0; i <= len; i++) dest[i] = val[len - 1 - i];
+    char *dest = malloc((len + 1) * sizeof(char));
+    for (size_t i = 0; i < len; i++) dest[i] = val[len - 1 - i];
+    dest[len] = '\0';
     return dest;
 }
 
 void reverse2(char *dest, const char *val) {
     size_t len = strlen(val);
-    for (size_t i = 0; i <= len; i++) dest[i] = val[len - 1 - i];
+    for (size_t i = 0; i < len; i++) dest[i] = val[len - 1 - i];
 }
-
 
 int main(void) {
     char *res1 = reverse1("joe");

@@ -56,13 +56,13 @@ EXAMPLE
 (1.1)
 time_t now;
 time(&now); // alternatively: now = time(NULL)
-printf("Timestamp: %ld, Formatted: %s", now, ctime(&now));
+printf("Timestamp: %ld, Formatted: %s", now, ctime(&now)); // Timestamp: 1709663025, Formatted: Tue Mar  5 19:23:45 2024
 (1.2)
 time_t now = time(NULL);
 struct tm *now_tm = localtime(&now);
-printf("Local: %s", asctime(now_tm));
+printf("Local: %s", asctime(now_tm));   // Local: Tue Mar  5 19:24:42 2024
 now_tm = gmtime(&now);
-printf("UTC: %s", asctime(now_tm));
+printf("UTC: %s", asctime(now_tm));     // UTC: Tue Mar  5 18:24:42 2024
 
 (2.1)
 struct tm d = {.tm_year=82,
@@ -80,10 +80,10 @@ printf("I am %.2f years OR %.2f days OR %.f secs old.\n", years, days, secs);
 (2.2)
 char s[128];
 // ISO 8601: 1982-01-03T10:45:30
-strftime(s, sizeof s, "ISO 8601: %FT%T%z", &d);
+strftime(s, sizeof s, "ISO 8601: %FT%T%z", &d); // ISO 8601: 1982-01-03T10:45:30+0000
 puts(s);
 
 (3)
 struct timespec ts;
 timespec_get(&ts, TIME_UTC);
-printf("%ld secs, %ld nanosecs\n", ts.tv_sec, ts.tv_nsec);
+printf("%ld secs, %ld nanosecs\n", ts.tv_sec, ts.tv_nsec); // 1709663539 secs, 877630735 nanosecs

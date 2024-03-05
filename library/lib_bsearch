@@ -23,7 +23,10 @@ EXAMPLE
 int comp(const void *a, const void *b) {
     return (*(int *) a - *(int *) b);
 }
-int key = 32;
-int base[] = {20, 5, 29, 63, 32};
-int *item = bsearch(&key, base, LEN, sizeof(int), comp);
-printf("Found: %d\n", *item);   // Found: 32
+
+int main(void) {
+    int key = 32;
+    int base[] = {5, 20, 29, 32, 63};
+    int *item = bsearch(&key, base, LEN, sizeof(int), comp);
+    if (item != NULL) printf("Found: %d\n", *item);   // Found: 32
+}

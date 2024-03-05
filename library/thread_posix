@@ -1,4 +1,4 @@
-threads->pthreads
+thread->pthread
 
 
 

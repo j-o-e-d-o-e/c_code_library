@@ -3,58 +3,39 @@ build->Make
 
 
 - build-file: Makefile
-- Make creates automatically object-files (built-in), e.g.
+- creates automatically object-files (built-in), e.g.
     - `make main.o` executes: cc -c -o main.o main.c
 - comments: #
 - indentation: tabs required (not spaces)
 - Error: Makefile:<LINE>: message
 - Make tracks changes upon timestamp of files
     - therefore, if Make does not detect changes, use `touch <filename>` to set new timestamp
-- help: man make OR make -h
-- targets
-    - if <dependencies> change, run <commands>
-        <target>: <dependencies>
-            <commands>
-    - build all (common), e.g.
-        all: dump1090 view1090
-    - clean project: delete exec, etc.(common)
-        clean:
-            rm -f *.o lib
-    - build any object-file from its source-file (built-in)
-        .c.o:
-            $(CC) $(CFLAGS) -c $< # alternatively: $(CC) $(CFLAGS) -c $*.c
-    - build any exec from its source-file
-        .c:
-            $(CC) $(CFLAGS) $@.c -o $@
-- macros
-    - $(CC): compiler, e.g. CC=gcc (predefined)
-    - $(CFLAGS): args given to compiler, e.g. CFLAGS=-O -systype bsd43
-        - predefined: defaults to empty string
-    - $(LIBS): libraries to be included, e.g. LIBS="-lncurses -lm -lsdl"
-    - $@: name of file to be made
-    - $?: names of changed dependents
-    - $<: name of the related file that caused the action
-    - $*: prefix shared by target and dependent files
-- conditional directives
-    - ifdef <macro>
-    - ifndef <macro>
-    - else
-    - ifeq (<macro1>,<macro2>)
-    - ifneq (<macro1>,<macro2>)
-    - endif: every conditional must end with an endif
+- <target>: <dependencies>
+    <commands>
+- build any object-file from its source-file (built-in)
+    .c.o:
+        $(CC) $(CFLAGS) -c $< # alternatively: $(CC) $(CFLAGS) -c $*.c
+- build any exec from its source-file
+    .c:
+        $(CC) $(CFLAGS) $@.c -o $@
 - gcc-flags
     - `-c`: compile only, don't link
     - `-o`: specifies output-file, i.e. exec
     - `-g`: debug information
-    - `-Wall`: all warnings
 
 - SEE ALSO
     - tutorialspoint.com/makefile
+    - devhints.io/makefile (cheat sheet)
 
 EXAMPLE
-all: main.o utils.o
-	$(CC) main.o utils.o -o code-library
-lib: main.o utils.o
-	$(CC) main.o utils.o -o $@
-clean:
-	rm -f *.o lib
+.PHONY: tests
+tests: tests.out
+	@bin/$<
+	@echo "Tests passed"
+
+tests.out: $(TEST_FILES)
+	@$(CC) $(CFLAGS) $^ -o bin/$@ $(LIBS)
+
+%.o: %.c
+	@echo Compiling $*
+	@$(CC) $(CFLAGS) -c $^ -o $@

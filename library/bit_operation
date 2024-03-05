@@ -35,20 +35,47 @@ operators
     - primer, ch.15
 
 EXAMPLE
+// helper: int/char to bin representation
+char *itob(unsigned char c) {
+    char *dest = malloc((8 + 1) * sizeof(char));
+    int count = 8;
+    while (count > 0) {
+        count--;
+        if (c & 1) dest[count] = '1';
+        else dest[count] = '0';
+        c >>= 1;
+    }
+    dest[8] = '\0';
+    return dest;
+}
 (1)
 unsigned char x = 'A';
+char *bin_x = itob(x);
 unsigned char y = ~x;
-printf("x: %8b/%3d\ny: %8b/%3d", x, x, y, y); // x:  1000001/ 65
-                                              // y: 10111110/190
+char *bin_y = itob(y);
+printf("x: %s/%3d\ny: %s/%3d\n", bin_x, x, bin_y, y);   // x:  1000001/ 65
+                                                        // y: 10111110/190
+free(bin_x);
+free(bin_y);
 (2)
 int x = 6;
+char *bin_x = ctob(x);
 int y = 3;
+char *bin_y = ctob(y);
 int z = x & y;
-printf("x: %3b/%d\ny: %3b/%d\nz: %3b/%d", x, x, y, y, z, z); // x: 110/6
-                                                             // y:  11/3
-                                                             // z:  10/2
+char *bin_z = ctob(z);
+printf("x: %s/%d\ny: %s/%d\nz: %s/%d\n", bin_x, x, bin_y, y, bin_z, z); // x: 00000110/6
+                                                                        // y: 00000011/3
+                                                                        // z: 00000010/2
+free(bin_x);
+free(bin_y);
+free(bin_z);
 (5)
 int x = 3;
+char *bin_x = ctob(x);
 int y = x << 3;
-printf("x: %5b/%2d\ny: %5b/%2d", x, x, y, y); // x:    11/ 3
-                                              // y: 11000/24
+char *bin_y = ctob(y);
+printf("x: %s/%d\ny: %s/%d\n", bin_x, x, bin_y, y); // x: 00000011/3
+                                                    // y: 00011000/24
+free(bin_x);
+free(bin_y);

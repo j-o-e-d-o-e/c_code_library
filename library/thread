@@ -1,4 +1,4 @@
-threads
+thread
 
 
 
@@ -34,7 +34,7 @@ int run(void *arg) {
     int i = *(int *) arg;
     free(arg);
     thread_local static int x = 42;
-    printf("THREAD %d: running!\n", i);
+    printf("THREAD %d: running! %d\n", i, x++);
     return i;
 }
 int main(void) {

@@ -1,4 +1,4 @@
-funcs->pointer
+func->pointer
 
 
 
@@ -22,12 +22,13 @@ funcs->pointer
 
 EXAMPLE
 void apply(void (*fp)(char *), char *str) {
-    (*fp)(str); // apply chosen func to str
+    (*fp)(str); // apply func to str
 }
-// alternatively
-// void apply(void fp(char *), char *str) {
-//     fp(str); // since (*fp) == func
-// }
+
+// alternatively:
+void apply(void fp(char *), char *str) {
+    fp(str);    // since (*fp) == func
+}
 
 void toupper_s(char *s) {
     while (*s) {

@@ -14,43 +14,32 @@ custom data structure
     - in most envs though, program will free mem automatically when it terminates
 
 - SEE ALSO
+    - beej, ch.20.3
     - primer, ch.17
     - /c/linked_list
     - /c/queued_list (FIFO: add only to the end, retrieve only from beginning)
 
 EXAMPLE
-struct film {
-    char title[20];
-    int rating;
-    struct film *next;
+struct node {
+    int data;
+    struct node *next;
 };
 
 int main(void) {
-    struct film *current = (struct film *) malloc(sizeof(struct film));
-    struct film *head = current;
-    struct film *prev;
-
-    strcpy(current->title, "Cloud Atlas");
-    current->rating = 8;
-    current->next = NULL; // could be omitted, here
-
-    prev = current;
-    current = (struct film *) malloc(sizeof(struct film)); // allocate on demand
-    prev->next = current;
-    strcpy(current->title, "Donnie Darko");
-    current->rating = 9;
-    current->next = NULL;
-
-    current = head;
-    while (current != NULL) {
-        printf("Title: %12s, Rating: %d\n", current->title, current->rating);
-        current = current->next;    // Title:  Cloud Atlas, Rating: 8
-                                    // Title: Donnie Darko, Rating: 9
-    }
-    current = head;
-    while (current != NULL) {
-        free(current);
+    struct node *head = malloc(sizeof(struct node));
+    head->data = 0;
+    struct node *current = head;
+    for (int i = 1; i < 4; i++) {
+        current->next = malloc(sizeof(struct node));
         current = current->next;
+        current->data = i;
     }
-    return 0;
+    current->next = NULL;
+    current = head;
+    while (current != NULL) {
+        printf("%d ", current->data); // 0 1 2 3
+        struct node *next = current->next;
+        free(current);
+        current = next;
+    }
 }

@@ -17,11 +17,6 @@ build->CMake->submodule
         - target_link_libraries(${PROJECT_NAME} <lib name>)
             - <lib name> (more specifally, target name) as defined in external/<lib name>/src/CMakeLists.txt
     (5) in *.c: #include <lib-name/lib.h>, e.g. #include <GLFW/glfw3.h>
-- configure (see: build->CMake)
-    - toggle options in lib's CMakeLists.txt: cmake -D<OPTION_NAME>=OFF||ON -S . -B build/
-- build (see: build->CMake)
-    - build/ contains subdir external/<lib name> and executable lib (e.g. libglfw3.a in src/)
-- execute (see: build->CMake)
 
 - SEE ALSO
     - /snippets/cmake/03-github-lib

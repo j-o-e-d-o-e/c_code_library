@@ -36,6 +36,7 @@ malloc/calloc/realloc
 
 EXAMPLE
 (1)
+#define SIZE 3
 int *ptr = malloc(SIZE * sizeof(int)); // (1) don't cast: (int *)
 for (int i = SIZE; i > 0; i--) ptr[SIZE - i] = i;
 for (int i = 0; i < SIZE; i++) printf("%d...\n", ptr[i]); // 3...
@@ -54,7 +55,7 @@ for (int i = 0; i < n; ++i) ptr[i] = i + 1;
 for (int i = 0; i < n; ++i) printf("%d ", ptr[i]); // 1 2
 puts("");
 int m = n * 2;
-ptr = realloc(ptr, m * sizeof(int)); // dynamically re-allocate mem
+ptr = realloc(ptr, m * sizeof(int));
 for (int i = n; i < m; ++i) ptr[i] = i + 1;
 for (int i = 0; i < m; ++i) printf("%d ", ptr[i]); // 1 2 3 4
 free(ptr);

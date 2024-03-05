@@ -32,21 +32,21 @@ EXAMPLE
 int main() {
     printf("main process (pid:%d)\n", (int) getpid());
     int rc = fork();
-    if (rc < 0) {           // fork failed; exit
+    if (rc < 0) {
         fprintf(stderr, "fork failed\n");
         exit(1);
-    } else if (rc == 0) {   // child goes down this path (new process)
+    } else if (rc == 0) { // child goes down this path (new process)
         printf("child process (pid:%d)\n", (int) getpid());
-        char *args[3] = {"wc", "Makefile"};
+        char *args[3] = {"wc", "makefile"};
         execvp(args[0], args);
-        printf("this shouldn't print out");
-    } else {                // parent goes down this path (main process)
+        printf("This shouldn't print out");
+    } else { // parent goes down this path (main process)
         int wc = wait(NULL);
         printf("main is now parent of %d (pid:%d)\n", wc, (int) getpid());
     }
     return 0;
 }
-// main process (pid:22497)
-// child process (pid:22500)
-// 181  591 5448 Makefile
-// main is now parent of 22500 (pid:22497)
+// main process (pid:43638)
+// child process (pid:43639)
+// 51  127 991 Makefile
+// main is now parent of 43639 (pid:43638)

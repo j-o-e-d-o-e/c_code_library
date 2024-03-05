@@ -15,20 +15,18 @@ enum/switch
 EXAMPLE
 enum spectrum {
     RED = 1,
-    GREEN,        // 2
-    BLUE          // 3
+    GREEN,
+    BLUE
 } color = RED;
-                  // %u: unsigned int
-                  // R: 1, G: 2, B: 3
-printf("R: %d, G: %d, B: %u\n", RED, GREEN, BLUE);
-if (color == RED) printf("color is red\n");
-++color;          // 2
+
+printf("R: %d, G: %d, B: %u\n", RED, GREEN, BLUE);  // R: 1, G: 2, B: 3
+++color;
 switch (color) {
     case RED:
         printf("color is red\n");
         break;
-    case GREEN:   // <- switched-to
-        printf("color is green\n");
+    case GREEN:
+        printf("color is green\n");                 // color is green
         break;
     case BLUE:
         printf("color is blue\n");
