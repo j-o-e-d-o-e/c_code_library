@@ -1,8 +1,7 @@
-#ifndef CODE_LIBRARY_CODE_LIBRARY_H
-#define CODE_LIBRARY_CODE_LIBRARY_H
+#pragma once
 
-#define S_LEN 80
-#define DIR_PATH "/home/joe/prog/c/code_library/library/"
+#define S_LEN 120
+#define DIR_PATH "/home/joe/temp/c-test/code_library/library/"
 #define DELIMITER_TOC "================================="
 #define DELIMITER_ENTRY "-------------------------------"
 #define TOC 0
@@ -33,7 +32,17 @@ typedef struct {
     struct entry entries[];
 } Library;
 
-void flags(char **argv);
+// main.c
+
+void user_input(Library *lib);
+
+void print_toc(const Library *lib);
+
+void print_entry(const struct entry *entry);
+
+int check_duplicate(char* line);
+
+// library.c
 
 Library *setup_lib(void);
 
@@ -41,19 +50,15 @@ void sort_lib(Library *lib);
 
 int comp(const void *p1, const void *p2);
 
-void print_toc(const Library *lib);
+Library *search(const Library *lib, char *line);
 
-void print_entry(const struct entry *entry);
+// utils.c
+
+void flags(char **argv);
 
 /* wrapper for fgets(): replaces first newline with null character */
 void f_gets(char *s, int n, FILE *f);
 
-Library *search(const Library *lib, char *line);
+void lower(const char *s, char *t);
 
-int check_duplicate(char* line);
-
-void lower(char *t, const char *s);
-
-void lowerAndTrim(char *t, const char *s);
-
-#endif // CODE_LIBRARY_CODE_LIBRARY_H
+void lower_and_trim(const char *s, char *t);

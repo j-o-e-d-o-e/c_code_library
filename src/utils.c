@@ -18,7 +18,7 @@ void flags(char **argv) {
         puts("Commands:");
         printf("\t- %-3d: Table of Content (or any char)\n\t- %-3d: Exit\n\t- s: : Search\n", TOC, EXIT);
         puts("\nLiterature:");
-        for (int i = 0; i < LIT_LEN; i++) printf("\t- %s\n", literature[i]);
+        for (size_t i = 0; i < LIT_LEN; i++) printf("\t- %s\n", literature[i]);
         puts("");
     }
 }
@@ -34,18 +34,18 @@ void f_gets(char *s, int n, FILE *f) {
     }
 }
 
-void lower(char *t, const char *s) {
+void lower(const char *s, char *t) {
     int i = 0;
-    while (*s) t[i++] = tolower(*s++);
+    while (*s) t[i++] = (char) tolower(*s++);
     t[i] = '\0';
 }
 
-void lowerAndTrim(char *t, const char *s) {
+void lower_and_trim(const char *s, char *t) {
     int i = 0, flag = 0;
     while (*s) {
         if (*s != ' ') {
             flag = 1;
-            t[i] = tolower(*s);
+            t[i] = (char) tolower(*s);
             i++;
         } else if (flag) {
             t[i] = '\0';
