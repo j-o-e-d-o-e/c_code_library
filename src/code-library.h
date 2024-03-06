@@ -1,12 +1,13 @@
 #pragma once
 
-#define S_LEN 120
-#define DIR_PATH "/home/joe/temp/c-test/code_library/library/"
+#define PATH_LEN 80
+#define TITLE_LEN 20
+#define DIR_PATH "/home/joe/prog/c/code_library/library/"
 #define DELIMITER_TOC "================================="
 #define DELIMITER_ENTRY "-------------------------------"
+#define LINE_SPACE 44
 #define TOC 0
 #define EXIT 667
-#define clear() printf("\033[H\033[J")
 
 #define RED 91
 #define GREEN 92
@@ -21,9 +22,9 @@ static const int colors[2] = {GREEN, CYAN};
         tags: 3rd line (category) */
 struct entry {
     int index;
-    char path[S_LEN];
-    char title[S_LEN];
-    char tags[S_LEN]; // literature
+    char path[PATH_LEN];
+    char title[TITLE_LEN];
+    char tags[TITLE_LEN];
 };
 
 /* collection of entries */

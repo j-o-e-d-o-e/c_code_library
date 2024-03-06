@@ -25,14 +25,14 @@ Library *setup_lib(void) {
         }
         struct entry *e = &(lib->entries[count]);
         e->index = count + 1;
-        char filename[S_LEN] = DIR_PATH;
+        char filename[PATH_LEN] = DIR_PATH;
         strcat(filename, file->d_name);
         strcpy(e->path, filename);
         FILE *f = fopen(filename, "r");
-        f_gets(e->title, S_LEN, f);
-        char s[S_LEN];
-        f_gets(s, S_LEN, f); // empty line
-        f_gets(e->tags, S_LEN, f);
+        f_gets(e->title, PATH_LEN, f);
+        char s[PATH_LEN];
+        f_gets(s, PATH_LEN, f); // empty line
+        f_gets(e->tags, PATH_LEN, f);
         count++;
         fclose(f);
     }
