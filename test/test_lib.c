@@ -15,7 +15,7 @@ TEST(lib, createLib) {
     Library *res = setup_lib();
     struct entry *entries = res->entries;
     TEST_ASSERT_GREATER_THAN_INT(0, res->len);
-    for (int i = 0; i < res->len; i++) {
+    for (size_t i = 0; i < res->len; i++) {
         struct entry e = entries[i];
         TEST_ASSERT_EQUAL_INT(i + 1, e.index);
     }

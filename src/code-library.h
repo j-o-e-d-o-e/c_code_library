@@ -19,7 +19,7 @@ static const int colors[2] = {GREEN, CYAN};
         index: sequential num
         path: DIR_PATH + filename
         title: 1st line in file
-        tags: 3rd line (category) */
+        tags: 3rd line (categories to search by) */
 struct entry {
     int index;
     char path[PATH_LEN];
@@ -29,7 +29,7 @@ struct entry {
 
 /* collection of entries */
 typedef struct {
-    int len;
+    size_t len;
     struct entry entries[];
 } Library;
 

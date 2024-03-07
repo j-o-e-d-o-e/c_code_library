@@ -51,7 +51,7 @@ void user_input(Library *lib) {
             printf("\033[%dmDevil's neighbour wishes you a good day.\033[0m\n", RED);
             free(line);
             break;
-        } else if (ch > lib->len != 0) {
+        } else if ((ch > lib->len) != 0) {
             printf("\033[%dmNot a valid number.\033[0m", RED);
             printf("\n");
             free(line);

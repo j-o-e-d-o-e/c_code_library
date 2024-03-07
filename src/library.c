@@ -47,7 +47,7 @@ Library *setup_lib(void) {
 
 void sort_lib(Library *lib) {
     qsort(lib->entries, lib->len, sizeof(struct entry), comp);
-    for (int i = 0; i < lib->len; i++) lib->entries[i].index = i + 1;
+    for (size_t i = 0; i < lib->len; i++) lib->entries[i].index = i + 1;
 }
 
 int comp(const void *p1, const void *p2) {
