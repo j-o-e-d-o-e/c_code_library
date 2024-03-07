@@ -1,7 +1,7 @@
 #pragma once
 
 #define PATH_LEN 80
-#define TITLE_LEN 20
+#define TITLE_LEN 40
 #define DIR_PATH "/home/joe/prog/c/code_library/library/"
 #define DELIMITER_TOC "================================="
 #define DELIMITER_ENTRY "-------------------------------"
