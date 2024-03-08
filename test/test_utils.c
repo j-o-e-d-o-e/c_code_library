@@ -17,7 +17,7 @@ TEST(utils, lower) {
 }
 
 TEST(utils, lowerAndTrim) {
-    char res[4];
+    char res[8];
     lower_and_trim("  Abc  ", res);
     TEST_ASSERT_EQUAL_STRING("abc", res);
 }

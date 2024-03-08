@@ -1,30 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <readline/history.h>
-#include <stdbool.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 #include "code-library.h"
 
 int main(int argc, char **argv) {
-    if (argc > 1) {
-        flags(argv);
-        return EXIT_SUCCESS;
-    }
-    Library *lib = setup_lib();
+    if (argc > 1) flags(argv);
+    Library *lib = create_lib();
     user_input(lib);
     free(lib);
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 void user_input(Library *lib) {
     print_toc(lib);
     using_history();
-    char prompt[40];
+    char prompt[TITLE_LEN];
     sprintf(prompt, "\n\033[%dmWhat would you like to read? \033[0m", RED);
-    while (true) {
+    for (;;) {
         char *line = readline(prompt);
-        if (line[0] == 's' && line[1] == ':') {
-            Library *tmp = search(lib, line);
+        if (strstr(line, "s:") == line) {
+            Library *tmp = search_lib(lib, line + 2);
             if (tmp->len > 0) {
                 if (!check_duplicate(line)) add_history(line);
                 printf("\n");
@@ -38,7 +34,7 @@ void user_input(Library *lib) {
             continue;
         }
         char *error;
-        size_t ch = strtol(line, &error, 10);
+        long ch = strtol(line, &error, 10);
         if (*error == *line) {
             printf("\033[%dmNot a number.\033[0m", RED);
             printf("\n");
@@ -68,17 +64,16 @@ void user_input(Library *lib) {
 
 void print_toc(const Library *lib) {
     printf("\033[%d;1m%s %s %s\033[0m\n", RED, DELIMITER_TOC, "C CODE LIBRARY", DELIMITER_TOC);
-    const struct entry *e = &(lib->entries[0]);
-    const struct entry *end = e + lib->len;
-    int count = 0;
-    while (e < end) {
-        if (count % 2 == 0) {
-            printf("\033[%dm%*d - %-*s%s\033[0m\n", GREEN, 2, e->index, LINE_SPACE, e->title, e->tags);
-        } else {
-            printf("\033[%d;%dm%*d - %-*s%s\033[0m\n", CYAN, BLACK, 2, e->index, LINE_SPACE, e->title, e->tags);
-        }
-        e++;
-        count++;
+    const struct entry *current = &(lib->entries[0]);
+    const struct entry *end = current + lib->len;
+    while (current < end) {
+        if (current->index % 2 != 0)
+            printf("\033[%dm%*d - %-*s%s\033[0m\n", GREEN, 2, current->index, LINE_SPACE,
+                   current->title, current->tags);
+        else
+            printf("\033[%d;%dm%*d - %-*s%s\033[0m\n", CYAN, BLACK, 2, current->index, LINE_SPACE,
+                   current->title, current->tags);
+        current++;
     }
 }
 
@@ -86,23 +81,19 @@ void print_entry(const struct entry *entry) {
     FILE *f;
     if ((f = fopen(entry->path, "r")) == NULL) {
         printf("\033[%dmOpening File %s failed.\033[0m\n", RED, entry->title);
-        return;
+        exit(EXIT_FAILURE);
     }
     printf("\n\033[%dm%s\033[0m\n", RED, DELIMITER_ENTRY);
     char title[TITLE_LEN];
-    f_gets(title, TITLE_LEN, f);
+    fgets_no_newline(title, TITLE_LEN, f);
     printf("\033[%d;1;4m%d - %s\033[0m\n\n", colors[entry->index % 2 == 0], entry->index, title);
-    char buffer[PATH_LEN];
-    f_gets(buffer, 1, f); // empty line
-    f_gets(buffer, TITLE_LEN, f); // tags
-    f_gets(buffer, 1, f); // empty line
-    char content[PATH_LEN];
-    while (1) {
-        content[0] = '\0';
-        fgets(content, PATH_LEN, f);
-        if (strcmp(content, "EXAMPLE\n") == 0) printf("\033[%d;1m%s\033[0m", colors[entry->index % 2 == 0], content);
-        else printf("\033[%dm%s\033[0m", colors[entry->index % 2 == 0], content);
-        if (feof(f)) break;
+    for (unsigned char i = 0; i < 3; i++) fgets((char[TITLE_LEN]) {0}, TITLE_LEN, f);
+    char line[LINE_LEN];
+    while (!feof(f)) {
+        line[0] = '\0';
+        fgets(line, LINE_LEN, f);
+        if (strcmp(line, "EXAMPLE\n") == 0) printf("\033[%d;1m%s\033[0m", colors[entry->index % 2 == 0], line);
+        else printf("\033[%dm%s\033[0m", colors[entry->index % 2 == 0], line);
     }
     fclose(f);
     printf("\033[%dm%s\033[0m\n", RED, DELIMITER_ENTRY);
@@ -110,9 +101,6 @@ void print_entry(const struct entry *entry) {
 
 int check_duplicate(char *line) {
     HIST_ENTRY **e = history_list();
-    for (int i = 0; i < history_length; i++) {
-        char *s = e[i]->line;
-        if (strcmp(s, line) == 0) return true;
-    }
-    return false;
+    for (int i = 0; i < history_length; i++) if (strcmp(e[i]->line, line) == 0) return 1;
+    return 0;
 }
