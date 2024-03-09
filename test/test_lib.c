@@ -15,9 +15,8 @@ TEST_TEAR_DOWN(lib) {
 TEST(lib, create) {
     Library *lib = create_lib();
     TEST_ASSERT_GREATER_THAN_UINT8(0, lib->len);
-    struct entry *entries = lib->entries;
     for (unsigned char i = 0; i < lib->len; i++) {
-        struct entry entry = entries[i];
+        struct entry entry = lib->entries[i];
         TEST_ASSERT_TRUE(strlen(entry.title) > 0);
         TEST_ASSERT_EQUAL_UINT8(i + 1, entry.index);
     }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include "code_library.h"
 
 void flags(char **argv) {
@@ -37,23 +36,22 @@ void fgets_no_newline(char *s, int n, FILE *f) {
     }
 }
 
-void lower(const char *s, char *t) {
-    unsigned char i = 0;
-    while (*s) t[i++] = (char) tolower(*s++);
-    t[i] = '\0';
-}
-
-void lower_and_trim(const char *s, char *t) {
-    unsigned char i = 0, flag = 0;
-    while (*s) {
-        if (*s != ' ') {
-            flag = 1;
-            t[i] = (char) tolower(*s);
-            i++;
-        } else if (flag) {
-            t[i] = '\0';
+void trim(char *dest, const char *const src) {
+    unsigned char index = 0, leading_trimmed = 0;
+    for (size_t i = 0; i < strlen(src); i++) {
+        const char *c = &src[i];
+        if (*c != ' ') {
+            leading_trimmed = 1;
+            dest[index++] = *c;
+            const char *c1 = &src[i + 1];
+            if (*c1 == '\0') dest[index] = *c1;
+            else if (*c1 == ' ' && *(c + 2) != '\0' && *(c + 2) != ' ') {
+                dest[index++] = *c1, dest[index++] = *(c + 2);
+                i += 2;
+            }
+        } else if (leading_trimmed) {
+            dest[index] = '\0';
             break;
         }
-        s++;
     }
 }
