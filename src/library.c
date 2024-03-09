@@ -23,15 +23,14 @@ Library *create_lib(void) {
             if (tmp == NULL) exit(EXIT_FAILURE);
             lib = tmp;
         }
-        struct entry *e = &(lib->entries[count]);
-        e->index = count + 1;
+        struct entry *entry = &(lib->entries[count]);
         char filename[PATH_LEN] = DIR_PATH;
         strcat(filename, file->d_name);
-        strcpy(e->path, filename);
+        strcpy(entry->path, filename);
         FILE *f = fopen(filename, "r");
-        fgets_no_newline(e->title, TITLE_LEN, f);
+        fgets_no_newline(entry->title, TITLE_LEN, f);
         fgets((char[TITLE_LEN]) {0}, TITLE_LEN, f);
-        fgets_no_newline(e->tags, TITLE_LEN, f);
+        fgets_no_newline(entry->tags, TITLE_LEN, f);
         fclose(f);
         count++;
     }

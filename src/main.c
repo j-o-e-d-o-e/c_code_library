@@ -52,11 +52,11 @@ void user_input(Library *lib) {
             printf("\n");
             free(line);
         } else {
-            struct entry *e = &lib->entries[ch - 1];
+            struct entry *entry = &lib->entries[ch - 1];
             char item[TITLE_LEN + sizeof(short) + 2];
-            sprintf(item, "%hu (%s)", (unsigned short) ch, e->title);
+            sprintf(item, "%hu (%s)", (unsigned short) ch, entry->title);
             if (strlen(line) > 0 && !check_duplicate(item)) add_history(item);
-            print_entry(e);
+            print_entry(entry);
             free(line);
         }
     }
@@ -85,8 +85,8 @@ void print_entry(const struct entry *entry) {
     }
     printf("\n\033[%dm%s\033[0m\n", RED, DELIMITER_ENTRY);
     char title[TITLE_LEN];
-    fgets_no_newline(title, TITLE_LEN, f);
-    printf("\033[%d;1;4m%d - %s\033[0m\n\n", colors[entry->index % 2 == 0], entry->index, title);
+    fgets(title, TITLE_LEN, f);
+    printf("\033[%d;1;4m%d - %s\033[0m\n", colors[entry->index % 2 == 0], entry->index, title);
     for (unsigned char i = 0; i < 3; i++) fgets((char[TITLE_LEN]) {0}, TITLE_LEN, f);
     char line[LINE_LEN];
     while (!feof(f)) {
@@ -100,7 +100,7 @@ void print_entry(const struct entry *entry) {
 }
 
 int check_duplicate(char *line) {
-    HIST_ENTRY **e = history_list();
-    for (int i = 0; i < history_length; i++) if (strcmp(e[i]->line, line) == 0) return 1;
+    HIST_ENTRY **entry = history_list();
+    for (int i = 0; i < history_length; i++) if (strcmp(entry[i]->line, line) == 0) return 1;
     return 0;
 }
