@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "code-library.h"
+#include "code_library.h"
 
 void flags(char **argv) {
     static const unsigned char LIT_LEN = 6;

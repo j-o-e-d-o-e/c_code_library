@@ -36,13 +36,15 @@ typedef struct {
 
 // main.c
 
-void user_input(Library *lib);
+void user_input(char *line);
 
 void print_toc(const Library *lib);
 
-void print_entry(const struct entry *entry);
+unsigned char print_entry(const struct entry *entry);
 
-int check_duplicate(char *line);
+int check_duplicate(const char *line);
+
+void free_lib(void);
 
 // library.c
 

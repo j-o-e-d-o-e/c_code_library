@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
-#include "code-library.h"
+#include "code_library.h"
 
 Library *create_lib(void) {
     DIR *d;
@@ -12,7 +12,7 @@ Library *create_lib(void) {
     }
     unsigned char buffer = 10;
     Library *lib = malloc(sizeof *lib + sizeof(struct entry[buffer]));
-    if (lib == NULL) exit(0);
+    if (lib == NULL) exit(EXIT_FAILURE);
     unsigned char count = 0;
     struct dirent *file;
     while ((file = readdir(d))) {
@@ -20,8 +20,10 @@ Library *create_lib(void) {
         if (count == buffer) {
             buffer += 10;
             Library *tmp = realloc(lib, sizeof(Library) + sizeof(struct entry) * buffer);
-            if (tmp == NULL) exit(EXIT_FAILURE);
-            lib = tmp;
+            if (tmp == NULL) {
+                free(lib);
+                exit(EXIT_FAILURE);
+            } else lib = tmp;
         }
         struct entry *entry = &(lib->entries[count]);
         char filename[PATH_LEN] = DIR_PATH;
@@ -37,7 +39,10 @@ Library *create_lib(void) {
     closedir(d);
     lib->len = count;
     Library *tmp = realloc(lib, sizeof(Library) + sizeof(struct entry) * lib->len);
-    if (tmp == NULL) exit(EXIT_FAILURE);
+    if (tmp == NULL) {
+        free(lib);
+        exit(EXIT_FAILURE);
+    }
     lib = tmp;
     sort_lib(lib);
     return lib;
@@ -51,11 +56,15 @@ void sort_lib(Library *lib) {
 int comp(const void *p1, const void *p2) {
     const struct entry *ps1 = p1;
     const struct entry *ps2 = p2;
-    return strcmp(ps1->title, ps2->title); // sort by title
+    return strcmp(ps1->title, ps2->title);
 }
 
 Library *search_lib(const Library *lib, char *line) {
     Library *lib_search = malloc(sizeof(Library) + sizeof(struct entry[lib->len]));
+    if (lib_search == NULL) {
+        free(line);
+        exit(EXIT_FAILURE);
+    }
     const struct entry *current = &(lib->entries[0]);
     const struct entry *end = current + lib->len;
     unsigned char count = 0;
@@ -65,7 +74,11 @@ Library *search_lib(const Library *lib, char *line) {
     }
     lib_search->len = count;
     Library *tmp = realloc(lib_search, sizeof(Library) + sizeof(struct entry) * lib_search->len);
-    if (tmp == NULL) exit(EXIT_FAILURE);
+    if (tmp == NULL) {
+        free(line);
+        free(lib_search);
+        exit(EXIT_FAILURE);
+    }
     lib_search = tmp;
     return lib_search;
 }

@@ -1,6 +1,6 @@
 #include "unity.h"
 #include "unity_fixture.h"
-#include "code-library.h"
+#include "code_library.h"
 
 TEST_GROUP(utils);
 
