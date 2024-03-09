@@ -46,7 +46,7 @@ void user_input(char *line) {
             printf("\033[%dmDevil's neighbour wishes you a good day.\033[0m\n", RED);
             free(line);
             exit(EXIT_SUCCESS);
-        } else if ((num < 0 || num > library->len) != 0) {
+        } else if (num < 0 || num > library->len) {
             printf("\033[%dmNot a valid number.\033[0m", RED);
             puts("");
         } else {
@@ -79,7 +79,7 @@ void print_toc(const Library *lib) {
 unsigned char print_entry(const struct entry *entry) {
     FILE *f;
     if ((f = fopen(entry->path, "r")) == NULL) {
-        printf("\033[%dmOpening File %s failed.\033[0m\n", RED, entry->title);
+        printf("\033[%dmOpening File %s failed.\033[0m\n", RED, entry->path);
         return 1;
     }
     printf("\n\033[%dm%s\033[0m\n", RED, DELIMITER_ENTRY);

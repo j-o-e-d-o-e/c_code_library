@@ -62,6 +62,4 @@ void flags(char **argv);
 
 void fgets_no_newline(char *s, int n, FILE *f);
 
-void lower(const char *s, char *t);
-
-void lower_and_trim(const char *s, char *t);
+void trim(char *dest, const char *src);
