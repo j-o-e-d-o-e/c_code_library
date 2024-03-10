@@ -26,31 +26,24 @@ TEST_TARGET = bin/test.out
 MEM_CHECK_TARGET = bin/memcheck.out
 
 .PHONY: all
-all: memcheck test app
+all: app
 
 .PHONY: app
 app: $(SRC_TARGET)
-	@./$<
 
 $(SRC_TARGET): $(SRC_FILES)
-	@echo "Compiling $@"
 	@$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 .PHONY: test
 test: $(TEST_TARGET)
-	@./$< -v
 
 $(TEST_TARGET): $(TEST_FILES)
-	@echo "Compiling $@"
-	@$(CC) $(CFLAGS) $(ASANFLAGS) $(INC_DIRS) $^ -o $@ $(LIBS)
+	@$(CC) $(CFLAGS) $(INC_DIRS) $^ -o $@ $(LIBS)
 
 .PHONY: memcheck
 memcheck: $(MEM_CHECK_TARGET)
-	@./$<
-	@echo "😊 Memory check passed 😊"
 
 $(MEM_CHECK_TARGET): $(SRC_FILES)
-	@echo "Compiling $@"
 	@$(CC) $(CFLAGS) $(ASANFLAGS) $^ -o $@ $(LIBS)
 
 .PHONY: clean

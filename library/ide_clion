@@ -1,0 +1,16 @@
+ide->clion
+
+
+
+- project skeleton with make and unity-testing-framework
+    - four targets (+all): app, test, memcheck, clean
+    - see e.g. ~/prog/c/code_library
+- run/debug configurations
+    - app/test/memcheck: as native apps
+        - target: according to makefile, e.g. memcheck
+            - picks up code changes automatically
+        - executable: path to bin, e.g. ./bin/memcheck.out
+        - for test: add '-v' to program arguments for more info about executed tests
+        - since native apps, may be run in debug
+            - "Memory View" allows to view raw memory of running process
+    - clean: as Makefile target

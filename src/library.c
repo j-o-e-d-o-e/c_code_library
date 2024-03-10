@@ -62,7 +62,7 @@ int comp(const void *p1, const void *p2) {
 Library *search_lib(const Library *lib, char *line) {
     char search_term[TITLE_LEN];
     trim(search_term, line);
-    Library *lib_search = malloc(sizeof(Library) + sizeof(struct entry[lib->len]));
+    Library *lib_search = malloc(sizeof *lib_search + sizeof(struct entry[lib->len]));
     if (lib_search == NULL) {
         free(line);
         exit(EXIT_FAILURE);

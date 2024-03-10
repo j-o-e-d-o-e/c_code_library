@@ -83,7 +83,7 @@ unsigned char print_entry(const struct entry *entry) {
         return 1;
     }
     printf("\n\033[%dm%s\033[0m\n", RED, DELIMITER_ENTRY);
-    printf("\033[%d;1;4m%d - %s\033[0m\n", colors[entry->index % 2 == 0], entry->index, entry->title);
+    printf("\033[%d;1;4m%d - %s\033[0m\n\n", colors[entry->index % 2 == 0], entry->index, entry->title);
     for (unsigned char i = 0; i < 4; i++) fgets((char[TITLE_LEN]) {0}, TITLE_LEN, f);
     char line[LINE_LEN];
     while (!feof(f)) {
