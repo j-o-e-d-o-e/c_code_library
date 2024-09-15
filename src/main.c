@@ -51,8 +51,9 @@ void user_input(char *line) {
             puts("");
         } else {
             const struct entry *entry = &library->entries[num - 1];
-            char item[TITLE_LEN + 6];
-            sprintf(item, "%hu (%s)", (unsigned short) num, entry->title);
+            size_t item_len = TITLE_LEN + sizeof(short) + 4; 
+            char item[item_len];
+            snprintf(item, item_len, "%hu (%s)", (unsigned short) num, entry->title);
             if (strlen(line) > 0 && !check_duplicate(item)) add_history(item);
             unsigned char ret = print_entry(entry);
             if (ret == 1){
